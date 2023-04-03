@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Criar Meta</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Nome da meta</mat-label>
+      <input matInput formControlName="nomeMeta" [(ngModel)]="data.nomeMeta" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>já tem um valor inicial?</mat-label>
+      <input matInput formControlName="valor" [(ngModel)]="data.valorInicial" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>qual o seu objetivo?</mat-label>
+      <input matInput formControlName="objetivo" [(ngModel)]="data.objetivo" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>data estimada para a conclusão</mat-label>
+      <input
+        matInput
+        formControlName="dataEstimada"
+        [(ngModel)]="data.dataEstimada"
+      />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="data.valorInicial"
+  >
+    Cancelar
+  </button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">
+    Cadastrar
+  </button>
+</div>
