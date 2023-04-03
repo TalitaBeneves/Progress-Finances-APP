@@ -1,0 +1,27 @@
+.bg-danger {
+  background-color: #ef4b21 !important;
+  border-radius: 20px;
+}
+
+img {
+  cursor: pointer;
+}
+
+section {
+  padding: 0 55px 0 55px;
+}
+
+a {
+  position: relative;
+  width: 164px;
+  height: 42px;
+  left: 90%;
+  top: 18px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  background: #ffffff;
+  font-weight: 400;
+  font-family: "Poppins";
+}
