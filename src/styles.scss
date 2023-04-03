@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap");
+:root {
+  --primary-color: #071f40;
+  --color-progress: #ef4b21;
+  --color-progress-out: #504749;
+  --color-card-progress: #d9d9d9;
+  --text-color-h1: #d9d9d9;
+  --text-color-p: #000;
+  --table-color-line-1: #A6C7F8
+  --table-color-line-2: #CDE0FB
+  --font:  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 5px;
+  background-color: var(--primary-color);
+}
+
+h1 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 36px;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 10px 0px 10px 20px;
+}
+
+p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: #000000;
+
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
