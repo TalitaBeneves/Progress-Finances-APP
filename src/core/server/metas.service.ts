@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CriarMetasModel, EditarMetasModel, MetasModel } from '../model/Metas';
+import {
+  AllMetasModel,
+  CriarMetasModel,
+  EditarMetasModel,
+  MetasModel,
+} from '../model/Metas';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +16,7 @@ export class MetasService {
   constructor(private http: HttpClient) {}
 
   getMeta() {
-    return this.http.get(this.url);
+    return this.http.get<AllMetasModel>(this.url);
   }
 
   addMeta(model: CriarMetasModel) {

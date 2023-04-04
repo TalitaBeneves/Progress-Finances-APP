@@ -15,6 +15,7 @@ export class DialogMetaHomeComponent implements OnInit {
   title: string = 'Criar Meta';
   btnTitle: string = 'Cadastrar';
   teste: any;
+  progresso: number = 0;
   form: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -42,39 +43,49 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   onNoClick(e: any): void {
-    console.log(this.btnTitle);
     if (this.btnTitle == 'Editar') {
       this.editarMeta();
       return;
     } else {
-      const model: CriarMetasModel = {
-        nomeMeta: this.form.value.nomeMeta,
-        valorInicial: this.form.value.valorInicial,
-        objetivo: this.form.value.objetivo,
-        dataEstimada: this.form.value.dataEstimada,
-        status: Status.ANDAMENTO,
-      };
-      this.serveMeta.addMeta(model).subscribe({
-        next: (res) => {
-          this.dialogRef.close();
-        },
-        error: (e) => {
-          console.error(e);
-        },
-      });
+      this.criarMeta();
     }
   }
 
   editarMeta() {
+    const formula =
+      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
     const model: EditarMetasModel = {
       nomeMeta: this.form.value.nomeMeta,
       valorInicial: this.form.value.valorInicial,
       objetivo: this.form.value.objetivo,
       dataEstimada: this.form.value.dataEstimada,
+      porcentagem: formula,
     };
     this.serveMeta.editMeta(this.teste.id, model).subscribe({
       next: (res) => {
         console.log(res);
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
+  }
+
+  criarMeta() {
+    const formula =
+      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
+    const model: CriarMetasModel = {
+      nomeMeta: this.form.value.nomeMeta,
+      valorInicial: this.form.value.valorInicial,
+      objetivo: this.form.value.objetivo,
+      dataEstimada: this.form.value.dataEstimada,
+      status: Status.ANDAMENTO,
+      porcentagem: formula,
+    };
+    this.serveMeta.addMeta(model).subscribe({
+      next: (res) => {
+        this.progresso = 30;
+        this.dialogRef.close();
       },
       error: (e) => {
         console.error(e);

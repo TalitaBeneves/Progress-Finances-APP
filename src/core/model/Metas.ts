@@ -16,6 +16,7 @@ export interface CriarMetasModel {
   objetivo: number;
   dataEstimada: string;
   status?: Status;
+  porcentagem: number;
 }
 
 export interface EditarMetasModel {
@@ -24,6 +25,16 @@ export interface EditarMetasModel {
   objetivo: number;
   dataEstimada: string;
   status?: Status;
+  porcentagem: number;
+}
+
+export interface AllMetasModel {
+  dataEstimada: string;
+  id: number;
+  nomeMeta: string;
+  objetivo: string;
+  porcentagem: number;
+  valorInicial: string;
 }
 
 export enum Status {

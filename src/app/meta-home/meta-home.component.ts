@@ -13,6 +13,7 @@ export class MetaHomeComponent implements OnInit {
   @ViewChild('dialogData') dialogData: DialogMetaHomeComponent;
 
   metas: any;
+  progresso: number = 0;
   constructor(
     private route: Router,
     private serveMeta: MetasService,
@@ -26,6 +27,7 @@ export class MetaHomeComponent implements OnInit {
     this.serveMeta.getMeta().subscribe({
       next: (res) => {
         this.metas = res;
+        this.progresso = res.porcentagem;
         console.log(res);
       },
       error: (e) => {
