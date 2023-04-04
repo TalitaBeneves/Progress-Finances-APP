@@ -6,7 +6,7 @@ import { MetaDetalhesComponent } from './meta-detalhe/meta-detalhes.component';
 const routes: Routes = [
   { path: '', component: MetaDetalhesComponent },
   { path: 'metas-home', component: MetaHomeComponent },
-  { path: 'meta-detalhe', component: MetaDetalhesComponent },
+  { path: 'meta-detalhe/:id', component: MetaDetalhesComponent },
 ];
 
 @NgModule({

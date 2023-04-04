@@ -17,6 +17,7 @@ export interface CriarMetasModel {
   dataEstimada: string;
   status?: Status;
   porcentagem: number;
+  items: Items[];
 }
 
 export interface EditarMetasModel {
@@ -35,6 +36,13 @@ export interface AllMetasModel {
   objetivo: string;
   porcentagem: number;
   valorInicial: string;
+  items: Items[];
+}
+
+export interface Items {
+  data: string;
+  hora: string;
+  valor: number;
 }
 
 export enum Status {

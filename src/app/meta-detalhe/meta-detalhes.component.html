@@ -1,11 +1,12 @@
 <section class="mt-5">
   <a [routerLink]="['/metas-home']">Voltar</a>
+  <button (click)="addDadosGrid()">+ Adicionar</button>
   <p style="color: #fff; text-align: center">Progresso</p>
   <div class="progress" style="height: 26px; border-radius: 20px">
     <div
       class="progress-bar bg-danger"
       role="progressbar"
-      style="width: 50%"
+      [style.width]="progresso + '%'"
       aria-valuenow="50"
       aria-valuemin="0"
       aria-valuemax="100"
@@ -22,42 +23,13 @@
         <th scope="col">Ações</th>
       </tr>
     </thead>
-    <tbody>
+
+    <tbody *ngFor="let item of items.items">
       <tr>
-        <th scope="row">1</th>
-        <td>03/04/2023</td>
-        <td>12:30</td>
-        <td>800</td>
-        <td>
-          <img
-            src="../../assets/img/icon.png"
-            alt="icone-editar"
-            width="21px"
-            height="21px"
-            (click)="edit()"
-          />
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>03/04/2023</td>
-        <td>12:30</td>
-        <td>800</td>
-        <td>
-          <img
-            src="../../assets/img/icon.png"
-            alt="icone-editar"
-            width="21px"
-            height="21px"
-            (click)="edit()"
-          />
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>03/04/2023</td>
-        <td>12:30</td>
-        <td>800</td>
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.data }}</td>
+        <td>{{ item.hora }}</td>
+        <td>{{ item.valor }}</td>
         <td>
           <img
             src="../../assets/img/icon.png"
@@ -70,4 +42,8 @@
       </tr>
     </tbody>
   </table>
+
+  <div *ngIf="items?.items == 0">
+    <p style="color: #ffffff; text-align: center">Não há dados</p>
+  </div>
 </section>

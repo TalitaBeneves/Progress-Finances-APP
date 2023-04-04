@@ -81,6 +81,7 @@ export class DialogMetaHomeComponent implements OnInit {
       dataEstimada: this.form.value.dataEstimada,
       status: Status.ANDAMENTO,
       porcentagem: formula,
+      items: [],
     };
     this.serveMeta.addMeta(model).subscribe({
       next: (res) => {

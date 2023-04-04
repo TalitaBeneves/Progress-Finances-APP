@@ -11,17 +11,20 @@ section {
   padding: 0 55px 0 55px;
 }
 
-a {
+a,
+button {
   position: relative;
-  width: 164px;
+  width: 165px;
   height: 42px;
-  left: 90%;
+  left: 84%;
   top: 18px;
   text-decoration: none;
   border: none;
   border-radius: 5px;
   padding: 10px 30px;
   background: #ffffff;
+  color: #2b78cf;
   font-weight: 400;
   font-family: "Poppins";
+  margin-right: 10px;
 }

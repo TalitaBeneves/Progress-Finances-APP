@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MetasService } from 'src/core/server/metas.service';
 import { DialogMetaHomeComponent } from './components/dialog-meta-home/dialog-meta-home.component';
+import { AllMetasModel, MetasModel } from 'src/core/model/Metas';
 
 @Component({
   selector: 'app-meta-home',
@@ -15,7 +16,7 @@ export class MetaHomeComponent implements OnInit {
   metas: any;
   progresso: number = 0;
   constructor(
-    private route: Router,
+    private router: Router,
     private serveMeta: MetasService,
     public dialog: MatDialog
   ) {}
@@ -70,8 +71,10 @@ export class MetaHomeComponent implements OnInit {
       },
     });
   }
-  openDetail() {
-    this.route.navigate(['/meta-detalhe']);
-    // alert('Detalhes Meta');
+  openDetail(item: AllMetasModel) {
+    const convert = JSON.stringify(item);
+    this.router.navigate(['/meta-detalhe', item.id], {
+      queryParams: { dados: convert },
+    });
   }
 }
