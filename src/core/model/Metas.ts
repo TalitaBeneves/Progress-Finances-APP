@@ -10,6 +10,15 @@ export interface MetasModel {
 }
 
 export interface CriarMetasModel {
+  id?: number;
+  nomeMeta: number;
+  valorInicial: number;
+  objetivo: number;
+  dataEstimada: string;
+  status?: Status;
+}
+
+export interface EditarMetasModel {
   nomeMeta: number;
   valorInicial: number;
   objetivo: number;

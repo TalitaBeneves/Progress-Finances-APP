@@ -1,13 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { MetasModel, Status } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { DialogMetaHomeComponent } from './components/dialog-meta-home/dialog-meta-home.component';
-import { MatDialog } from '@angular/material/dialog';
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+
 @Component({
   selector: 'app-meta-home',
   templateUrl: './meta-home.component.html',
@@ -16,8 +12,6 @@ export interface DialogData {
 export class MetaHomeComponent implements OnInit {
   @ViewChild('dialogData') dialogData: DialogMetaHomeComponent;
 
-  animal?: string;
-  name?: string;
   metas: any;
   constructor(
     private route: Router,
@@ -43,18 +37,27 @@ export class MetaHomeComponent implements OnInit {
   addMeta() {
     const dialogRef = this.dialog.open(DialogMetaHomeComponent, {
       width: '400px',
-      data: { name: this.name, animal: this.animal },
+      data: {
+        nomeMeta: null,
+        valorInicial: null,
+        objetivo: null,
+        dataEstimada: null,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.animal = result;
+      // this.animal = result;
     });
   }
 
-  edit() {
-    alert('Editar Meta');
+  edit(e: any) {
+    const dialogRef = this.dialog.open(DialogMetaHomeComponent, {
+      width: '400px',
+      data: e,
+    });
   }
+
   delet(id: number) {
     this.serveMeta.deletMeta(id).subscribe({
       next: (res) => {
@@ -67,6 +70,6 @@ export class MetaHomeComponent implements OnInit {
   }
   openDetail() {
     this.route.navigate(['/meta-detalhe']);
-    alert('Detalhes Meta');
+    // alert('Detalhes Meta');
   }
 }

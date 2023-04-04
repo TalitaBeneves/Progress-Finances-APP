@@ -1,13 +1,8 @@
 <section>
   <button (click)="addMeta()">+Adicionar Meta</button>
   <h1>Metas em andamento</h1>
-  <div
-    class="cards my-3"
-    style="cursor: pointer"
-    (click)="openDetail()"
-    *ngFor="let item of metas"
-  >
-    <div class="d-flex w-100">
+  <div class="cards my-3" style="cursor: pointer" *ngFor="let item of metas">
+    <div class="d-flex w-100" (click)="openDetail()">
       <h3 style="width: 100%; margin-bottom: 3px">{{ item.nomeMeta }}</h3>
       <div class="d-flex justify-content-end w-100 pr-4">
         <img
@@ -16,7 +11,7 @@
           alt="icone-editar"
           width="21px"
           height="21px"
-          (click)="edit()"
+          (click)="edit(item)"
         />
         <img
           class="mr-4"
