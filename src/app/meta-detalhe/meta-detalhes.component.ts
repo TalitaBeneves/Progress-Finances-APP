@@ -1,6 +1,9 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AllMetasModel } from 'src/core/model/Metas';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { CriarMetasModel, Items, Status } from 'src/core/model/Metas';
+import { MetasService } from 'src/core/server/metas.service';
+import { DialogMetaDetalheComponent } from './components/dialog-meta-detalhe/dialog-meta-detalhe.component';
 
 @Component({
   selector: 'app-meta-detalhes',
@@ -12,7 +15,11 @@ export class MetaDetalhesComponent implements OnInit {
   progresso: number;
   items: any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private serviceMeta: MetasService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
@@ -23,10 +30,32 @@ export class MetaDetalhesComponent implements OnInit {
     });
   }
 
-  edit() {
-    alert('Editar Meta');
+  edit(e: any) {
+    const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
+      width: '400px',
+      data: {
+        nomeMeta: null,
+        valorInicial: null,
+        objetivo: null,
+        dataEstimada: null,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
+
   addDadosGrid() {
-    alert('addDadosGrid Meta');
+    const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
+      width: '400px',
+      data: this.items,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 }

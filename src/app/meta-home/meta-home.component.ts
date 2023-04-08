@@ -73,7 +73,7 @@ export class MetaHomeComponent implements OnInit {
   }
   openDetail(item: AllMetasModel) {
     const convert = JSON.stringify(item);
-    this.router.navigate(['/meta-detalhe', item.id], {
+    this.router.navigate(['/meta-detalhe', item.metaId], {
       queryParams: { dados: convert },
     });
   }

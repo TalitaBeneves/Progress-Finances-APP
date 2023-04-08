@@ -31,7 +31,7 @@ export interface EditarMetasModel {
 
 export interface AllMetasModel {
   dataEstimada: string;
-  id: number;
+  metaId: number;
   nomeMeta: string;
   objetivo: string;
   porcentagem: number;
@@ -40,6 +40,7 @@ export interface AllMetasModel {
 }
 
 export interface Items {
+  id?: number;
   data: string;
   hora: string;
   valor: number;
