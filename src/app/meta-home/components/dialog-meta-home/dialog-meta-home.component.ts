@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CriarMetasModel, Status } from 'src/core/model/Metas';
+import { Data } from '@angular/router';
+import { AllMetasModel, CriarMetasModel, Status } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { EditarMetasModel } from './../../../../core/model/Metas';
 
@@ -11,22 +12,24 @@ import { EditarMetasModel } from './../../../../core/model/Metas';
   styleUrls: ['./dialog-meta-home.component.scss'],
 })
 export class DialogMetaHomeComponent implements OnInit {
-  @Output() metaCriada = new EventEmitter();
   title: string = 'Criar Meta';
   btnTitle: string = 'Cadastrar';
-  teste: any;
-  progresso: number = 0;
+
+  getId: number;
+
   form: FormGroup;
+  minDate: Data = new Date();
+
   constructor(
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: CriarMetasModel,
+    @Inject(MAT_DIALOG_DATA) public data: AllMetasModel,
     private serveMeta: MetasService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
-    if (this.data.objetivo != null) {
-      this.teste = this.data;
+    if (this.data.valorInicial != null) {
+      this.getId = this.data.id;
       this.title = 'Editar Meta';
       this.btnTitle = 'Editar';
     }
@@ -52,16 +55,17 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   editarMeta() {
-    const formula =
-      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
     const model: EditarMetasModel = {
+      id: this.getId,
       nomeMeta: this.form.value.nomeMeta,
       valorInicial: this.form.value.valorInicial,
-      objetivo: this.form.value.objetivo,
-      dataEstimada: this.form.value.dataEstimada,
-      porcentagem: formula,
+      valorMeta: this.form.value.objetivo,
+      dataAlvo: this.form.value.dataEstimada,
+      dataCadastro: new Date(),
+      porcentagem: this.formulaPorcentagem(),
     };
-    this.serveMeta.editMeta(this.teste.id, model).subscribe({
+
+    this.serveMeta.editMeta(model).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -72,25 +76,30 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   criarMeta() {
-    const formula =
-      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
     const model: CriarMetasModel = {
       nomeMeta: this.form.value.nomeMeta,
       valorInicial: this.form.value.valorInicial,
-      objetivo: this.form.value.objetivo,
-      dataEstimada: this.form.value.dataEstimada,
+      valorMeta: this.form.value.objetivo,
+      dataAlvo: this.form.value.dataEstimada,
+      porcentagem: this.formulaPorcentagem(),
+      dataCadastro: new Date(),
       status: Status.ANDAMENTO,
-      porcentagem: formula,
       items: [],
     };
     this.serveMeta.addMeta(model).subscribe({
       next: (res) => {
-        this.progresso = 30;
         this.dialogRef.close();
       },
       error: (e) => {
         console.error(e);
       },
     });
+  }
+
+  formulaPorcentagem() {
+    const formula =
+      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
+
+    return formula;
   }
 }
