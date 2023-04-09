@@ -1,7 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { MetaDetalhesComponent } from './meta-detalhes.component';
 
@@ -11,9 +9,8 @@ describe('MetaDetalhesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MetaDetalhesComponent ]
-    })
-    .compileComponents();
+      declarations: [MetaDetalhesComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

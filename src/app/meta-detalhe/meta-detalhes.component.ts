@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { MetasService } from 'src/core/server/metas.service';
 import { DialogMetaDetalheComponent } from './components/dialog-meta-detalhe/dialog-meta-detalhe.component';
+import Swal from 'sweetalert2';
+import { Items } from 'src/core/model/Metas';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-meta-detalhes',
@@ -17,8 +20,13 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private serviceMeta: MetasService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private toastr: ToastrService
+  ) {
+    this.serviceMeta.listen().subscribe(() => {
+      this.getById();
+    });
+  }
   ngAfterViewInit(): void {}
 
   ngOnInit() {
@@ -48,10 +56,7 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      //atualizar a grid após o cadastro
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   editarItem(e: any) {
@@ -66,21 +71,33 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      //atualizar a grid após a edição
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
-  deletarItem(e: any) {
-    this.serviceMeta.deleteItem(e).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (e) => {
-        console.error(e);
-      },
+  deletarItem(item: Items) {
+    Swal.fire({
+      title: '<b>Deletar Deposito!</b>',
+      text: `Tem certeza que gostaria de deletar o deposito ${item.id}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, Deletar!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.serviceMeta.deleteItem(item.id).subscribe({
+          next: (res) => {
+            this.toastr.success(
+              'Deposito foi deletado com sucesso!',
+              'success'
+            );
+            this.serviceMeta.filter(res);
+          },
+          error: (e) => {
+            console.error(e);
+          },
+        });
+      }
     });
-    //swa pergintando se deseja realmente excluir aquele deposito
   }
 }

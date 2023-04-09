@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+
 import {
-  AllMetasModel,
   CreateItemsModel,
   EditarItemsModel,
   Items,
 } from 'src/core/model/Metas';
+
 import { MetasService } from 'src/core/server/metas.service';
 
 @Component({
@@ -24,6 +26,7 @@ export class DialogMetaDetalheComponent implements OnInit {
   metas: any;
   minDate: Date = new Date();
   items = [];
+
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA)
@@ -32,15 +35,14 @@ export class DialogMetaDetalheComponent implements OnInit {
       cadastro: boolean;
       inputs: Items;
     },
-    private serveMeta: MetasService,
     private fb: FormBuilder,
-    private serviceMeta: MetasService
+    private serviceMeta: MetasService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
-    console.log(this.data.inputs);
     if (this.data.cadastro != true) {
-      this.getId = this.data.dados.id;
+      this.getId = this.data.inputs.id;
       this.title = 'Editar Deposito';
       this.btnTitle = 'Editar';
     }
@@ -74,7 +76,9 @@ export class DialogMetaDetalheComponent implements OnInit {
     };
     this.serviceMeta.editarItem(model).subscribe({
       next: (res) => {
-        console.log(res);
+        this.toastr.success('Deposito foi editado com sucesso!', 'success');
+        this.serviceMeta.filter(res);
+        this.dialogRef.close();
       },
       error: (e) => {
         console.error(e);
@@ -91,7 +95,9 @@ export class DialogMetaDetalheComponent implements OnInit {
     };
     this.serviceMeta.createItem(model).subscribe({
       next: (res) => {
-        console.log(res);
+        this.toastr.success('Meta foi cadastrado com sucesso!', 'success');
+        this.serviceMeta.filter(res);
+        this.dialogRef.close();
       },
       error: (e) => {
         console.error(e);
