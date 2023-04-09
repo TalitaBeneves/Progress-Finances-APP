@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   url: 'https://localhost:7162/controler/Metas',
+  urlItems: 'https://localhost:7162/Metas/Items',
 };
 
 /*

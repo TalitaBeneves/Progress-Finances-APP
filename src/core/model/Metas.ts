@@ -41,6 +41,14 @@ export interface Items {
   valor: number;
 }
 
+export interface CreateItemsModel {
+  id?: string;
+  valorDepositado: number;
+  dataDeposito: any;
+  idMeta: number;
+  progressFinanceModelId: number;
+}
+
 export enum Status {
   CONCLUIDA = 0,
   ANDAMENTO = 1,
