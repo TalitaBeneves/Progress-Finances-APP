@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import {
   AllMetasModel,
   CriarMetasModel,
   EditarMetasModel,
   Items,
-  MetasModel,
 } from '../model/Metas';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +30,8 @@ export class MetasService {
     return this.http.post(this.url, model);
   }
 
-  editMeta(id: number, model: EditarMetasModel) {
-    const url = `${this.url}/${id}`;
+  editMeta(model: EditarMetasModel) {
+    const url = `${this.url}`;
     return this.http.put(url, model);
   }
 

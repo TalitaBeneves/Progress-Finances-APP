@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://localhost:7162/controler/API',
+  url: 'https://localhost:7162/controler/Metas',
 };
 
 /*
