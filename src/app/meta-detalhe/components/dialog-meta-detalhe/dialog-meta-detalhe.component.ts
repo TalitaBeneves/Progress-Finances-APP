@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CriarMetasModel, Items, Status } from 'src/core/model/Metas';
+import { AllMetasModel, CreateItemsModel, Items } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 
 @Component({
@@ -11,24 +11,30 @@ import { MetasService } from 'src/core/server/metas.service';
 })
 export class DialogMetaDetalheComponent implements OnInit {
   @Output() metaCriada = new EventEmitter();
-  title: string = 'Criar Meta';
+  title: string = 'Adicionar Deposito';
   btnTitle: string = 'Cadastrar';
   teste: any;
-  progresso: number = 0;
+  progresso: number;
   form: FormGroup;
   metas: any;
+  minDate: Date = new Date();
   constructor(
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      dados: any;
+      cadastro: boolean;
+    },
     private serveMeta: MetasService,
     private fb: FormBuilder,
     private serviceMeta: MetasService
   ) {}
 
   ngOnInit() {
-    if (this.data.valor != null) {
+    console.log(this.data);
+    if (this.data.cadastro != true) {
       this.teste = this.data;
-      this.title = 'Editar Meta';
+      this.title = 'Editar Deposito';
       this.btnTitle = 'Editar';
     }
 
@@ -37,9 +43,8 @@ export class DialogMetaDetalheComponent implements OnInit {
 
   montaForm() {
     this.form = this.fb.group({
-      data: [null, Validators.required],
-      valor: [null],
-      hora: [null, Validators.required],
+      dataDeposito: [null, Validators.required],
+      valorDeposito: [null, Validators.required],
     });
   }
 
@@ -53,62 +58,36 @@ export class DialogMetaDetalheComponent implements OnInit {
   }
 
   editarMeta(e?: any) {
-    // const model: Items = {
-    //   id: 0,
-    //   data: '',
-    //   hora: '',
-    //   valor: 0,
-    // };
-    // this.serviceMeta.editItemMeta(e, model).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //   },
-    //   error: (e) => {
-    //     console.error(e);
-    //   },
-    // });
+    const model: CreateItemsModel = {
+      valorDepositado: Number(this.form.value.valorDeposito),
+      dataDeposito: this.form.value.dataDeposito,
+      idMeta: this.data.dados.id,
+      progressFinanceModelId: this.data.dados.id,
+    };
+    this.serviceMeta.createItem(model).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
   }
 
-  // criarMeta() {
-  //   const formula =
-  //     (this.form.value.valorInicial / this.form.value.objetivo) * 100;
-  //   // const model: CriarMetasModel = {
-  //   //   nomeMeta: this.form.value.nomeMeta,
-  //   //   valorInicial: this.form.value.valorInicial,
-  //   //   objetivo: this.form.value.objetivo,
-  //   //   dataEstimada: this.form.value.dataEstimada,
-  //   //   status: Status.ANDAMENTO,
-  //   //   porcentagem: formula,
-  //   //   items: [],
-  //   // };
-  //   const model: Items = {
-  //     data: this.form.value.data,
-  //     hora: this.form.value.hora,
-  //     valor: this.form.value.valor,
-  //   };
-  //   this.serveMeta.cadastrarItem(this.data.id, model).subscribe({
-  //     next: (res) => {
-  //       this.progresso = 30;
-  //       this.dialogRef.close();
-  //     },
-  //     error: (e) => {
-  //       console.error(e);
-  //     },
-  //   });
-  // }
-
-  createItem(metaId?: number, item?: any) {
-    this.serveMeta
-      .createItem(this.data.metaId, this.data.items)
-      .subscribe((data) => {
-        if (this.metas && this.metas.length) {
-          const metaIndex = this.metas.findIndex(
-            (meta: any) => meta.id === this.data.metaId
-          );
-          if (metaIndex > -1) {
-            this.metas[metaIndex].items.push(data);
-          }
-        }
-      });
+  createItem() {
+    const model: CreateItemsModel = {
+      valorDepositado: Number(this.form.value.valorDeposito),
+      dataDeposito: this.form.value.dataDeposito,
+      idMeta: this.data.dados.id,
+      progressFinanceModelId: this.data.dados.id,
+    };
+    this.serviceMeta.createItem(model).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
   }
 }

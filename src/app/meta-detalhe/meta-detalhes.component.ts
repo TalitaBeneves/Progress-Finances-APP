@@ -25,7 +25,10 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
     this.route.queryParams.subscribe((params: any) => {
       this.id = Number(params.idMeta);
     });
+    this.getById();
+  }
 
+  getById() {
     this.serviceMeta.getMetaById(this.id).subscribe({
       next: (res) => {
         this.items = res;
@@ -36,46 +39,47 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  editarItem(e: any) {
+  cadastrarItem() {
     const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
       width: '400px',
       data: {
-        nomeMeta: null,
-        valorInicial: null,
-        objetivo: null,
-        dataEstimada: null,
+        dados: this.items,
+        cadastro: true,
       },
     });
 
     dialogRef.afterClosed().subscribe(() => {
+      //atualizar a grid após o cadastro
+      console.log('The dialog was closed');
+    });
+  }
+
+  editarItem(e: any) {
+    const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
+      width: '400px',
+      data: {
+        dataDeposito: null,
+        valorDeposito: null,
+        cadastro: false,
+        dados: this.items,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      //atualizar a grid após a edição
       console.log('The dialog was closed');
     });
   }
 
   deletarItem(e: any) {
-    const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
-      width: '400px',
-      data: {
-        nomeMeta: null,
-        valorInicial: null,
-        objetivo: null,
-        dataEstimada: null,
+    this.serviceMeta.deleteItem(e).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (e) => {
+        console.error(e);
       },
     });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  cadastrarItem() {
-    const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
-      width: '400px',
-      data: this.items,
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
+    //swa pergintando se deseja realmente excluir aquele deposito
   }
 }

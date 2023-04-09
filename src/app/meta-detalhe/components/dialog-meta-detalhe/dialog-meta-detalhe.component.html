@@ -1,25 +1,36 @@
-<h1 mat-dialog-title>{{ title }}</h1>
+<h1 mat-dialog-title style="color: #252525">{{ title }}</h1>
 <div mat-dialog-content>
   <form [formGroup]="form">
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Data</mat-label>
-      <input matInput formControlName="data" [(ngModel)]="data.data" />
+    <mat-form-field appearance="fill" class="w-100 example-full-width">
+      <mat-label>Data Deposito</mat-label>
+      <input
+        matInput
+        [min]="minDate"
+        [matDatepicker]="picker"
+        formControlName="dataDeposito"
+        [(ngModel)]="data.dados.dataDeposito"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <br />
     <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Hora</mat-label>
-      <input matInput formControlName="hora" [(ngModel)]="data.hora" />
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Valor</mat-label>
-      <input matInput formControlName="valor" [(ngModel)]="data.valor" />
+      <mat-label>Valor Deposito</mat-label>
+      <input
+        matInput
+        formControlName="valorDeposito"
+        [(ngModel)]="data.dados.valorDeposito"
+      />
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data.valor">
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="data.dados.valorDeposito"
+  >
     Cancelar
   </button>
   <button mat-raised-button color="warn" (click)="onNoClick($event)">
