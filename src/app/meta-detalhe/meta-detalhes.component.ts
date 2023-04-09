@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { CriarMetasModel, Items, Status } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { DialogMetaDetalheComponent } from './components/dialog-meta-detalhe/dialog-meta-detalhe.component';
 
@@ -10,7 +9,7 @@ import { DialogMetaDetalheComponent } from './components/dialog-meta-detalhe/dia
   templateUrl: './meta-detalhes.component.html',
   styleUrls: ['./meta-detalhes.component.scss'],
 })
-export class MetaDetalhesComponent implements OnInit {
+export class MetaDetalhesComponent implements OnInit, AfterViewInit {
   id: number;
   progresso: number;
   items: any;
@@ -20,17 +19,24 @@ export class MetaDetalhesComponent implements OnInit {
     private serviceMeta: MetasService,
     public dialog: MatDialog
   ) {}
+  ngAfterViewInit(): void {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
-      const arrString = params.dados;
-      this.items = JSON.parse(arrString);
-      this.progresso = this.items.porcentagem;
-      console.log(this.items);
+      this.id = Number(params.idMeta);
+    });
+
+    this.serviceMeta.getMetaById(this.id).subscribe({
+      next: (res) => {
+        this.items = res;
+      },
+      error: (e) => {
+        console.error(e);
+      },
     });
   }
 
-  edit(e: any) {
+  editarItem(e: any) {
     const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
       width: '400px',
       data: {
@@ -43,11 +49,26 @@ export class MetaDetalhesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 
-  addDadosGrid() {
+  deletarItem(e: any) {
+    const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
+      width: '400px',
+      data: {
+        nomeMeta: null,
+        valorInicial: null,
+        objetivo: null,
+        dataEstimada: null,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  cadastrarItem() {
     const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
       width: '400px',
       data: this.items,
@@ -55,7 +76,6 @@ export class MetaDetalhesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 }
