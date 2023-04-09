@@ -1,7 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { DialogMetaHomeComponent } from './dialog-meta-home.component';
 
@@ -11,9 +9,8 @@ describe('DialogMetaHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogMetaHomeComponent ]
-    })
-    .compileComponents();
+      declarations: [DialogMetaHomeComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

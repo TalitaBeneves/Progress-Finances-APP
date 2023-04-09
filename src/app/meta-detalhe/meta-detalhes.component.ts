@@ -62,6 +62,7 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
         valorDeposito: null,
         cadastro: false,
         dados: this.items,
+        inputs: e,
       },
     });
 

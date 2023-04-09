@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { AllMetasModel, Status } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { DialogMetaHomeComponent } from './components/dialog-meta-home/dialog-meta-home.component';
@@ -15,18 +16,22 @@ export class MetaHomeComponent implements OnInit {
   filtroStatusConcluidas: AllMetasModel;
   filtroStatusAndamentos: AllMetasModel;
 
-  constructor(private serveMeta: MetasService, public dialog: MatDialog) {}
+  constructor(private serveMeta: MetasService, public dialog: MatDialog) {
+    this.serveMeta.listen().subscribe((e) => {
+      this.getMeta();
+    });
+  }
 
   ngOnInit() {
     this.getMeta();
   }
+
   getMeta() {
     this.serveMeta.getMeta().subscribe({
       next: (res) => {
         this.resultMeta = res;
         this.filtro();
         this.progresso = res.porcentagem;
-        console.log(res);
       },
       error: (e) => {
         console.error(e);
@@ -45,9 +50,7 @@ export class MetaHomeComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   filtro() {

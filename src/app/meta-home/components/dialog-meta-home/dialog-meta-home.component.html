@@ -44,13 +44,7 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button
-    mat-raised-button
-    color="primary"
-    [mat-dialog-close]="data.valorInicial"
-  >
-    Cancelar
-  </button>
+  <button mat-raised-button color="primary">Cancelar</button>
   <button mat-raised-button color="warn" (click)="onNoClick($event)">
     {{ btnTitle }}
   </button>

@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AllMetasModel, CreateItemsModel, Items } from 'src/core/model/Metas';
+import {
+  AllMetasModel,
+  CreateItemsModel,
+  EditarItemsModel,
+  Items,
+} from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 
 @Component({
@@ -13,17 +18,19 @@ export class DialogMetaDetalheComponent implements OnInit {
   @Output() metaCriada = new EventEmitter();
   title: string = 'Adicionar Deposito';
   btnTitle: string = 'Cadastrar';
-  teste: any;
+  getId: number;
   progresso: number;
   form: FormGroup;
   metas: any;
   minDate: Date = new Date();
+  items = [];
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA)
     public data: {
       dados: any;
       cadastro: boolean;
+      inputs: Items;
     },
     private serveMeta: MetasService,
     private fb: FormBuilder,
@@ -31,9 +38,9 @@ export class DialogMetaDetalheComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.data);
+    console.log(this.data.inputs);
     if (this.data.cadastro != true) {
-      this.teste = this.data;
+      this.getId = this.data.dados.id;
       this.title = 'Editar Deposito';
       this.btnTitle = 'Editar';
     }
@@ -58,13 +65,14 @@ export class DialogMetaDetalheComponent implements OnInit {
   }
 
   editarMeta(e?: any) {
-    const model: CreateItemsModel = {
+    const model: EditarItemsModel = {
+      id: this.getId,
       valorDepositado: Number(this.form.value.valorDeposito),
       dataDeposito: this.form.value.dataDeposito,
       idMeta: this.data.dados.id,
       progressFinanceModelId: this.data.dados.id,
     };
-    this.serviceMeta.createItem(model).subscribe({
+    this.serviceMeta.editarItem(model).subscribe({
       next: (res) => {
         console.log(res);
       },

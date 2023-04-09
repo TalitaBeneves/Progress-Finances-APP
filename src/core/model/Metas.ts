@@ -36,15 +36,21 @@ export interface AllMetasModel {
 
 export interface Items {
   id: number;
-  data: string;
-  hora: string;
-  valor: number;
+  dataDeposito: Date;
+  valorDepositado: number;
 }
 
 export interface CreateItemsModel {
-  id?: string;
   valorDepositado: number;
-  dataDeposito: any;
+  dataDeposito: Date;
+  idMeta: number;
+  progressFinanceModelId: number;
+}
+
+export interface EditarItemsModel {
+  id: number;
+  valorDepositado: number;
+  dataDeposito: Date;
   idMeta: number;
   progressFinanceModelId: number;
 }

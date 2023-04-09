@@ -1,7 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { MetasAndamentoComponent } from './metas-andamento.component';
 
@@ -11,9 +9,8 @@ describe('MetasAndamentoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MetasAndamentoComponent ]
-    })
-    .compileComponents();
+      declarations: [MetasAndamentoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

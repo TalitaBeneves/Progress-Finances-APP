@@ -1,18 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+
+import { Observable, Subject } from 'rxjs';
+
 import { environment } from 'src/environments/environment';
 import {
   AllMetasModel,
   CreateItemsModel,
   CriarMetasModel,
+  EditarItemsModel,
   EditarMetasModel,
   Items,
 } from '../model/Metas';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'X-HTTP-Method-Override': 'POST', // ou 'DELETE'
+    'X-HTTP-Method-Override': 'POST',
   }),
 };
 
@@ -20,11 +23,19 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class MetasService {
-  // url: string = 'http://localhost:3000/metas';
   url: string = environment.url;
   urlItems: string = environment.urlItems;
+  private _listners = new Subject<any>();
 
   constructor(private http: HttpClient) {}
+
+  listen(): Observable<any> {
+    return this._listners.asObservable();
+  }
+
+  filter(filterBy: any) {
+    this._listners.next(filterBy);
+  }
 
   getMeta() {
     return this.http.get<AllMetasModel>(this.url);
@@ -53,6 +64,10 @@ export class MetasService {
 
   createItem(model: CreateItemsModel) {
     return this.http.post(this.urlItems, model, httpOptions);
+  }
+
+  editarItem(model: EditarItemsModel) {
+    return this.http.put(this.urlItems, model, httpOptions);
   }
 
   deleteItem(idItem: number) {

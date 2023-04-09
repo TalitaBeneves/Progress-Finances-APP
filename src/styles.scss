@@ -44,3 +44,9 @@ p {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.toast-container {
+  pointer-events: none;
+  position: fixed;
+  z-index: 999999;
+  margin-top: 20px !important;
+}

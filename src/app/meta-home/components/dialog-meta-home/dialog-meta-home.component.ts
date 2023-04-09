@@ -1,10 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Data } from '@angular/router';
+
 import { AllMetasModel, CriarMetasModel, Status } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { EditarMetasModel } from './../../../../core/model/Metas';
+import { MetaHomeComponent } from './../../meta-home.component';
+
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-meta-home',
@@ -12,6 +17,8 @@ import { EditarMetasModel } from './../../../../core/model/Metas';
   styleUrls: ['./dialog-meta-home.component.scss'],
 })
 export class DialogMetaHomeComponent implements OnInit {
+  @ViewChild(MetaHomeComponent) component: MetaHomeComponent;
+  update: Subject<any> = new Subject<any>();
   title: string = 'Criar Meta';
   btnTitle: string = 'Cadastrar';
 
@@ -24,6 +31,7 @@ export class DialogMetaHomeComponent implements OnInit {
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: AllMetasModel,
     private serveMeta: MetasService,
+    private toastr: ToastrService,
     private fb: FormBuilder
   ) {}
 
@@ -67,7 +75,9 @@ export class DialogMetaHomeComponent implements OnInit {
 
     this.serveMeta.editMeta(model).subscribe({
       next: (res) => {
-        console.log(res);
+        this.toastr.success('Meta foi editada com sucesso!', 'success');
+        this.serveMeta.filter(res);
+        this.dialogRef.close();
       },
       error: (e) => {
         console.error(e);
@@ -88,6 +98,8 @@ export class DialogMetaHomeComponent implements OnInit {
     };
     this.serveMeta.addMeta(model).subscribe({
       next: (res) => {
+        this.toastr.success('Meta foi criada com sucesso!', 'success');
+        this.serveMeta.filter(res);
         this.dialogRef.close();
       },
       error: (e) => {
