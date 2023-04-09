@@ -1,0 +1,82 @@
+<div
+  class="cards my-3"
+  style="cursor: pointer"
+  *ngFor="let item of filtroStatusAndamentos"
+>
+  <!-- -->
+  <div class="d-flex w-100">
+    <h3 style="width: 100%; margin-bottom: 3px">{{ item.nomeMeta }}</h3>
+    <div class="d-flex justify-content-end w-100 pr-4">
+      <img
+        class="mr-2"
+        src="../../assets/img/icon.png"
+        alt="icone-editar"
+        width="25px"
+        height="25px"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Editar Meta"
+        (click)="edit(item)"
+      />
+      <img
+        class="mr-2"
+        src="../../assets/img/lixeira.png"
+        alt="icone-excluir"
+        width="25px"
+        height="25px"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Deletar Meta"
+        (click)="delet(item.id)"
+      />
+      <img
+        class="mr-4"
+        src="../../assets/img/information.png"
+        alt="icone-search"
+        width="25px"
+        height="25px"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Visualizar seu Depositos"
+        (click)="openDetail(item)"
+      />
+    </div>
+  </div>
+  <div class="progress" style="height: 26px; border-radius: 20px">
+    <div
+      [style.width]="item.porcentagem + '%'"
+      class="progress-bar bg-danger"
+      role="progressbar"
+      aria-valuenow="50"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <p
+        style="
+          text-align: end;
+          color: #ffffffc9;
+          padding-top: 10px;
+          font-size: 18px;
+          font-weight: bold;
+          padding-right: 20px;
+          padding-left: 12px;
+        "
+        *ngIf="item.porcentagem"
+      >
+        {{ item.porcentagem + "%" }}
+      </p>
+    </div>
+  </div>
+  <div class="d-flex w-100">
+    <p class="card-p">valor atual: {{ item.valorInicial | currency : "R$" }}</p>
+    <p class="card-p">objetivo: {{ item.valorMeta | currency : "R$" }}</p>
+    <p class="card-p">
+      Data estimada para conclusão: {{ item.dataAlvo | date : "dd/MM/YYYY" }}
+    </p>
+  </div>
+</div>
+<div *ngIf="filtroStatusAndamentos?.length <= 0">
+  <p style="color: #ffffff; padding: 10px 0px 10px 20px">
+    Não há metas em andamento!
+  </p>
+</div>
