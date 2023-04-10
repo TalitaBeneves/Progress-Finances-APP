@@ -6,7 +6,7 @@ export interface CriarMetasModel {
   valorMeta: number;
   dataCadastro: Data;
   dataAlvo: Data;
-  porcentagem: number;
+  porcentagem?: number;
   status?: Status;
   items: Items[];
 }
@@ -18,7 +18,7 @@ export interface EditarMetasModel {
   valorMeta: number;
   dataCadastro: Data;
   dataAlvo: Data;
-  porcentagem: number;
+  porcentagem?: number;
   status?: Status;
 }
 
@@ -26,6 +26,7 @@ export interface AllMetasModel {
   id: number;
   nomeMeta: number;
   valorInicial: number;
+  valorTotal: number;
   valorMeta: number;
   dataCadastro: Data;
   dataAlvo: Data;
