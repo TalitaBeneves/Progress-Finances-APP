@@ -51,7 +51,7 @@ export class MetasAndamentoComponent {
       if (result.isConfirmed) {
         this.serveMeta.deletMeta(meta.id).subscribe({
           next: (res) => {
-            this.toastr.success('Meta foi deletada com sucesso!', 'success');
+            this.toastr.success('Meta foi deletada com sucesso!', 'Sucesso');
             this.serveMeta.filter(res);
           },
           error: (e) => {

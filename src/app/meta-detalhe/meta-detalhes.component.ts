@@ -1,18 +1,20 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+
+import { Items } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { DialogMetaDetalheComponent } from './components/dialog-meta-detalhe/dialog-meta-detalhe.component';
-import Swal from 'sweetalert2';
-import { Items } from 'src/core/model/Metas';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-meta-detalhes',
   templateUrl: './meta-detalhes.component.html',
   styleUrls: ['./meta-detalhes.component.scss'],
 })
-export class MetaDetalhesComponent implements OnInit, AfterViewInit {
+export class MetaDetalhesComponent implements OnInit {
   id: number;
   progresso: number;
   items: any;
@@ -27,7 +29,6 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
       this.getById();
     });
   }
-  ngAfterViewInit(): void {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
@@ -53,13 +54,17 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
       data: {
         dados: this.items,
         cadastro: true,
+        inputs: {
+          valorDeposito: null,
+          dataDeposito: null,
+        },
       },
     });
 
     dialogRef.afterClosed().subscribe(() => {});
   }
 
-  editarItem(e: any) {
+  editarItem(item: Items) {
     const dialogRef = this.dialog.open(DialogMetaDetalheComponent, {
       width: '400px',
       data: {
@@ -67,7 +72,7 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
         valorDeposito: null,
         cadastro: false,
         dados: this.items,
-        inputs: e,
+        inputs: item,
       },
     });
 
@@ -89,7 +94,7 @@ export class MetaDetalhesComponent implements OnInit, AfterViewInit {
           next: (res) => {
             this.toastr.success(
               'Deposito foi deletado com sucesso!',
-              'success'
+              'Sucesso'
             );
             this.serviceMeta.filter(res);
           },

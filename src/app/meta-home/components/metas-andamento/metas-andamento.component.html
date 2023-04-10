@@ -3,7 +3,6 @@
   style="cursor: pointer"
   *ngFor="let item of filtroStatusAndamentos"
 >
-  <!-- -->
   <div class="d-flex w-100">
     <h3 style="width: 100%; margin-bottom: 3px">{{ item.nomeMeta }}</h3>
     <div class="d-flex justify-content-end w-100 pr-4">
@@ -68,7 +67,7 @@
     </div>
   </div>
   <div class="d-flex w-100">
-    <p class="card-p">valor atual: {{ item.valorInicial | currency : "R$" }}</p>
+    <p class="card-p">valor Total: {{ item.valorTotal | currency : "R$" }}</p>
     <p class="card-p">objetivo: {{ item.valorMeta | currency : "R$" }}</p>
     <p class="card-p">
       Data estimada para conclusão: {{ item.dataAlvo | date : "dd/MM/YYYY" }}
