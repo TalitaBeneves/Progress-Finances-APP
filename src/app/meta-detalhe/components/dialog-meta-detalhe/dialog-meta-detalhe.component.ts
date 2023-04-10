@@ -52,7 +52,7 @@ export class DialogMetaDetalheComponent implements OnInit {
 
   montaForm() {
     this.form = this.fb.group({
-      dataDeposito: [null, Validators.required],
+      dataDeposito: ['', Validators.required],
       valorDeposito: [null, Validators.required],
     });
   }
@@ -67,6 +67,7 @@ export class DialogMetaDetalheComponent implements OnInit {
   }
 
   editarMeta(e?: any) {
+    this.verificacaoValid();
     const model: EditarItemsModel = {
       id: this.getId,
       valorDepositado: Number(this.form.value.valorDeposito),
@@ -76,7 +77,7 @@ export class DialogMetaDetalheComponent implements OnInit {
     };
     this.serviceMeta.editarItem(model).subscribe({
       next: (res) => {
-        this.toastr.success('Deposito foi editado com sucesso!', 'success');
+        this.toastr.success('Deposito foi editado com sucesso!', 'Sucesso');
         this.serviceMeta.filter(res);
         this.dialogRef.close();
       },
@@ -87,6 +88,7 @@ export class DialogMetaDetalheComponent implements OnInit {
   }
 
   createItem() {
+    this.verificacaoValid();
     const model: CreateItemsModel = {
       valorDepositado: Number(this.form.value.valorDeposito),
       dataDeposito: this.form.value.dataDeposito,
@@ -95,7 +97,7 @@ export class DialogMetaDetalheComponent implements OnInit {
     };
     this.serviceMeta.createItem(model).subscribe({
       next: (res) => {
-        this.toastr.success('Meta foi cadastrado com sucesso!', 'success');
+        this.toastr.success('Meta foi cadastrado com sucesso!', 'Sucesso');
         this.serviceMeta.filter(res);
         this.dialogRef.close();
       },
@@ -103,5 +105,16 @@ export class DialogMetaDetalheComponent implements OnInit {
         console.error(e);
       },
     });
+  }
+
+  verificacaoValid() {
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
   }
 }

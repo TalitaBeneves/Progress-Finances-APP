@@ -63,6 +63,7 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   editarMeta() {
+    this.verificacaoValid();
     const model: EditarMetasModel = {
       id: this.getId,
       nomeMeta: this.form.value.nomeMeta,
@@ -70,12 +71,11 @@ export class DialogMetaHomeComponent implements OnInit {
       valorMeta: this.form.value.objetivo,
       dataAlvo: this.form.value.dataEstimada,
       dataCadastro: new Date(),
-      porcentagem: this.formulaPorcentagem(),
     };
 
     this.serveMeta.editMeta(model).subscribe({
       next: (res) => {
-        this.toastr.success('Meta foi editada com sucesso!', 'success');
+        this.toastr.success('Meta foi editada com sucesso!', 'Sucesso');
         this.serveMeta.filter(res);
         this.dialogRef.close();
       },
@@ -86,19 +86,26 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   criarMeta() {
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
     const model: CriarMetasModel = {
       nomeMeta: this.form.value.nomeMeta,
       valorInicial: this.form.value.valorInicial,
       valorMeta: this.form.value.objetivo,
       dataAlvo: this.form.value.dataEstimada,
-      porcentagem: this.formulaPorcentagem(),
       dataCadastro: new Date(),
       status: Status.ANDAMENTO,
       items: [],
     };
     this.serveMeta.addMeta(model).subscribe({
       next: (res) => {
-        this.toastr.success('Meta foi criada com sucesso!', 'success');
+        this.toastr.success('Meta foi criada com sucesso!', 'Sucesso');
         this.serveMeta.filter(res);
         this.dialogRef.close();
       },
@@ -108,10 +115,14 @@ export class DialogMetaHomeComponent implements OnInit {
     });
   }
 
-  formulaPorcentagem() {
-    const formula =
-      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
-
-    return formula;
+  verificacaoValid() {
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
   }
 }
