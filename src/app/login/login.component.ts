@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
+import { LoginUsuario } from 'src/core/model/Usuario';
+import { UsuarioService } from 'src/core/server/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private serviceUsuario: UsuarioService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.montaForm();
@@ -22,6 +29,19 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.form.value);
+    const model: LoginUsuario = {
+      senha: this.form.value.senha,
+      email: this.form.value.email,
+    };
+    this.serviceUsuario.login(model).subscribe({
+      next: (res) => {
+        this.router.navigate(['metas-home']);
+        console.log(res);
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
+    console.log();
   }
 }
