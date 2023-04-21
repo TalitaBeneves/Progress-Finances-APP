@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
@@ -27,7 +28,7 @@ import { CadastroModule } from './cadastro/cadastro.module';
 import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     MetaHomeComponent,
     MetaDetalhesComponent,
@@ -35,8 +36,8 @@ import { MenuComponent } from './menu/menu.component';
     DialogMetaDetalheComponent,
     MetasAndamentoComponent,
     MetasConcluidasComponent,
-      MenuComponent
-   ],
+    MenuComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -50,6 +51,7 @@ import { MenuComponent } from './menu/menu.component';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true,
     }),
