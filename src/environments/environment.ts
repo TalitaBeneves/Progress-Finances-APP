@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://localhost:7162/controller/Metas',
-  urlItems: 'https://localhost:7162/Metas/Items',
+  url: 'https://localhost:7162/controller/',
 };
 
 /*

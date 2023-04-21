@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class MetasService {
   url: string = environment.url;
-  urlItems: string = environment.urlItems;
+
   private _listners = new Subject<any>();
 
   constructor(private http: HttpClient) {}
@@ -38,39 +38,42 @@ export class MetasService {
   }
 
   getMeta() {
-    return this.http.get<AllMetasModel>(this.url);
+    return this.http.get<AllMetasModel>(`${this.url}/Metas`);
   }
 
   getMetaById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.url}/${id}`);
+    return this.http.get<any>(`${this.url}/Metas/${id}`);
   }
 
   addMeta(model: CriarMetasModel) {
-    return this.http.post(this.url, model, httpOptions);
+    return this.http.post(`${this.url}`, model, httpOptions);
   }
 
   editMeta(model: EditarMetasModel) {
-    const url = `${this.url}`;
+    const url = `${this.url}/Metas`;
     return this.http.put(url, model, httpOptions);
   }
 
   deletMeta(id: number) {
-    return this.http.delete(`${this.url}/${id}`, httpOptions);
+    return this.http.delete(`${this.url}Metas/${id}`, httpOptions);
   }
 
   getItems() {
-    return this.http.get<Items>(this.urlItems);
+    return this.http.get<Items>(`${this.url}/Items`);
   }
 
   createItem(model: CreateItemsModel) {
-    return this.http.post(this.urlItems, model, httpOptions);
+    return this.http.post(`${this.url}/Items`, model, httpOptions);
   }
 
   editarItem(model: EditarItemsModel) {
-    return this.http.put(this.urlItems, model, httpOptions);
+    return this.http.put(`${this.url}/Items`, model, httpOptions);
   }
 
   deleteItem(idItem: number) {
-    return this.http.delete<any>(`${this.urlItems}/${idItem}`, httpOptions);
+    return this.http.delete<any>(
+      `${`${this.url}/Items`}/${idItem}`,
+      httpOptions
+    );
   }
 }
