@@ -1,0 +1,84 @@
+nav.menu-lateral {
+  width: 80px;
+  height: 100%;
+  background-color: #202020;
+  padding: 40px 0 40px 0px;
+  box-shadow: 3px 0 0 #ef4b21;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+nav.menu-lateral:hover {
+  width: 300px;
+}
+
+.btn-expandir {
+  width: 100%;
+  padding-left: 10px;
+}
+
+.btn-expandir > i {
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+ul {
+  height: 100%;
+  list-style-type: none;
+  padding: 0px;
+
+  color: #fff;
+}
+
+ul li.item-menu {
+  transition: 0.2s;
+}
+
+ul li.ativo {
+  // background-color: #ff0077;
+}
+
+ul li.item-menu:hover {
+  border-start-start-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background: var(--color-progress);
+}
+
+ul li.item-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 20px 4%;
+  display: flex;
+  margin-bottom: 10px;
+  line-height: 40px;
+  margin-left: 18px;
+  white-space: nowrap;
+}
+
+ul li.item-menu a .txt-link {
+  margin-left: 70px;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+nav.menu-lateral .txt-link {
+  margin-left: 40px;
+  opacity: 1;
+}
+
+ul li.item-menu a .icon {
+  font-size: 30px;
+}
+
+li.active {
+  border-start-start-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background: var(--color-progress);
+  color: white;
+}

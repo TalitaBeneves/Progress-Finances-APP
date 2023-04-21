@@ -1,0 +1,56 @@
+<nav class="menu-lateral">
+  <hr style="height: 1px; border-bottom: 1px solid gray" />
+  <div class="btn-expandir ml-1">
+    <!-- <p style="color: #fff; text-align: center">Progress Finance</p> -->
+    <img src="assets/img/lixeira.png" alt="" width="54" height="54" />
+  </div>
+
+  <ul class="mt-5 ml-1">
+    <li
+      class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'Dashboard' }"
+      (click)="activeItem = 'Dashboard'"
+    >
+      <a routerLink="/metas-home">
+        <span class="icon"><i class="bi bi-columns-gap"></i></span>
+        <span class="ml-4">Dashboard</span>
+      </a>
+    </li>
+
+    <li
+      class="item-menu mb-0"
+      class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'Minhas Metas' }"
+      (click)="activeItem = 'Minhas Metas'"
+    >
+      <a href="#">
+        <span class="icon">
+          <i class="bi bi-graph-up"></i>
+        </span>
+        <span class="ml-4">Minhas Metas</span>
+      </a>
+    </li>
+    <li
+      class="item-menu"
+      class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'Meus Ativos' }"
+      (click)="activeItem = 'Meus Ativos'"
+    >
+      <a href="#">
+        <span class="icon"><i class="bi bi-wallet2"></i></span>
+        <span class="ml-4">Meus Ativos</span>
+      </a>
+    </li>
+    <li
+      class="item-menu"
+      class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'Perfil' }"
+      (click)="activeItem = 'Perfil'"
+    >
+      <a href="#">
+        <span class="icon"><i class="bi bi-person-circle"></i></span>
+        <span class="ml-4">Perfil</span>
+      </a>
+    </li>
+  </ul>
+</nav>
