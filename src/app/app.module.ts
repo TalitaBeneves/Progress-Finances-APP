@@ -57,7 +57,7 @@ import { MetaHomeComponent } from './meta-home/meta-home.component';
     }),
     LoginModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-Br' }],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

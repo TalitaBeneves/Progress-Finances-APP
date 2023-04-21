@@ -1,0 +1,159 @@
+{
+  "metas": [
+    {
+      "metaId": 1,
+      "nomeMeta": "Meta 1",
+      "objetivo": 5000,
+      "valorInicial": 1000,
+      "porcentagem": 20,
+      "dataEstimada": "01/01/2024",
+      "items": [
+        {
+          "id": 1,
+          "data": "01/01/2023",
+          "hora": "09:00",
+          "valor": 500
+        },
+        {
+          "id": 2,
+          "data": "02/01/2023",
+          "hora": "11:00",
+          "valor": 1000
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nomeMeta": "Meta 2",
+      "objetivo": 5000,
+      "valorInicial": 1000,
+      "porcentagem": 20,
+      "dataEstimada": "01/01/2024",
+      "items": [
+        {
+          "id": 1,
+          "data": "01/01/2023",
+          "hora": "09:00",
+          "valor": 500
+        },
+        {
+          "id": 2,
+          "data": "02/01/2023",
+          "hora": "11:00",
+          "valor": 1000
+        }
+      ]
+    }
+  ],
+  "metas-items": [
+    {
+      "metaId": 1,
+      "itemId": 1
+    },
+    {
+      "metaId": 1,
+      "itemId": 2
+    },
+    {
+      "metaId": 2,
+      "itemId": 1
+    },
+    {
+      "metaId": 2,
+      "itemId": 2
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "data": "01/01/2023",
+      "hora": "09:00",
+      "valor": 500
+    },
+    {
+      "id": 2,
+      "data": "02/01/2023",
+      "hora": "11:00",
+      "valor": 1000
+    },
+    {
+      "data": null,
+      "hora": null,
+      "valor": null,
+      "metaId": 1,
+      "id": 3
+    },
+    {
+      "metaId": "undefined",
+      "id": 4
+    },
+    {
+      "metaId": "undefined",
+      "id": 5
+    },
+    {
+      "metaId": "undefined",
+      "id": 6
+    },
+    {
+      "metaId": "undefined",
+      "id": 7
+    },
+    [
+      {
+        "id": 1,
+        "data": "01/01/2023",
+        "hora": "09:00",
+        "valor": 500
+      },
+      {
+        "id": 2,
+        "data": "02/01/2023",
+        "hora": "11:00",
+        "valor": 1000
+      }
+    ],
+    [
+      {
+        "id": 1,
+        "data": "01/01/2023",
+        "hora": "09:00",
+        "valor": 500
+      },
+      {
+        "id": 2,
+        "data": "02/01/2023",
+        "hora": "11:00",
+        "valor": 1000
+      }
+    ],
+    [
+      {
+        "id": 1,
+        "data": "01/01/2023",
+        "hora": "09:00",
+        "valor": 500
+      },
+      {
+        "id": 2,
+        "data": "02/01/2023",
+        "hora": "11:00",
+        "valor": 1000
+      }
+    ],
+    [
+      {
+        "id": 1,
+        "data": "01/01/2023",
+        "hora": "09:00",
+        "valor": 500
+      },
+      {
+        "id": 2,
+        "data": "02/01/2023",
+        "hora": "11:00",
+        "valor": 1000
+      }
+    ]
+  ]
+}
