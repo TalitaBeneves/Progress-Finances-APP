@@ -3,7 +3,7 @@
   height: 123px;
   left: 8px;
   top: 89px;
-  padding: 20px 0px 10px 20px;
+  padding: 20px 20px 20px 20px;
 
   background: #d9d9d9;
   border-radius: 20px;
@@ -27,19 +27,15 @@
 
 button {
   position: relative;
-  width: 165px;
+  width: 164px;
   height: 42px;
-  top: 18px;
-  text-decoration: none;
+  left: 87%;
+  top: 27px;
   border: none;
   border-radius: 5px;
-  padding: 12px;
   background: #ffffff;
-  color: #2b78cf;
   font-weight: 400;
   font-family: "Poppins";
-  margin-right: 10px;
-  text-align: center;
 }
 
 .bg-danger {

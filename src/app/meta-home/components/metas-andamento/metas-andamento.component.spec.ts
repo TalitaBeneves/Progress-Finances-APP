@@ -1,20 +1,20 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogMetaHomeComponent } from './dialog-meta-home.component';
+import { MetasAndamentoComponent } from './metas-andamento.component';
 
-describe('DialogMetaHomeComponent', () => {
-  let component: DialogMetaHomeComponent;
-  let fixture: ComponentFixture<DialogMetaHomeComponent>;
+describe('MetasAndamentoComponent', () => {
+  let component: MetasAndamentoComponent;
+  let fixture: ComponentFixture<MetasAndamentoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DialogMetaHomeComponent],
+      declarations: [MetasAndamentoComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogMetaHomeComponent);
+    fixture = TestBed.createComponent(MetasAndamentoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

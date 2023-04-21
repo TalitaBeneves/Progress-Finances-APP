@@ -1,52 +1,62 @@
-export interface MetasModel {
-  id?: number;
-  nomeMeta: string;
-  valorAtual: number;
-  objetivo: number;
-  hora: string;
-  dataEstimada: string;
-  porcentagem: string;
-  status: Status;
-}
+import { Data } from '@angular/router';
 
 export interface CriarMetasModel {
-  id?: number;
   nomeMeta: number;
   valorInicial: number;
-  objetivo: number;
-  dataEstimada: string;
+  valorMeta: number;
+  dataCadastro: Data;
+  dataAlvo: Data;
+  porcentagem?: number;
   status?: Status;
-  porcentagem: number;
   items: Items[];
 }
 
 export interface EditarMetasModel {
+  id: number;
   nomeMeta: number;
   valorInicial: number;
-  objetivo: number;
-  dataEstimada: string;
+  valorMeta: number;
+  dataCadastro: Data;
+  dataAlvo: Data;
+  porcentagem?: number;
   status?: Status;
-  porcentagem: number;
 }
 
 export interface AllMetasModel {
-  dataEstimada: string;
-  metaId: number;
-  nomeMeta: string;
-  objetivo: string;
+  id: number;
+  nomeMeta: number;
+  valorInicial: number;
+  valorTotal: number;
+  valorMeta: number;
+  dataCadastro: Data;
+  dataAlvo: Data;
   porcentagem: number;
-  valorInicial: string;
+  status?: Status;
   items: Items[];
 }
 
 export interface Items {
-  id?: number;
-  data: string;
-  hora: string;
-  valor: number;
+  id: number;
+  dataDeposito: Date;
+  valorDepositado: number;
+}
+
+export interface CreateItemsModel {
+  valorDepositado: number;
+  dataDeposito: Date;
+  idMeta: number;
+  progressFinanceModelId: number;
+}
+
+export interface EditarItemsModel {
+  id: number;
+  valorDepositado: number;
+  dataDeposito: Date;
+  idMeta: number;
+  progressFinanceModelId: number;
 }
 
 export enum Status {
-  CONCLUIDA = 1,
-  ANDAMENTO = 2,
+  CONCLUIDA = 0,
+  ANDAMENTO = 1,
 }

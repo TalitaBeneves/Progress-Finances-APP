@@ -13,32 +13,38 @@
         matInput
         formControlName="valorInicial"
         [(ngModel)]="data.valorInicial"
+        mask="separator.2"
+        thousandSeparator="."
       />
     </mat-form-field>
     <br />
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>qual o seu objetivo?</mat-label>
-      <input matInput formControlName="objetivo" [(ngModel)]="data.objetivo" />
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>data estimada para a conclusão</mat-label>
       <input
         matInput
-        formControlName="dataEstimada"
-        [(ngModel)]="data.dataEstimada"
+        formControlName="objetivo"
+        [(ngModel)]="data.valorMeta"
+        mask="separator.2"
+        thousandSeparator="."
       />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill" class="w-100 example-full-width">
+      <mat-label>Escolha a data para a conclusão</mat-label>
+      <input
+        matInput
+        [min]="minDate"
+        [matDatepicker]="picker"
+        formControlName="dataEstimada"
+        [(ngModel)]="data.dataAlvo"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
-  <button
-    mat-raised-button
-    color="primary"
-    [mat-dialog-close]="data.valorInicial"
-  >
-    Cancelar
-  </button>
+  <button mat-raised-button color="primary">Cancelar</button>
   <button mat-raised-button color="warn" (click)="onNoClick($event)">
     {{ btnTitle }}
   </button>

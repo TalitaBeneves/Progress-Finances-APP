@@ -16,15 +16,25 @@ button {
   position: relative;
   width: 165px;
   height: 42px;
-  left: 84%;
   top: 18px;
   text-decoration: none;
   border: none;
   border-radius: 5px;
-  padding: 10px 30px;
+  padding: 12px;
   background: #ffffff;
   color: #2b78cf;
   font-weight: 400;
   font-family: "Poppins";
   margin-right: 10px;
+  text-align: center;
+}
+p {
+  font-size: 19px;
+  text-align: left;
+  color: #fff;
+}
+.con {
+  display: inline-flex;
+  justify-content: left;
+  margin: 7px;
 }

@@ -1,9 +1,15 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CriarMetasModel, Status } from 'src/core/model/Metas';
+import { Data } from '@angular/router';
+
+import { AllMetasModel, CriarMetasModel, Status } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { EditarMetasModel } from './../../../../core/model/Metas';
+import { MetaHomeComponent } from './../../meta-home.component';
+
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-meta-home',
@@ -11,22 +17,27 @@ import { EditarMetasModel } from './../../../../core/model/Metas';
   styleUrls: ['./dialog-meta-home.component.scss'],
 })
 export class DialogMetaHomeComponent implements OnInit {
-  @Output() metaCriada = new EventEmitter();
+  @ViewChild(MetaHomeComponent) component: MetaHomeComponent;
+  update: Subject<any> = new Subject<any>();
   title: string = 'Criar Meta';
   btnTitle: string = 'Cadastrar';
-  teste: any;
-  progresso: number = 0;
+
+  getId: number;
+
   form: FormGroup;
+  minDate: Data = new Date();
+
   constructor(
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: CriarMetasModel,
+    @Inject(MAT_DIALOG_DATA) public data: AllMetasModel,
     private serveMeta: MetasService,
+    private toastr: ToastrService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
-    if (this.data.objetivo != null) {
-      this.teste = this.data;
+    if (this.data.valorInicial != null) {
+      this.getId = this.data.id;
       this.title = 'Editar Meta';
       this.btnTitle = 'Editar';
     }
@@ -52,18 +63,21 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   editarMeta() {
-    const formula =
-      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
+    this.verificacaoValid();
     const model: EditarMetasModel = {
+      id: this.getId,
       nomeMeta: this.form.value.nomeMeta,
       valorInicial: this.form.value.valorInicial,
-      objetivo: this.form.value.objetivo,
-      dataEstimada: this.form.value.dataEstimada,
-      porcentagem: formula,
+      valorMeta: this.form.value.objetivo,
+      dataAlvo: this.form.value.dataEstimada,
+      dataCadastro: new Date(),
     };
-    this.serveMeta.editMeta(this.teste.id, model).subscribe({
+
+    this.serveMeta.editMeta(model).subscribe({
       next: (res) => {
-        console.log(res);
+        this.toastr.success('Meta foi editada com sucesso!', 'Sucesso');
+        this.serveMeta.filter(res);
+        this.dialogRef.close();
       },
       error: (e) => {
         console.error(e);
@@ -72,25 +86,43 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   criarMeta() {
-    const formula =
-      (this.form.value.valorInicial / this.form.value.objetivo) * 100;
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
     const model: CriarMetasModel = {
       nomeMeta: this.form.value.nomeMeta,
       valorInicial: this.form.value.valorInicial,
-      objetivo: this.form.value.objetivo,
-      dataEstimada: this.form.value.dataEstimada,
+      valorMeta: this.form.value.objetivo,
+      dataAlvo: this.form.value.dataEstimada,
+      dataCadastro: new Date(),
       status: Status.ANDAMENTO,
-      porcentagem: formula,
       items: [],
     };
     this.serveMeta.addMeta(model).subscribe({
       next: (res) => {
-        this.progresso = 30;
+        this.toastr.success('Meta foi criada com sucesso!', 'Sucesso');
+        this.serveMeta.filter(res);
         this.dialogRef.close();
       },
       error: (e) => {
         console.error(e);
       },
     });
+  }
+
+  verificacaoValid() {
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
   }
 }
