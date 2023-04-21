@@ -23,9 +23,11 @@ import { DialogMetaHomeComponent } from './meta-home/components/dialog-meta-home
 import { MetasAndamentoComponent } from './meta-home/components/metas-andamento/metas-andamento.component';
 import { MetasConcluidasComponent } from './meta-home/components/metas-concluidas/metas-concluidas.component';
 import { MetaHomeComponent } from './meta-home/meta-home.component';
+import { CadastroModule } from './cadastro/cadastro.module';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     MetaHomeComponent,
     MetaDetalhesComponent,
@@ -33,7 +35,8 @@ import { MetaHomeComponent } from './meta-home/meta-home.component';
     DialogMetaDetalheComponent,
     MetasAndamentoComponent,
     MetasConcluidasComponent,
-  ],
+      MenuComponent
+   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -56,6 +59,7 @@ import { MetaHomeComponent } from './meta-home/meta-home.component';
       preventDuplicates: false,
     }),
     LoginModule,
+    CadastroModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

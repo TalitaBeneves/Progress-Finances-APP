@@ -3,12 +3,15 @@
     <p><b>PROGRESS FINANCE</b></p>
 
     <form [formGroup]="form" class="form">
+      <input type="text" formControlName="usuario" placeholder="Usuário" />
       <input type="email" formControlName="email" placeholder="E-mail" />
       <input type="password" formControlName="senha" placeholder="senha" />
 
-      <button type="submit" (click)="login()">Entrar</button>
+      <button type="submit" (click)="cadastrarUsuario()">Cadastrar</button>
     </form>
 
-    <a href="">Ainda não tem conta? Cadastre-se agora</a>
+    <p>
+      Já tem conta? faça o <a href="/login" style="color: blue">login aqui</a>
+    </p>
   </div>
 </section>
