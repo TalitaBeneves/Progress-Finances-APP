@@ -1,0 +1,14 @@
+<section class="area_login">
+  <div class="login">
+    <p><b>PROGRESS FINANCE</b></p>
+
+    <form [formGroup]="form" class="form">
+      <input type="email" formControlName="email" placeholder="E-mail" />
+      <input type="password" formControlName="senha" placeholder="senha" />
+
+      <button type="submit" (click)="login()">Entrar</button>
+    </form>
+
+    <a href="">Ainda não tem conta? Cadastre-se agora</a>
+  </div>
+</section>
