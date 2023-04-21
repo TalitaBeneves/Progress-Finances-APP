@@ -2,9 +2,10 @@ import { MetaHomeComponent } from './meta-home/meta-home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MetaDetalhesComponent } from './meta-detalhe/meta-detalhes.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', component: MetaDetalhesComponent },
+  { path: '', component: LoginComponent },
   { path: 'metas-home', component: MetaHomeComponent },
   { path: 'meta-detalhe/:id', component: MetaDetalhesComponent },
 ];

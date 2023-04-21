@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CadastroModule } from './cadastro/cadastro.module';
+import { LoginModule } from './login/login.module';
 import { DialogMetaDetalheComponent } from './meta-detalhe/components/dialog-meta-detalhe/dialog-meta-detalhe.component';
 import { MetaDetalhesComponent } from './meta-detalhe/meta-detalhes.component';
 import { DialogMetaHomeComponent } from './meta-home/components/dialog-meta-home/dialog-meta-home.component';
@@ -33,6 +35,8 @@ import { MetaHomeComponent } from './meta-home/meta-home.component';
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
+    LoginModule,
+    CadastroModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
