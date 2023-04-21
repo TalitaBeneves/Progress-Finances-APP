@@ -15,7 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CadastroModule } from './cadastro/cadastro.module';
+
 import { LoginModule } from './login/login.module';
 import { DialogMetaDetalheComponent } from './meta-detalhe/components/dialog-meta-detalhe/dialog-meta-detalhe.component';
 import { MetaDetalhesComponent } from './meta-detalhe/meta-detalhes.component';
@@ -56,7 +56,6 @@ import { MetaHomeComponent } from './meta-home/meta-home.component';
       preventDuplicates: false,
     }),
     LoginModule,
-    CadastroModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-Br' }],
   bootstrap: [AppComponent],
