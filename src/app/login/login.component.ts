@@ -11,6 +11,7 @@ import { UsuarioService } from 'src/core/server/usuario/usuario.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  user: any;
   constructor(
     private fb: FormBuilder,
     private serviceUsuario: UsuarioService,
@@ -35,7 +36,9 @@ export class LoginComponent implements OnInit {
     };
     this.serviceUsuario.login(model).subscribe({
       next: (res) => {
+        this.user = res;
         this.router.navigate(['metas-home']);
+        localStorage.setItem('usuario', this.user);
         console.log(res);
       },
       error: (e) => {
