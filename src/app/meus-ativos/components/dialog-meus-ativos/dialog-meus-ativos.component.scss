@@ -1,0 +1,34 @@
+::ng-deep .mat-dialog-title {
+  color: #000;
+}
+
+.caixa {
+  height: 140px;
+  background-color: gray;
+}
+
+.box {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  height: 83px;
+}
+
+.positivo {
+  background-color: rebeccapurple;
+  color: #ffff;
+  padding: 28px;
+  margin: 10px 10px 0 0;
+}
+.negativo {
+  background-color: rebeccapurple;
+  color: #ffff;
+  padding: 28px;
+  margin: 10px 10px 0 0;
+}
+.final {
+  background-color: rebeccapurple;
+  color: #ffff;
+  padding: 28px;
+  margin: 10px 10px 0 0;
+}

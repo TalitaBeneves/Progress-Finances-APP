@@ -1,0 +1,68 @@
+<h1 mat-dialog-title style="color: #252525">{{ title }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <select name="tipoAtivo" id="" formControlName="tipoAtivo">
+      <option value="Acoes">Ações</option>
+      <option value="Fiis">Fundos Imobiliários</option>
+      <option value="Renda_Fixa">Renda Fixa</option>
+    </select>
+    <br />
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Nome do ativo</mat-label>
+      <input matInput formControlName="nomeAtivo" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Quantidade</mat-label>
+      <input matInput formControlName="quantidade" />
+    </mat-form-field>
+  </form>
+
+  <h5>Responda as perguntas com sinceridade</h5>
+  <div class="caixa">
+    <div class="box">
+      <div class="positivo">Pontos Positivos 0</div>
+      <div class="negativo">Pontos Negativos 0</div>
+      <div class="final">Pontuação Final 0</div>
+    </div>
+    <br />
+
+    <div>
+      <table class="table table-dark mt-4 text-left">
+        <thead style="background-color: gray !important">
+          <tr>
+            <th scope="col">Pergunta</th>
+            <th scope="col">Criterio</th>
+            <th scope="col">resposta</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!--// *ngFor="let item of items" preparar um json -->
+          <tr>
+            <td>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur
+              voluptas iste aperiam delectus
+            </td>
+            <td>Dividendos</td>
+            <td>
+              <mat-slide-toggle
+                class="example-margin"
+                [color]="color"
+                [checked]="checked"
+                [disabled]="disabled"
+              >
+                Slide me!
+              </mat-slide-toggle>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary">Cancelar</button>
+  <button mat-raised-button color="warn" (click)="onNoClick($event)">
+    Salvar
+  </button>
+</div>
