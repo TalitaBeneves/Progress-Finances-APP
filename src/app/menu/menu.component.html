@@ -1,4 +1,4 @@
-<nav class="menu-lateral">
+<nav class="menu-lateral" *ngIf="showMenu()">
   <hr style="height: 1px; border-bottom: 1px solid gray" />
   <div class="btn-expandir ml-1">
     <!-- <p style="color: #fff; text-align: center">Progress Finance</p> -->
@@ -11,7 +11,7 @@
       [ngClass]="{ active: activeItem === 'Dashboard' }"
       (click)="activeItem = 'Dashboard'"
     >
-      <a routerLink="/metas-home">
+      <a href="#">
         <span class="icon"><i class="bi bi-columns-gap"></i></span>
         <span class="ml-4">Dashboard</span>
       </a>
@@ -23,7 +23,7 @@
       [ngClass]="{ active: activeItem === 'Minhas Metas' }"
       (click)="activeItem = 'Minhas Metas'"
     >
-      <a href="#">
+      <a routerLink="/metas-home">
         <span class="icon">
           <i class="bi bi-graph-up"></i>
         </span>
@@ -36,7 +36,7 @@
       [ngClass]="{ active: activeItem === 'Meus Ativos' }"
       (click)="activeItem = 'Meus Ativos'"
     >
-      <a href="#">
+      <a routerLink="/meus-ativos">
         <span class="icon"><i class="bi bi-wallet2"></i></span>
         <span class="ml-4">Meus Ativos</span>
       </a>
@@ -50,6 +50,17 @@
       <a href="#">
         <span class="icon"><i class="bi bi-person-circle"></i></span>
         <span class="ml-4">Perfil</span>
+      </a>
+    </li>
+    <li
+      class="item-menu"
+      class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'Sair' }"
+      (click)="activeItem = 'Sair'"
+    >
+      <a routerLink="/login" (click)="logout()">
+        <span class="icon"><i class="bi bi-box-arrow-right"></i></span>
+        <span class="ml-4">Sair</span>
       </a>
     </li>
   </ul>
