@@ -1,0 +1,42 @@
+canvas {
+  display: block;
+  box-sizing: border-box;
+  height: 300px !important;
+  width: 300px !important;
+}
+
+.dash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 110px;
+}
+
+.acoes {
+  color: #4fbfb5;
+  font-weight: 500;
+}
+.fiis {
+  color: #26d5f2;
+  font-weight: 500;
+}
+.rendaFixa {
+  color: #529be1;
+  font-weight: 500;
+}
+
+button {
+  position: relative;
+  width: 165px;
+  height: 42px;
+  top: 18px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  background: #ffffff;
+  color: #2b78cf;
+  font-weight: 400;
+  font-family: "Poppins";
+  text-align: center;
+}

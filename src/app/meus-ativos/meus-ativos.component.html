@@ -1,0 +1,63 @@
+<div class="container">
+  <div style="display: flex; align-items: end; justify-content: end">
+    <button (click)="addMeta()">+Adicionar Meta</button>
+  </div>
+  <div class="dash">
+    <canvas #chart></canvas>
+  </div>
+
+  <table class="table table-dark mt-4 text-center">
+    <thead style="background-color: #161819 !important">
+      <tr>
+        <th scope="col">Tipo de ativo</th>
+        <th scope="col">Nome do ativo</th>
+        <th scope="col">Nota</th>
+        <th scope="col">Recomendado %</th>
+        <th scope="col">Valor Sugerido</th>
+        <!-- <th scope="col">Valor do ativo</th> -->
+        <th scope="col">Ação</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let item of items">
+      <tr>
+        <td
+          [ngClass]="{
+            acoes: item.tipoAtivo === 0,
+            fiis: item.tipoAtivo === 1,
+            rendaFixa: item.tipoAtivo === 2
+          }"
+        >
+          {{ item.tipoAtivo | formatTipoAtivo }}
+        </td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.nota }}</td>
+        <td>{{ item.recomendacaoPorcentagem + "%" }}</td>
+        <td>{{ item.sugestaoInvestimento }}</td>
+        <!-- <td>{{ item.valorAtivo }}</td> // o valor vai ser exibido por uma chamada a api -->
+        <td>Aportar</td>
+      </tr>
+      <tr>
+        <td
+          [ngClass]="{
+            acoes: item.tipoAtivo === 0,
+            fiis: item.tipoAtivo === 1,
+            rendaFixa: item.tipoAtivo === 2
+          }"
+        >
+          {{ item.tipoAtivo | formatTipoAtivo }}
+        </td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.nota }}</td>
+        <td>{{ item.recomendacaoPorcentagem + "%" }}</td>
+        <td>{{ item.sugestaoInvestimento }}</td>
+        <!-- <td>{{ item.valorAtivo }}</td> // o valor vai ser exibido por uma chamada a api -->
+        <td>Aportar</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="items == 0">
+    <p style="color: #ffffff; text-align: center">Nenhum ativo cadastrado</p>
+  </div>
+</div>
