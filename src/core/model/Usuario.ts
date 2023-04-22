@@ -9,3 +9,10 @@ export interface CadastrarUsuario {
   email: string;
   imagemUrl?: string;
 }
+
+export interface UsuarioLogado {
+  IdUsuario: number;
+  email: string;
+  nome: string;
+  imagemUrl?: string;
+}
