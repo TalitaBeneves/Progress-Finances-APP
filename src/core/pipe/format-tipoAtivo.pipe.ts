@@ -7,6 +7,6 @@ export class FormatTipoAtivoPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     if (value == 0) return 'Ações';
     if (value == 1) return 'Fundos Imobiliários';
-    if (value == 3) return 'Renda Fixa';
+    if (value == 2) return 'Renda Fixa';
   }
 }

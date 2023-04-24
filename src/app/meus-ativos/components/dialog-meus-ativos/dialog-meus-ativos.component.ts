@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +16,7 @@ import {
 } from 'src/core/model/Metas';
 
 import { MetasService } from 'src/core/server/metas.service';
+import { PerguntasService } from '../../perguntas.service';
 
 @Component({
   selector: 'app-dialog-meus-ativos',
@@ -24,40 +30,69 @@ export class DialogMeusAtivosComponent implements OnInit {
   getId: number;
   progresso: number;
   form: FormGroup;
+  formPontos: FormGroup;
   metas: any;
   minDate: Date = new Date();
   items = [];
   color: ThemePalette = 'accent';
-  checked = false;
+  checked: any;
   disabled = false;
+  perguntas: any;
+  value: any;
+  qtdPontos: number = 0;
+
+  ativos = [
+    { value: 'acoes', viewValue: 'Ações' },
+    { value: 'fiis', viewValue: 'Fundos Imobiliários' },
+    { value: 'renda_Fixa', viewValue: 'Renda Fixa' },
+  ];
+
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA)
     public data: {},
     private fb: FormBuilder,
     private serviceMeta: MetasService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private servicePergunta: PerguntasService
   ) {}
 
   ngOnInit() {
     this.montaForm();
   }
 
+  onSelectionChange() {
+    this.perguntas = this.servicePergunta.getPerguntas();
+
+    this.perguntas = this.perguntas.filter(
+      (item: { tipo: string }) => item.tipo == this.value
+    );
+
+    this.checked = this.perguntas.filter(
+      (item: { checked: boolean }) => item.checked == false
+    );
+  }
+
+  onQtdPontosChange(perguntaId: any) {
+    if (perguntaId.checked) this.qtdPontos += 1;
+    else this.qtdPontos -= 1;
+  }
+
   montaForm() {
     this.form = this.fb.group({
-      tipoAtivo: ['', Validators.required],
+      tipoAtivo: [null, Validators.required],
       nomeAtivo: [null, Validators.required],
       quantidade: [null, Validators.required],
+      localAlocado: [null, Validators.required],
     });
   }
 
   onNoClick(e: any): void {
-    if (this.btnTitle == 'Editar') {
-      this.editarMeta();
-      return;
-    } else {
-      this.createItem();
-    }
+    const qtdPontos = this.qtdPontos;
+    const checked = this.checked.length;
+
+    const percentual = qtdPontos / checked;
+    const pontuacao = Math.round(percentual * 10);
   }
 
   editarMeta(e?: any) {
@@ -66,8 +101,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   createItem() {
-    this.verificacaoValid();
-
+    //this.verificacaoValid();
     // this.toastr.success('Meta foi cadastrado com sucesso!', 'Sucesso');
     // this.serviceMeta.filter(res);
     // this.dialogRef.close();

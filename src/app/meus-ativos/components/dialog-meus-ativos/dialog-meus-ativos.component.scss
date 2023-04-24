@@ -1,10 +1,13 @@
 ::ng-deep .mat-dialog-title {
   color: #000;
 }
+::ng-deep .mat-dialog-container {
+  background-color: #d7dad7;
+}
 
 .caixa {
   height: 140px;
-  background-color: gray;
+  background-color: #d9d9d9;
 }
 
 .box {
@@ -14,20 +17,11 @@
   height: 83px;
 }
 
-.positivo {
-  background-color: rebeccapurple;
-  color: #ffff;
-  padding: 28px;
-  margin: 10px 10px 0 0;
-}
-.negativo {
-  background-color: rebeccapurple;
-  color: #ffff;
-  padding: 28px;
-  margin: 10px 10px 0 0;
-}
+.positivo,
+.negativo,
 .final {
-  background-color: rebeccapurple;
+  background-color: #b94b4b;
+  border-radius: 10px;
   color: #ffff;
   padding: 28px;
   margin: 10px 10px 0 0;
