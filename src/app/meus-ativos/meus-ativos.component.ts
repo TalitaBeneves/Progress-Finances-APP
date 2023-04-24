@@ -17,6 +17,7 @@ export class MeusAtivosComponent implements OnInit {
   acoes: number;
   fiis: number;
   rendaFixa: number;
+  corFundo = '#4fbfb5';
 
   constructor(
     private financesService: FinancesService,
@@ -40,7 +41,7 @@ export class MeusAtivosComponent implements OnInit {
     });
   }
 
-  addMeta() {
+  openDialogCadastrar() {
     const dialogRef = this.dialog.open(DialogMeusAtivosComponent, {
       width: '1000px',
       data: {
@@ -65,11 +66,12 @@ export class MeusAtivosComponent implements OnInit {
             {
               data: [this.acoes, this.fiis, this.rendaFixa],
               backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
+                'rgb(79, 191, 181, 0.50)',
+                'rgb(38, 213, 242, 0.50)',
+                'rgb(82, 155, 225, 0.50)',
               ],
               borderWidth: 1,
+              borderColor: '#4fbfb5',
             },
           ],
         },

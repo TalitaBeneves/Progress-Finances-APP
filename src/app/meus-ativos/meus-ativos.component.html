@@ -1,6 +1,6 @@
 <div class="container">
   <div style="display: flex; align-items: end; justify-content: end">
-    <button (click)="addMeta()">+Adicionar Meta</button>
+    <button (click)="openDialogCadastrar()">+Cadastrar Ativo</button>
   </div>
   <div class="dash">
     <canvas #chart></canvas>
@@ -14,7 +14,9 @@
         <th scope="col">Nota</th>
         <th scope="col">Recomendado %</th>
         <th scope="col">Valor Sugerido</th>
-        <!-- <th scope="col">Valor do ativo</th> -->
+        <!-- <th scope="col">Valor Total</th>
+        <th scope="col">Quantidade</th> -->
+        <!-- <th scope="col">Valor atual do ativo</th> -->
         <th scope="col">Ação</th>
       </tr>
     </thead>
@@ -22,36 +24,40 @@
     <tbody *ngFor="let item of items">
       <tr>
         <td
+          style="padding-left: 68px"
           [ngClass]="{
-            acoes: item.tipoAtivo === 0,
+            corFundo: item.tipoAtivo === 0,
             fiis: item.tipoAtivo === 1,
             rendaFixa: item.tipoAtivo === 2
           }"
         >
-          {{ item.tipoAtivo | formatTipoAtivo }}
+          <div
+            style="
+              color: #fff;
+              background-color: rgb(79, 191, 181);
+              border-radius: 20px;
+              padding: 10px;
+              font-size: 16px;
+              width: 75%;
+            "
+            [style.background-color]="
+              item.tipoAtivo === 0
+                ? '#4fbfb5'
+                : item.tipoAtivo === 1
+                ? '#26d5f2'
+                : '#529be1'
+            "
+          >
+            {{ item.tipoAtivo | formatTipoAtivo }}
+          </div>
         </td>
         <td>{{ item.nome }}</td>
         <td>{{ item.nota }}</td>
         <td>{{ item.recomendacaoPorcentagem + "%" }}</td>
         <td>{{ item.sugestaoInvestimento }}</td>
         <!-- <td>{{ item.valorAtivo }}</td> // o valor vai ser exibido por uma chamada a api -->
-        <td>Aportar</td>
-      </tr>
-      <tr>
-        <td
-          [ngClass]="{
-            acoes: item.tipoAtivo === 0,
-            fiis: item.tipoAtivo === 1,
-            rendaFixa: item.tipoAtivo === 2
-          }"
-        >
-          {{ item.tipoAtivo | formatTipoAtivo }}
-        </td>
-        <td>{{ item.nome }}</td>
-        <td>{{ item.nota }}</td>
-        <td>{{ item.recomendacaoPorcentagem + "%" }}</td>
-        <td>{{ item.sugestaoInvestimento }}</td>
-        <!-- <td>{{ item.valorAtivo }}</td> // o valor vai ser exibido por uma chamada a api -->
+        <!-- <td></td>
+        <td></td> -->
         <td>Aportar</td>
       </tr>
     </tbody>

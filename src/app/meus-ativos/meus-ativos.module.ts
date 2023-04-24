@@ -11,6 +11,7 @@ import { FormatTipoAtivoPipe } from 'src/core/pipe/format-tipoAtivo.pipe';
 import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialog-meus-ativos.component';
 import { MeusAtivosComponent } from './meus-ativos.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSlideToggleModule,
+    MatSelectModule,
   ],
   declarations: [
     MeusAtivosComponent,
