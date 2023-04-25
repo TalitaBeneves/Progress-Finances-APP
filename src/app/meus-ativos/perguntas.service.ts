@@ -15,7 +15,7 @@ export class PerguntasService {
           'O fundo imobiliário está negociado abaizo do P/VP 1?(Acima de 1,5 eu descarto o investimento em qualquer hipótese)?',
         checked: false,
         criterio: '',
-        tipo: 'fiis',
+        tipo: 1,
       },
       {
         id: 2,
@@ -23,14 +23,14 @@ export class PerguntasService {
           'As propriedades são novas e não consomem manutenção excessiva?',
         checked: false,
         criterio: '',
-        tipo: 'fiis',
+        tipo: 1,
       },
       {
         id: 3,
         question: 'Distribui dividendos a mais de 4 anos consistentemente?',
         checked: false,
         criterio: '',
-        tipo: 'fiis',
+        tipo: 1,
       },
       {
         id: 4,
@@ -38,7 +38,7 @@ export class PerguntasService {
           'Os imóveis desse Fundo Imobiliário estão localizados em regiões nobres?',
         checked: false,
         criterio: '',
-        tipo: 'fiis',
+        tipo: 1,
       },
 
       ////AÇÕES
@@ -48,7 +48,7 @@ export class PerguntasService {
           'O valor atual do ativo é considerado um bom preço em relação ao seu valor intrínseco?',
         checked: false,
         criterio: 'Relação preço/lucro da ação',
-        tipo: 'acoes',
+        tipo: 3,
       },
 
       {
@@ -57,7 +57,7 @@ export class PerguntasService {
           'A divida liquida é menor que o lucro liquído dos últimos 12 meses? ',
         checked: false,
         criterio: 'Dívid Liquida - Lucro Líquido',
-        tipo: 'acoes',
+        tipo: 3,
       },
       {
         id: 7,
@@ -65,28 +65,7 @@ export class PerguntasService {
           'Tem um crescimento de receita(lucro) superior a 5% nos últimos 5 anos?',
         checked: false,
         criterio: 'CAGR',
-        tipo: 'acoes',
-      },
-      {
-        id: 8,
-        question: 'A empresa está negocianda com um P/VP abaixo de 5?',
-        checked: false,
-        criterio: 'CAGR',
-        tipo: 'acoes',
-      },
-      {
-        id: 9,
-        question: 'A empresa está negocianda com um P/VP abaixo de 5?',
-        checked: false,
-        criterio: 'CAGR',
-        tipo: 'acoes',
-      },
-      {
-        id: 10,
-        question: 'A empresa está negocianda com um P/VP abaixo de 5?',
-        checked: false,
-        criterio: 'CAGR',
-        tipo: 'acoes',
+        tipo: 3,
       },
     ];
   }

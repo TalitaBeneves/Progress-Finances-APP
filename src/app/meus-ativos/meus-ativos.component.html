@@ -26,7 +26,7 @@
         <td
           style="padding-left: 68px"
           [ngClass]="{
-            corFundo: item.tipoAtivo === 0,
+            corFundo: item.tipoAtivo === 3,
             fiis: item.tipoAtivo === 1,
             rendaFixa: item.tipoAtivo === 2
           }"
@@ -41,7 +41,7 @@
               width: 75%;
             "
             [style.background-color]="
-              item.tipoAtivo === 0
+              item.tipoAtivo === 3
                 ? '#4fbfb5'
                 : item.tipoAtivo === 1
                 ? '#26d5f2'

@@ -1,4 +1,5 @@
 import { Data } from '@angular/router';
+import { Status } from './Enums';
 
 export interface CriarMetasModel {
   nomeMeta: number;
@@ -54,9 +55,4 @@ export interface EditarItemsModel {
   dataDeposito: Date;
   idMeta: number;
   progressFinanceModelId: number;
-}
-
-export enum Status {
-  CONCLUIDA = 0,
-  ANDAMENTO = 1,
 }

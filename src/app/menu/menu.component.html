@@ -33,6 +33,17 @@
     <li
       class="item-menu"
       class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'Perfil' }"
+      (click)="activeItem = 'Perfil'"
+    >
+      <a href="#">
+        <span class="icon"><i class="bi bi-person-circle"></i></span>
+        <span class="ml-4">Novo aporte</span>
+      </a>
+    </li>
+    <li
+      class="item-menu"
+      class="item-menu ativo"
       [ngClass]="{ active: activeItem === 'Meus Ativos' }"
       (click)="activeItem = 'Meus Ativos'"
     >
@@ -41,6 +52,7 @@
         <span class="ml-4">Meus Ativos</span>
       </a>
     </li>
+
     <li
       class="item-menu"
       class="item-menu ativo"

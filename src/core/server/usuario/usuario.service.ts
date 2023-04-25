@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class UsuarioService {
   private currentUserSource = new ReplaySubject<any>(1);
-  url: string = environment.urlLogin;
+  url: string = environment.urlBase;
 
   constructor(private http: HttpClient) {}
 

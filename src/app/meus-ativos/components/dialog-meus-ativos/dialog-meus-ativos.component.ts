@@ -17,6 +17,8 @@ import {
 
 import { MetasService } from 'src/core/server/metas.service';
 import { PerguntasService } from '../../perguntas.service';
+import { CadastrarAtivo } from 'src/core/model/Ativo';
+import { FinancesService } from 'src/core/server/Finances/finances.service';
 
 @Component({
   selector: 'app-dialog-meus-ativos',
@@ -27,7 +29,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   @Output() metaCriada = new EventEmitter();
   title: string = 'Aportar';
   btnTitle: string = 'Cadastrar';
-  getId: number;
+  getId: any;
   progresso: number;
   form: FormGroup;
   formPontos: FormGroup;
@@ -40,32 +42,44 @@ export class DialogMeusAtivosComponent implements OnInit {
   perguntas: any;
   value: any;
   qtdPontos: number = 0;
-
+  recomendacaoPorcentagem: number;
+  sugestaoInvestimento: number;
+  IdMetaIdUses: any;
   ativos = [
-    { value: 'acoes', viewValue: 'Ações' },
-    { value: 'fiis', viewValue: 'Fundos Imobiliários' },
-    { value: 'renda_Fixa', viewValue: 'Renda Fixa' },
+    { value: 3, viewValue: 'Ações' },
+    { value: 1, viewValue: 'Fundos Imobiliários' },
+    { value: 2, viewValue: 'Renda Fixa' },
   ];
 
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA)
-    public data: {},
+    public data: any,
     private fb: FormBuilder,
-    private serviceMeta: MetasService,
+    private serviceFinances: FinancesService,
     private toastr: ToastrService,
     private servicePergunta: PerguntasService
   ) {}
 
   ngOnInit() {
     this.montaForm();
+    var getIdUsuario = localStorage.getItem('usuario');
+    this.getId = getIdUsuario;
+    this.getId = JSON.parse(this.getId);
+    this.getIds(this.getId.idUsuario);
+  }
+
+  getIds(id: number) {
+    this.serviceFinances.getMetaInvestimentoId(id).subscribe({
+      next: (res) => (this.IdMetaIdUses = res),
+    });
   }
 
   onSelectionChange() {
     this.perguntas = this.servicePergunta.getPerguntas();
 
     this.perguntas = this.perguntas.filter(
-      (item: { tipo: string }) => item.tipo == this.value
+      (item: { tipo: number }) => item.tipo == this.value
     );
 
     this.checked = this.perguntas.filter(
@@ -84,6 +98,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       nomeAtivo: [null, Validators.required],
       quantidade: [null, Validators.required],
       localAlocado: [null, Validators.required],
+      valorAtivoAtual: [null, Validators.required],
     });
   }
 
@@ -93,6 +108,44 @@ export class DialogMeusAtivosComponent implements OnInit {
 
     const percentual = qtdPontos / checked;
     const pontuacao = Math.round(percentual * 10);
+
+    this.calcularInvestimento(
+      pontuacao,
+      parseInt(this.form.value.valorAtivoAtual),
+      this.form.value.quantidade
+    );
+
+    const model: CadastrarAtivo = {
+      idUsuario: this.IdMetaIdUses.idUsuario,
+      idMeta: this.IdMetaIdUses.idMeta,
+      nome: this.form.value.nomeAtivo,
+      nota: pontuacao,
+      recomendacaoPorcentagem: this.recomendacaoPorcentagem,
+      sugestaoInvestimento: this.sugestaoInvestimento,
+      tipoAtivo: this.form.value.tipoAtivo,
+      // localAlocado
+      // valorAtualAtivo
+      // quantidadeAtivo
+    };
+
+    this.serviceFinances.cadastrarAtivo(model).subscribe({
+      next: (res) => {
+        this.toastr.success('O ativo foi cadastrado com sucesso!', 'Sucesso');
+        this.serviceFinances.filter(res);
+        this.dialogRef.close();
+        console.log(res);
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
+  }
+
+  calcularInvestimento(nota: number, valorAtual: number, quantidade: number) {
+    const sugestaoInvestimento = nota * valorAtual;
+    const recomendacaoPorcentagem = nota * 10;
+    this.sugestaoInvestimento = sugestaoInvestimento;
+    this.recomendacaoPorcentagem = recomendacaoPorcentagem;
   }
 
   editarMeta(e?: any) {

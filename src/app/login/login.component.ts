@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         this.user = res;
         this.router.navigate(['metas-home']);
-        localStorage.setItem('usuario', this.user);
+        localStorage.setItem('usuario', JSON.stringify(this.user));
         console.log(res);
       },
       error: (e) => {

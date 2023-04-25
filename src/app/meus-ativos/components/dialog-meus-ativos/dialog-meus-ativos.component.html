@@ -28,13 +28,16 @@
       />
     </mat-form-field>
     <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Valor atual do ativo</mat-label>
+      <input matInput formControlName="valorAtivoAtual" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-100">
       <mat-label>Quantidade</mat-label>
       <input matInput formControlName="quantidade" />
     </mat-form-field>
   </form>
 
-  <div *ngIf="value && value != 'renda_Fixa'" class="py-4">
-    <!-- <form [formGroup]="formPontos"> -->
+  <div *ngIf="value && value != 2" class="py-4">
     <h5 style="font-size: 17px">Responda as perguntas com sinceridade</h5>
     <div class="caixa">
       <div class="box">
@@ -82,13 +85,12 @@
         </tbody>
       </table>
     </div>
-    <!-- </form> -->
   </div>
 </div>
 
 <div mat-dialog-actions>
   <button mat-raised-button color="primary">Cancelar</button>
   <button mat-raised-button color="warn" (click)="onNoClick($event)">
-    Salvar
+    Cadastrar
   </button>
 </div>

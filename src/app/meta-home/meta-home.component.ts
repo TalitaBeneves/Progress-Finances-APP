@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { AllMetasModel, Status } from 'src/core/model/Metas';
+import { AllMetasModel } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { DialogMetaHomeComponent } from './components/dialog-meta-home/dialog-meta-home.component';
+import { Status } from 'src/core/model/Enums';
 
 @Component({
   selector: 'app-meta-home',

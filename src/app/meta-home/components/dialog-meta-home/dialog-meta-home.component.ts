@@ -3,13 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Data } from '@angular/router';
 
-import { AllMetasModel, CriarMetasModel, Status } from 'src/core/model/Metas';
+import { AllMetasModel, CriarMetasModel } from 'src/core/model/Metas';
 import { MetasService } from 'src/core/server/metas.service';
 import { EditarMetasModel } from './../../../../core/model/Metas';
 import { MetaHomeComponent } from './../../meta-home.component';
 
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { Status } from 'src/core/model/Enums';
 
 @Component({
   selector: 'app-dialog-meta-home',

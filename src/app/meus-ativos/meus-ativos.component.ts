@@ -13,28 +13,33 @@ import { MatDialog } from '@angular/material/dialog';
 export class MeusAtivosComponent implements OnInit {
   @ViewChild('chart', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   items: any;
-  getId: string;
+  getId: any;
   acoes: number;
   fiis: number;
   rendaFixa: number;
   corFundo = '#4fbfb5';
 
   constructor(
-    private financesService: FinancesService,
+    private serviceFinances: FinancesService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    this.serviceFinances.listen().subscribe((e) => {
+      this.listAtivos();
+    });
+  }
 
   ngOnInit() {
     const getId = localStorage.getItem('usuario');
-    if (getId) this.getId = getId;
+    if (getId) this.getId = JSON.parse(getId);
 
     this.listAtivos();
   }
 
   listAtivos() {
-    this.financesService.getMeta(this.getId).subscribe({
+    this.serviceFinances.getMeta(this.getId.idUsuario).subscribe({
       next: (res) => {
         this.items = res;
+        console.log(res);
         this.mondaDashboard();
         this.dashboard();
       },
@@ -44,12 +49,7 @@ export class MeusAtivosComponent implements OnInit {
   openDialogCadastrar() {
     const dialogRef = this.dialog.open(DialogMeusAtivosComponent, {
       width: '1000px',
-      data: {
-        nomeMeta: null,
-        valorInicial: null,
-        objetivo: null,
-        dataEstimada: null,
-      },
+      data: this.items,
     });
 
     dialogRef.afterClosed().subscribe((result) => {});
