@@ -17,16 +17,17 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { CadastroModule } from './cadastro/cadastro.module';
-import { LoginModule } from './login/login.module';
-import { MenuComponent } from './menu/menu.component';
-import { DialogMetaDetalheComponent } from './meta-detalhe/components/dialog-meta-detalhe/dialog-meta-detalhe.component';
-import { MetaDetalhesComponent } from './meta-detalhe/meta-detalhes.component';
-import { DialogMetaHomeComponent } from './meta-home/components/dialog-meta-home/dialog-meta-home.component';
-import { MetasAndamentoComponent } from './meta-home/components/metas-andamento/metas-andamento.component';
-import { MetasConcluidasComponent } from './meta-home/components/metas-concluidas/metas-concluidas.component';
-import { MetaHomeComponent } from './meta-home/meta-home.component';
-import { MeusAtivosModule } from './meus-ativos/meus-ativos.module';
+import { CadastroModule } from './user/cadastro/cadastro.module';
+import { LoginModule } from './user/login/login.module';
+import { DialogMetaDetalheComponent } from './page/meta-detalhe/components/dialog-meta-detalhe/dialog-meta-detalhe.component';
+import { MetaDetalhesComponent } from './page/meta-detalhe/meta-detalhes.component';
+import { DialogMetaHomeComponent } from './page/meta-home/components/dialog-meta-home/dialog-meta-home.component';
+import { MetasAndamentoComponent } from './page/meta-home/components/metas-andamento/metas-andamento.component';
+import { MetasConcluidasComponent } from './page/meta-home/components/metas-concluidas/metas-concluidas.component';
+import { MetaHomeComponent } from './page/meta-home/meta-home.component';
+import { MeusAtivosModule } from './page/meus-ativos/meus-ativos.module';
+import { MetaInvestimentoComponent } from './page/meta-home/components/meta-investimento/meta-investimento.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MeusAtivosModule } from './meus-ativos/meus-ativos.module';
     MetasAndamentoComponent,
     MetasConcluidasComponent,
     MenuComponent,
+    MetaInvestimentoComponent,
   ],
   imports: [
     BrowserModule,

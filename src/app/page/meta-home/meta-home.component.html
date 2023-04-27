@@ -1,0 +1,32 @@
+<section class="container">
+  <div style="display: flex; justify-content: end">
+    <button (click)="addMeta()">+Adicionar Meta</button>
+  </div>
+
+  <mat-tab-group
+    mat-align-tabs="center"
+    style="
+      margin: 128px auto;
+      background: rgba(0, 0, 0, 0.12);
+      padding: 33px;
+      border-radius: 12px;
+    "
+  >
+    <mat-tab>
+      <ng-template mat-tab-label> Meta de Investimento </ng-template>
+      <app-meta-investimento></app-meta-investimento>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label> Metas em Andamento </ng-template>
+      <app-metas-andamento
+        [filtroStatusAndamentos]="filtroStatusAndamentos"
+      ></app-metas-andamento>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label> Metas Concluídas </ng-template>
+      <app-metas-concluidas
+        [filtroStatusConcluidas]="filtroStatusConcluidas"
+      ></app-metas-concluidas>
+    </mat-tab>
+  </mat-tab-group>
+</section>

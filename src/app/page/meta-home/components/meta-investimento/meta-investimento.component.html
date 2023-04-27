@@ -1,0 +1,77 @@
+<div class="container mt-3 text-light p-4">
+  <div class="d-flex justify-content-between">
+    <h4 class="text-light py-3">
+      Edite os itens para ajustar suas metas de investimento
+    </h4>
+    <button type="submit" (click)="salvarMetaInvestimento()">Salvar</button>
+  </div>
+
+  <div style="display: flex">
+    <div class="bg-dark w-100 rounded pb-4">
+      <h2 class="text-center">Total {{ acoes + fiis + fixa }}%</h2>
+      <div class="dash">
+        <canvas #chart></canvas>
+      </div>
+      <!-- tem que ter uma logica no max, pq o total não pode ser mais que 100% -->
+    </div>
+    <div
+      class="container mx-3 w-100 py-3 rounded"
+      style="background-color: rgba(0, 0, 0, 0.192)"
+    >
+      <div class="d-flex justify-content-between">
+        <label for="acoes">Ações</label>
+        <label for="acoes">{{ acoes }}%</label>
+      </div>
+      <input
+        type="range"
+        class="range"
+        id="acoes"
+        min="0"
+        [ngStyle]="{ 'background-color': '#5555' }"
+        max="100"
+        step="1"
+        [formControl]="formAcoes"
+        (input)="updateChart()"
+        [(ngModel)]="acoes"
+      />
+
+      <div class="d-flex justify-content-between pt-3">
+        <label for="fiis">FIIs </label>
+        <label for="acoes">{{ fiis }}%</label>
+      </div>
+
+      <input
+        type="range"
+        class="range"
+        id="fiis"
+        min="0"
+        [ngStyle]="{ 'background-color': '#5555' }"
+        max="100"
+        step="1"
+        [formControl]="formFiis"
+        (input)="updateChart()"
+        [(ngModel)]="fiis"
+      />
+
+      <div class="d-flex justify-content-between pt-3">
+        <label for="fixa">Renda Fixa </label>
+        <label for="acoes">{{ fixa }}%</label>
+      </div>
+
+      <input
+        type="range"
+        class="range"
+        id="fixa"
+        min="0"
+        [ngStyle]="{ 'background-color': '#5555' }"
+        max="100"
+        step="1"
+        [formControl]="formFixa"
+        (input)="updateChart()"
+        [(ngModel)]="fixa"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- adicionar futuramente uma sugestão de metas  -->

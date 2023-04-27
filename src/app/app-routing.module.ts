@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CadastroComponent } from './cadastro/cadastro.component';
-import { LoginComponent } from './login/login.component';
-import { MetaDetalhesComponent } from './meta-detalhe/meta-detalhes.component';
-import { MetaHomeComponent } from './meta-home/meta-home.component';
-import { MeusAtivosComponent } from './meus-ativos/meus-ativos.component';
-import { AuthGuard } from 'src/core/guard/auth.guard';
+import { CadastroComponent } from './user/cadastro/cadastro.component';
+import { LoginComponent } from './user/login/login.component';
+import { MetaDetalhesComponent } from './page/meta-detalhe/meta-detalhes.component';
+import { MetaHomeComponent } from './page/meta-home/meta-home.component';
+import { MeusAtivosComponent } from './page/meus-ativos/meus-ativos.component';
+import { AuthGuard } from './core/guard/auth.guard';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
