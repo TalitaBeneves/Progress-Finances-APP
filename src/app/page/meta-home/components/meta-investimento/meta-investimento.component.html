@@ -9,10 +9,12 @@
   <div style="display: flex">
     <div class="bg-dark w-100 rounded pb-4">
       <h2 class="text-center">Total {{ acoes + fiis + fixa }}%</h2>
+      <h3 class="text-center text-danger" *ngIf="acoes + fiis + fixa > 100">
+        O valor ultrapassou os 100%
+      </h3>
       <div class="dash">
         <canvas #chart></canvas>
       </div>
-      <!-- tem que ter uma logica no max, pq o total não pode ser mais que 100% -->
     </div>
     <div
       class="container mx-3 w-100 py-3 rounded"

@@ -2,6 +2,7 @@
   <div style="display: flex; align-items: end; justify-content: end">
     <button (click)="openDialogCadastrar()">+Cadastrar Ativo</button>
   </div>
+
   <div class="dash">
     <canvas #chart></canvas>
   </div>
@@ -11,12 +12,13 @@
       <tr>
         <th scope="col">Tipo de ativo</th>
         <th scope="col">Nome do ativo</th>
+        <th scope="col">Local alocado</th>
         <th scope="col">Nota</th>
         <th scope="col">Recomendado %</th>
         <th scope="col">Valor Sugerido</th>
-        <!-- <th scope="col">Valor Total</th>
-        <th scope="col">Quantidade</th> -->
-        <!-- <th scope="col">Valor atual do ativo</th> -->
+        <th scope="col">Valor do Ativo</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Valor total investido</th>
         <th scope="col">Ação</th>
       </tr>
     </thead>
@@ -24,7 +26,6 @@
     <tbody *ngFor="let item of items">
       <tr>
         <td
-          style="padding-left: 68px"
           [ngClass]="{
             corFundo: item.tipoAtivo === 3,
             fiis: item.tipoAtivo === 1,
@@ -36,9 +37,9 @@
               color: #fff;
               background-color: rgb(79, 191, 181);
               border-radius: 20px;
-              padding: 10px;
-              font-size: 16px;
-              width: 75%;
+              padding: 2px;
+              font-size: 15px;
+              width: 129%;
             "
             [style.background-color]="
               item.tipoAtivo === 3
@@ -52,12 +53,13 @@
           </div>
         </td>
         <td>{{ item.nome }}</td>
+        <td>{{ item.localAlocado }}</td>
         <td>{{ item.nota }}</td>
         <td>{{ item.recomendacaoPorcentagem + "%" }}</td>
-        <td>{{ item.sugestaoInvestimento }}</td>
-        <!-- <td>{{ item.valorAtivo }}</td> // o valor vai ser exibido por uma chamada a api -->
-        <!-- <td></td>
-        <td></td> -->
+        <td>{{ item.sugestaoInvestimento.toFixed(2) }}</td>
+        <td>{{ item.valorAtualDoAtivo }}</td>
+        <td>{{ item.quantidadeDeAtivo }}</td>
+        <td>{{ item.valorTotalInvestido }}</td>
         <td>Aportar</td>
       </tr>
     </tbody>

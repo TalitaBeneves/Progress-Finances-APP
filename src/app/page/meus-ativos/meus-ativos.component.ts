@@ -13,9 +13,9 @@ export class MeusAtivosComponent implements OnInit {
   @ViewChild('chart', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   items: any;
   getId: any;
-  acoes: number;
-  fiis: number;
-  rendaFixa: number;
+  acoes: number = 1;
+  fiis: number = 1;
+  rendaFixa: number = 1;
   corFundo = '#4fbfb5';
 
   constructor(
@@ -54,7 +54,7 @@ export class MeusAtivosComponent implements OnInit {
   }
 
   dashboard() {
-    const ctx = this.canvas.nativeElement.getContext('2d');
+    const ctx = this.canvas?.nativeElement.getContext('2d');
     if (ctx) {
       const myChart = new Chart(ctx, {
         type: 'doughnut',
@@ -80,7 +80,7 @@ export class MeusAtivosComponent implements OnInit {
 
   mondaDashboard() {
     this.acoes = this.items.filter(
-      (item: { tipoAtivo: number }) => item.tipoAtivo === 0
+      (item: { tipoAtivo: number }) => item.tipoAtivo === 3
     ).length;
     this.fiis = this.items.filter(
       (item: { tipoAtivo: number }) => item.tipoAtivo === 1

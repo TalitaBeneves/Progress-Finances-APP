@@ -6,22 +6,26 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Logica
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Em "Medas em andamento" precissa conter
+-Nome da meta
+-valor atual da meta
+-objetivo (valor que quer alcançar)
+-Data estimada para a conclusão
+-bnt de editar
+-btn de excluir
+-btn de adicionar nova meta
 
-## Build
+Tem que carregar as metas concluidas. Caso não tenha nenhuma meta concluida, então aparece uma mensagem com a seguinte frase "Não há metar concluídas."
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Ao clicar em cima dessa meta, vai para uma outra tela, que vai aparecer os detalhes daquela meta, ou seja, o progresso, valor aplicado, data, hora. É possivel editar tbm
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+tem que ter uma pagina perguntando ao usuario de quanto deve ser a meta,
+ele tbm pode editar essa meta
 
-## Further help
+quando clicar em cima da meta, vai para pagina de detalhes, ou seja com o resumo dos dados, como Data, hora, valor
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

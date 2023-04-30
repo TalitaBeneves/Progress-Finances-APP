@@ -12,7 +12,7 @@
       (click)="activeItem = 'Dashboard'"
     >
       <a href="#">
-        <span class="icon"><i class="bi bi-columns-gap"></i></span>
+        <span class="icon"><i class="bi bi-pie-chart-fill"></i></span>
         <span class="ml-4">Dashboard</span>
       </a>
     </li>
@@ -33,23 +33,24 @@
     <li
       class="item-menu"
       class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Perfil' }"
-      (click)="activeItem = 'Perfil'"
-    >
-      <a href="#">
-        <span class="icon"><i class="bi bi-person-circle"></i></span>
-        <span class="ml-4">Novo aporte</span>
-      </a>
-    </li>
-    <li
-      class="item-menu"
-      class="item-menu ativo"
       [ngClass]="{ active: activeItem === 'Meus Ativos' }"
       (click)="activeItem = 'Meus Ativos'"
     >
       <a routerLink="/meus-ativos">
         <span class="icon"><i class="bi bi-wallet2"></i></span>
         <span class="ml-4">Meus Ativos</span>
+      </a>
+    </li>
+
+    <li
+      class="item-menu"
+      class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'Perfil' }"
+      (click)="activeItem = 'Perfil'"
+    >
+      <a routerLink="/novo-aporte">
+        <span class="icon"><i class="bi bi-clipboard-data"></i></span>
+        <span class="ml-4">Novo Aporte</span>
       </a>
     </li>
 

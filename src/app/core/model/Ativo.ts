@@ -8,4 +8,20 @@ export interface CadastrarAtivo {
   recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
   tipoAtivo: TipoAtivo;
+  localAlocado: string;
+  quantidadeDeAtivo: number;
+  valorTotalInvestido: number;
+  valorAtualDoAtivo: number;
+}
+
+export interface ListaAtivoCalculado {
+  idUsuario: number;
+  idMeta: number;
+  idAtivo: number;
+  nome: string;
+  nota: number;
+  recomendacaoPorcentagem: number;
+  sugestaoInvestimento: number;
+  valorTotalInvestido: number;
+  tipoAtivo: TipoAtivo;
 }

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PerguntasService } from '../../perguntas.service';
 import { CadastrarAtivo } from 'src/app/core/model/Ativo';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
+import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 
 @Component({
   selector: 'app-dialog-meus-ativos',
@@ -33,6 +34,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
   IdMetaIdUses: any;
+  getIdUser: any;
   ativos = [
     { value: 3, viewValue: 'Ações' },
     { value: 1, viewValue: 'Fundos Imobiliários' },
@@ -46,20 +48,23 @@ export class DialogMeusAtivosComponent implements OnInit {
     private fb: FormBuilder,
     private serviceFinances: FinancesService,
     private toastr: ToastrService,
-    private servicePergunta: PerguntasService
+    private servicePergunta: PerguntasService,
+    private serviceUsuario: UsuarioService
   ) {}
 
   ngOnInit() {
     this.montaForm();
-    var getIdUsuario = localStorage.getItem('usuario');
-    this.getId = getIdUsuario;
-    this.getId = JSON.parse(this.getId);
-    this.getIds(this.getId.idUsuario);
+
+    this.getIdUser = this.serviceUsuario.getUserLocalStorage();
+    this.getMetaId(this.getIdUser.idUsuario);
   }
 
-  getIds(id: number) {
+  getMetaId(id: number) {
     this.serviceFinances.listarMetaInvestimento(id).subscribe({
-      next: (res) => (this.IdMetaIdUses = res),
+      next: (res) => {
+        this.IdMetaIdUses = res[0];
+        console.log(this.IdMetaIdUses);
+      },
     });
   }
 
@@ -95,25 +100,35 @@ export class DialogMeusAtivosComponent implements OnInit {
     const checked = this.checked.length;
 
     const percentual = qtdPontos / checked;
-    const pontuacao = Math.round(percentual * 10);
+    let pontuacao = Math.round(percentual * 10);
+    if (this.value == 2) {
+      pontuacao = 10;
+    }
+    const percentualRecomendado =
+      ((pontuacao *
+        this.form.value.quantidade *
+        parseInt(this.form.value.valorAtivoAtual)) /
+        100) *
+      20;
+    const sugestaoInvestimento =
+      pontuacao * parseInt(this.form.value.valorAtivoAtual);
 
-    this.calcularInvestimento(
-      pontuacao,
-      parseInt(this.form.value.valorAtivoAtual),
-      this.form.value.quantidade
-    );
+    const calculaTotal =
+      parseInt(this.form.value.valorAtivoAtual) *
+      parseInt(this.form.value.quantidade);
 
     const model: CadastrarAtivo = {
-      idUsuario: this.IdMetaIdUses.idUsuario,
+      idUsuario: this.getIdUser.idUsuario,
       idMeta: this.IdMetaIdUses.idMeta,
       nome: this.form.value.nomeAtivo,
       nota: pontuacao,
-      recomendacaoPorcentagem: this.recomendacaoPorcentagem,
-      sugestaoInvestimento: this.sugestaoInvestimento,
+      recomendacaoPorcentagem: percentualRecomendado,
+      sugestaoInvestimento: sugestaoInvestimento,
       tipoAtivo: this.form.value.tipoAtivo,
-      // localAlocado
-      // valorAtualAtivo
-      // quantidadeAtivo
+      localAlocado: this.form.value.localAlocado,
+      quantidadeDeAtivo: parseInt(this.form.value.quantidade),
+      valorTotalInvestido: calculaTotal,
+      valorAtualDoAtivo: parseInt(this.form.value.valorAtivoAtual),
     };
 
     this.serviceFinances.cadastrarAtivo(model).subscribe({
@@ -121,19 +136,11 @@ export class DialogMeusAtivosComponent implements OnInit {
         this.toastr.success('O ativo foi cadastrado com sucesso!', 'Sucesso');
         this.serviceFinances.filter(res);
         this.dialogRef.close();
-        console.log(res);
       },
       error: (e) => {
         console.error(e);
       },
     });
-  }
-
-  calcularInvestimento(nota: number, valorAtual: number, quantidade: number) {
-    const sugestaoInvestimento = nota * valorAtual;
-    const recomendacaoPorcentagem = nota * 10;
-    this.sugestaoInvestimento = sugestaoInvestimento;
-    this.recomendacaoPorcentagem = recomendacaoPorcentagem;
   }
 
   editarMeta(e?: any) {

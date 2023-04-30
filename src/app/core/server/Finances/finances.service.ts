@@ -1,9 +1,9 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { CadastrarAtivo } from '../../model/Ativo';
+import { CadastrarAtivo, ListaAtivoCalculado } from '../../model/Ativo';
 import { MetaInvestimento } from '../../model/MetaInvestimento';
 const httpOptions = {
   headers: new HttpHeaders({
@@ -52,6 +52,16 @@ export class FinancesService {
   listarMetaInvestimento(idMeta: number) {
     return this.http.get<MetaInvestimento[]>(
       `${this.url}api/MetasInvestimento/${idMeta}`
+    );
+  }
+
+  //calcular
+  calcularRecomendacaoInvestimento(
+    idUsuario: number,
+    valorInvestimento: number
+  ) {
+    return this.http.get<ListaAtivoCalculado>(
+      `${this.url}api/CalcularInvestimento?idUsuario=${idUsuario}&valorInvestimento=${valorInvestimento}`
     );
   }
 }

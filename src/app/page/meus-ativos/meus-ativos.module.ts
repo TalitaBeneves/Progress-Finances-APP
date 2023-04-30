@@ -13,6 +13,7 @@ import { MeusAtivosComponent } from './meus-ativos.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { FormatTipoAtivoPipe } from 'src/app/core/pipe/format-tipoAtivo.pipe';
+import { SharedModule } from 'src/app/core/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -28,11 +29,8 @@ import { FormatTipoAtivoPipe } from 'src/app/core/pipe/format-tipoAtivo.pipe';
     MatNativeDateModule,
     MatSlideToggleModule,
     MatSelectModule,
+    SharedModule,
   ],
-  declarations: [
-    MeusAtivosComponent,
-    DialogMeusAtivosComponent,
-    FormatTipoAtivoPipe,
-  ],
+  declarations: [MeusAtivosComponent, DialogMeusAtivosComponent],
 })
 export class MeusAtivosModule {}
