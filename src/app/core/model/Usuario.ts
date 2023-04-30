@@ -11,7 +11,7 @@ export interface CadastrarUsuario {
 }
 
 export interface UsuarioLogado {
-  IdUsuario: number;
+  idUsuario: number;
   email: string;
   nome: string;
   imagemUrl?: string;

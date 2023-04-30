@@ -8,6 +8,7 @@ import { MetaHomeComponent } from './page/meta-home/meta-home.component';
 import { MeusAtivosComponent } from './page/meus-ativos/meus-ativos.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { NovoAporteComponent } from './page/NovoAporte/novo-aporte.component';
+import { DashboardComponent } from './page/Dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'novo-aporte',
     component: NovoAporteComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', component: LoginComponent },

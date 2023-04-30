@@ -18,6 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MenuComponent } from './components/menu/menu.component';
+import { DashboardModule } from './page/Dashboard/novo-aporte.module';
+import { NovoAporteModule } from './page/NovoAporte/novo-aporte.module';
 import { DialogMetaDetalheComponent } from './page/meta-detalhe/components/dialog-meta-detalhe/dialog-meta-detalhe.component';
 import { MetaDetalhesComponent } from './page/meta-detalhe/meta-detalhes.component';
 import { DialogMetaHomeComponent } from './page/meta-home/components/dialog-meta-home/dialog-meta-home.component';
@@ -28,7 +30,6 @@ import { MetaHomeComponent } from './page/meta-home/meta-home.component';
 import { MeusAtivosModule } from './page/meus-ativos/meus-ativos.module';
 import { CadastroModule } from './user/cadastro/cadastro.module';
 import { LoginModule } from './user/login/login.module';
-import { NovoAporteModule } from './page/NovoAporte/novo-aporte.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { NovoAporteModule } from './page/NovoAporte/novo-aporte.module';
     MeusAtivosModule,
     MatTabsModule,
     NovoAporteModule,
+    DashboardModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true,
     }),

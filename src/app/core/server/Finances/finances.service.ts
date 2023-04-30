@@ -28,7 +28,7 @@ export class FinancesService {
     this._listners.next(filterBy);
   }
 
-  litarAtivosById(idUsuario: string) {
+  litarAtivosById(idUsuario: number) {
     return this.http.get<any>(`${this.url}Ativos/LitarAtivosById/${idUsuario}`);
   }
 
