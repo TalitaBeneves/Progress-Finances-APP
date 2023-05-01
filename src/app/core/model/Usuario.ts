@@ -16,3 +16,11 @@ export interface UsuarioLogado {
   nome: string;
   imagemUrl?: string;
 }
+export interface AtualizarDadosUsuarioModel {
+  idUsuario: number;
+  email: string;
+  nome: string;
+  senhaAtual: string;
+  novaSenha: string;
+  imagemUrl?: string;
+}

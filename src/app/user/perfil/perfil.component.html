@@ -1,0 +1,139 @@
+<section class="container">
+  <div class="card rounded p-4">
+    <div class="row" style="padding: 1rem !important">
+      <div class="pt-1">
+        <div class="mb-3">
+          <div class="">
+            <input
+              type="file"
+              #file
+              (change)="onFileChange($event)"
+              style="display: none"
+            />
+          </div>
+          <div class="d-flex align-self-center pt-3">
+            <img
+              [src]="imagemURL"
+              class="rounded"
+              (click)="file.click()"
+              name="aboutme"
+              width="220"
+              height="220"
+              style="cursor: pointer"
+            />
+          </div>
+          <div class="card-body">
+            <!-- <div class="h4 text-center mb-3">@{{dadosUser.nome}}</div>
+            <div class="h7 text-bold pb-1"><b>E-mail:</b> {{dadosUser.primeiroNome + ' ' + dadosUser.ultimoNome}}</div>
+            <div class="h7">
+              {{dadosUser.descricao}}
+            </div> -->
+          </div>
+          <!-- <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-6 text-center border-right">
+                  <div class="h5">0</div>
+                  <div class="h6 text-muted">Total de ativos</div>
+                </div>
+              </div>
+            </li>
+          </ul> -->
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <mat-card class="w-100 p-3">
+          <div class="d-flex">
+            <form [formGroup]="form">
+              <div class="row p-1">
+                <mat-form-field appearance="outline" class="col-sm-12">
+                  <mat-label>Nome</mat-label>
+                  <input matInput formControlName="nome" placeholder="Nome" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-sm-12">
+                  <mat-label>E-mail</mat-label>
+                  <input matInput type="email" formControlName="email" />
+                </mat-form-field>
+              </div>
+            </form>
+            <form [formGroup]="formSenha">
+              <div class="row ml-5">
+                <mat-form-field appearance="outline" class="col-sm-7">
+                  <mat-label>Senha atual</mat-label>
+                  <input
+                    matInput
+                    [type]="hideSenhaAtual ? 'password' : 'text'"
+                    formControlName="senhaAtual"
+                  />
+                  <button
+                    mat-icon-button
+                    matSuffix
+                    (click)="hideSenhaAtual = !hideSenhaAtual"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hideSenhaAtual"
+                  >
+                    <mat-icon>{{
+                      hideSenhaAtual ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                  </button>
+                </mat-form-field>
+                <div class="w-100"></div>
+
+                <mat-form-field appearance="outline" class="col-sm-7">
+                  <mat-label>Nova senha</mat-label>
+                  <input
+                    matInput
+                    [type]="hideNovaSenha ? 'password' : 'text'"
+                    formControlName="novaSenha"
+                  />
+                  <button
+                    mat-icon-button
+                    matSuffix
+                    [type]="hideNovaSenha ? 'password' : 'text'"
+                    (click)="hideNovaSenha = !hideNovaSenha"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hideNovaSenha"
+                  >
+                    <mat-icon>{{
+                      hideNovaSenha ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <div class="w-100"></div>
+                <mat-form-field appearance="outline" class="col-sm-7">
+                  <mat-label>Confirma nova senha</mat-label>
+                  <input
+                    matInput
+                    formControlName="confirmaSenha"
+                    [type]="hideConfirmarSenha ? 'password' : 'text'"
+                  />
+                  <button
+                    mat-icon-button
+                    matSuffix
+                    (click)="hideConfirmarSenha = !hideConfirmarSenha"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hideConfirmarSenha"
+                  >
+                    <mat-icon>{{
+                      hideConfirmarSenha ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </form>
+          </div>
+          <div
+            style="display: flex; justify-content: end"
+            *ngIf="form.dirty || formSenha.dirty"
+          >
+            <button type="submit" (click)="editarUser()">
+              Salvar alterações
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

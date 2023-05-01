@@ -9,6 +9,7 @@ import { MeusAtivosComponent } from './page/meus-ativos/meus-ativos.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { NovoAporteComponent } from './page/NovoAporte/novo-aporte.component';
 import { DashboardComponent } from './page/Dashboard/dashboard.component';
+import { PerfilComponent } from './user/perfil/perfil.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'perfil',
+    component: PerfilComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', component: LoginComponent },

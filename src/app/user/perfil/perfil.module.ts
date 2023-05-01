@@ -6,7 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from 'src/app/core/shared/shared.module';
-import { DashboardComponent } from './dashboard.component';
+import { PerfilComponent } from './perfil.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { DashboardComponent } from './dashboard.component';
     ReactiveFormsModule,
     SharedModule,
     MatToolbarModule,
+    MatCardModule,
+    MatIconModule,
   ],
-  declarations: [DashboardComponent],
+  declarations: [PerfilComponent],
 })
-export class DashboardModule {}
+export class PerfilModule {}

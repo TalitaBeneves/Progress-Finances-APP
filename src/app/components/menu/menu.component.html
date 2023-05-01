@@ -45,8 +45,8 @@
     <li
       class="item-menu"
       class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Perfil' }"
-      (click)="activeItem = 'Perfil'"
+      [ngClass]="{ active: activeItem === 'Aporte' }"
+      (click)="activeItem = 'Aporte'"
     >
       <a routerLink="/novo-aporte">
         <span class="icon"><i class="bi bi-clipboard-data"></i></span>
@@ -60,7 +60,7 @@
       [ngClass]="{ active: activeItem === 'Perfil' }"
       (click)="activeItem = 'Perfil'"
     >
-      <a href="#">
+      <a routerLink="/perfil">
         <span class="icon"><i class="bi bi-person-circle"></i></span>
         <span class="ml-4">Perfil</span>
       </a>

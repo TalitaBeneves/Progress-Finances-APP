@@ -1,9 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, take } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { CadastrarUsuario, LoginUsuario } from '../../model/Usuario';
+import {
+  CadastrarUsuario,
+  LoginUsuario,
+  UsuarioLogado,
+} from '../../model/Usuario';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -44,5 +48,23 @@ export class UsuarioService {
     return this.http.get(
       `${this.url}Usuarios/buscarMetaInvestimentoPeloId/${idUsuario}`
     );
+  }
+
+  atualizarDados(model: UsuarioLogado) {
+    return this.http.put(
+      `${this.url}Usuarios/EditarUsuario`,
+      model,
+      httpOptions
+    );
+  }
+
+  atualizarImagem(idUsuario: number, file: File) {
+    const fileToUpload = file[0] as File;
+    const formData = new FormData();
+    formData.append('file', fileToUpload);
+
+    return this.http
+      .post(`${this.url}Usuarios/upload-image/${idUsuario}`, formData)
+      .pipe(take(1));
   }
 }

@@ -39,7 +39,6 @@ export class CadastroComponent implements OnInit {
     this.serviceUsuario.cadastrarUsuario(model).subscribe({
       next: (res) => {
         this.router.navigate(['metas-home']);
-        console.log(res);
       },
       error: (e) => {
         console.error(e);
