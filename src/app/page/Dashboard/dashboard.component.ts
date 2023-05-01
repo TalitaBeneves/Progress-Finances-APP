@@ -184,10 +184,10 @@ export class DashboardComponent implements OnInit {
   saudacoes() {
     const now = new Date();
     const hora = now.getHours();
-    if (hora > 12) {
+
+    if (hora >= 12 && hora < 18) {
       this.saudacao = 'Boa tarde';
-    }
-    if (hora > 18) {
+    } else if (hora >= 18 || hora < 6) {
       this.saudacao = 'Boa noite';
     } else {
       this.saudacao = 'Bom dia';
