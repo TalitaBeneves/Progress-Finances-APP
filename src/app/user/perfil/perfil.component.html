@@ -1,7 +1,10 @@
 <section class="container">
-  <div class="card rounded p-4">
+  <div
+    class="card rounded p-4"
+    style="background-color: rgba(0, 0, 0, 0.2) !important"
+  >
     <div class="row" style="padding: 1rem !important">
-      <div class="pt-1">
+      <div class="pt-1" style="display: block; width: 100%; margin-left: 15px">
         <div class="mb-3">
           <div class="">
             <input
@@ -22,28 +25,14 @@
               style="cursor: pointer"
             />
           </div>
-          <div class="card-body">
-            <!-- <div class="h4 text-center mb-3">@{{dadosUser.nome}}</div>
-            <div class="h7 text-bold pb-1"><b>E-mail:</b> {{dadosUser.primeiroNome + ' ' + dadosUser.ultimoNome}}</div>
-            <div class="h7">
-              {{dadosUser.descricao}}
-            </div> -->
-          </div>
-          <!-- <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-6 text-center border-right">
-                  <div class="h5">0</div>
-                  <div class="h6 text-muted">Total de ativos</div>
-                </div>
-              </div>
-            </li>
-          </ul> -->
         </div>
       </div>
 
       <div class="col-lg-9">
-        <mat-card class="w-100 p-3">
+        <mat-card
+          class="w-100 p-3"
+          style="background-color: #ffffffeb !important"
+        >
           <div class="d-flex">
             <form [formGroup]="form">
               <div class="row p-1">

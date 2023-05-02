@@ -1,3 +1,4 @@
+import { TipoAtivo } from './../../../../core/model/Enums';
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
@@ -5,9 +6,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 
 import { PerguntasService } from '../../perguntas.service';
-import { CadastrarAtivo } from 'src/app/core/model/Ativo';
+import { AtualizarAtivo, CadastrarAtivo } from 'src/app/core/model/Ativo';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
 import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
+import {
+  ListarMetaInvestimentoModel,
+  MetaInvestimento,
+} from 'src/app/core/model/MetaInvestimento';
 
 @Component({
   selector: 'app-dialog-meus-ativos',
@@ -17,7 +22,7 @@ import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 export class DialogMeusAtivosComponent implements OnInit {
   @Output() metaCriada = new EventEmitter();
   title: string = 'Aportar';
-  btnTitle: string = 'Cadastrar';
+  btnTitle: string = 'Cadastrar ativo';
   getId: any;
   progresso: number;
   form: FormGroup;
@@ -33,8 +38,9 @@ export class DialogMeusAtivosComponent implements OnInit {
   qtdPontos: number = 0;
   recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
-  IdMetaIdUses: any;
+  dadosMeta: ListarMetaInvestimentoModel;
   getIdUser: any;
+
   ativos = [
     { value: 3, viewValue: 'Ações' },
     { value: 1, viewValue: 'Fundos Imobiliários' },
@@ -57,13 +63,20 @@ export class DialogMeusAtivosComponent implements OnInit {
 
     this.getIdUser = this.serviceUsuario.getUserLocalStorage();
     this.getMetaId(this.getIdUser.idUsuario);
+
+    if (this.data) {
+      this.btnTitle = 'Editar ativo';
+      this.value = this.data.tipoAtivo;
+      this.form.get('tipoAtivo')?.disable();
+      this.form.get('tipoAtivo')?.setValue(this.value);
+      this.form.patchValue(this.data);
+    }
   }
 
   getMetaId(id: number) {
     this.serviceFinances.listarMetaInvestimento(id).subscribe({
       next: (res) => {
-        this.IdMetaIdUses = res[0];
-        console.log(this.IdMetaIdUses);
+        this.dadosMeta = res[0];
       },
     });
   }
@@ -81,54 +94,54 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   onQtdPontosChange(perguntaId: any) {
-    if (perguntaId.checked) this.qtdPontos += 1;
-    else this.qtdPontos -= 1;
+    if (perguntaId.checked) {
+      this.qtdPontos += 1;
+      // this.perguntas.forEach((element) => {
+      //   if (element == perguntaId) {
+      //     element.checked = true;
+      //   }
+      // });
+    } else this.qtdPontos -= 1;
   }
 
   montaForm() {
     this.form = this.fb.group({
       tipoAtivo: [null, Validators.required],
-      nomeAtivo: [null, Validators.required],
-      quantidade: [null, Validators.required],
+      nome: [null, Validators.required],
+      quantidadeDeAtivo: [null, Validators.required],
       localAlocado: [null, Validators.required],
-      valorAtivoAtual: [null, Validators.required],
+      valorAtualDoAtivo: [null, Validators.required],
     });
   }
 
-  onNoClick(e: any): void {
+  cadastrarAtivo(): void {
     const qtdPontos = this.qtdPontos;
     const checked = this.checked.length;
 
     const percentual = qtdPontos / checked;
     let pontuacao = Math.round(percentual * 10);
-    if (this.value == 2) {
-      pontuacao = 10;
-    }
-    const percentualRecomendado =
-      ((pontuacao *
-        this.form.value.quantidade *
-        parseInt(this.form.value.valorAtivoAtual)) /
-        100) *
-      20;
-    const sugestaoInvestimento =
-      pontuacao * parseInt(this.form.value.valorAtivoAtual);
+    if (this.value == 2) pontuacao = 10;
 
+    const sugestaoInvestimento =
+      pontuacao * parseInt(this.form.value.valorAtualDoAtivo);
     const calculaTotal =
-      parseInt(this.form.value.valorAtivoAtual) *
-      parseInt(this.form.value.quantidade);
+      parseInt(this.form.value.valorAtualDoAtivo) *
+      parseInt(this.form.value.quantidadeDeAtivo);
+    const percentualRecomendado =
+      (sugestaoInvestimento / calculaTotal / this.dadosMeta.acoes) * 100;
 
     const model: CadastrarAtivo = {
       idUsuario: this.getIdUser.idUsuario,
-      idMeta: this.IdMetaIdUses.idMeta,
-      nome: this.form.value.nomeAtivo,
+      idMeta: this.dadosMeta.idMeta,
+      nome: this.form.value.nome,
       nota: pontuacao,
       recomendacaoPorcentagem: percentualRecomendado,
       sugestaoInvestimento: sugestaoInvestimento,
       tipoAtivo: this.form.value.tipoAtivo,
       localAlocado: this.form.value.localAlocado,
-      quantidadeDeAtivo: parseInt(this.form.value.quantidade),
+      quantidadeDeAtivo: parseInt(this.form.value.quantidadeDeAtivo),
       valorTotalInvestido: calculaTotal,
-      valorAtualDoAtivo: parseInt(this.form.value.valorAtivoAtual),
+      valorAtualDoAtivo: parseInt(this.form.value.valorAtualDoAtivo),
     };
 
     this.serviceFinances.cadastrarAtivo(model).subscribe({
@@ -144,15 +157,34 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   editarMeta(e?: any) {
-    // this.toastr.success('Deposito foi editado com sucesso!', 'Sucesso');
-    // this.serviceMeta.filter(res);
-  }
+    const calculaTotal =
+      parseInt(this.form.value.valorAtualDoAtivo) *
+      parseInt(this.form.value.quantidadeDeAtivo);
+    const model: AtualizarAtivo = {
+      idUsuario: this.data.idUsuario,
+      idMeta: this.data.idMeta,
+      idAtivo: this.data.idAtivo,
+      nome: this.form.value.nome,
+      localAlocado: this.form.value.localAlocado,
+      quantidadeDeAtivo: parseInt(this.form.value.quantidadeDeAtivo),
+      valorAtualDoAtivo: parseInt(this.form.value.valorAtualDoAtivo),
+      valorTotalInvestido: calculaTotal,
+      nota: this.data.nota,
+      recomendacaoPorcentagem: this.data.recomendacaoPorcentagem,
+      sugestaoInvestimento: this.data.sugestaoInvestimento,
+      tipoAtivo: this.data.tipoAtivo,
+    };
 
-  createItem() {
-    //this.verificacaoValid();
-    // this.toastr.success('Meta foi cadastrado com sucesso!', 'Sucesso');
-    // this.serviceMeta.filter(res);
-    // this.dialogRef.close();
+    this.serviceFinances.atualizarAtivo(model).subscribe({
+      next: (res) => {
+        this.toastr.success('O ativo foi atualizado com sucesso!', 'Sucesso');
+        this.serviceFinances.filter(res);
+        this.dialogRef.close();
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
   }
 
   verificacaoValid() {
@@ -164,5 +196,10 @@ export class DialogMeusAtivosComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+  }
+
+  salvar() {
+    if (this.data) this.editarMeta();
+    else this.cadastrarAtivo();
   }
 }

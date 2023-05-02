@@ -8,12 +8,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SharedModule } from 'src/app/core/shared/shared.module';
 import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialog-meus-ativos.component';
 import { MeusAtivosComponent } from './meus-ativos.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
-import { FormatTipoAtivoPipe } from 'src/app/core/pipe/format-tipoAtivo.pipe';
-import { SharedModule } from 'src/app/core/shared/shared.module';
 
 @NgModule({
   imports: [

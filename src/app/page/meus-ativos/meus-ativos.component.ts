@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import Chart from 'chart.js/auto';
 import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialog-meus-ativos.component';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-meus-ativos',
@@ -20,7 +21,8 @@ export class MeusAtivosComponent implements OnInit {
 
   constructor(
     private serviceFinances: FinancesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr: ToastrService
   ) {
     this.serviceFinances.listen().subscribe((e) => {
       this.listAtivos();
@@ -44,13 +46,29 @@ export class MeusAtivosComponent implements OnInit {
     });
   }
 
-  openDialogCadastrar() {
+  openDialogCadastrar(element?) {
     const dialogRef = this.dialog.open(DialogMeusAtivosComponent, {
       width: '1000px',
-      data: this.items,
+      data: element,
     });
 
     dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  getDadosTabela(e) {
+    this.openDialogCadastrar(e);
+  }
+
+  deletarAtivo(e) {
+    this.serviceFinances.deletarAtivo(e.idAtivo).subscribe({
+      next: (res) => {
+        this.toastr.success('O ativo foi atualizado com sucesso!', 'Sucesso');
+        this.serviceFinances.filter(res);
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
   }
 
   dashboard() {

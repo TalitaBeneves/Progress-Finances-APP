@@ -3,8 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { CadastrarAtivo, ListaAtivoCalculado } from '../../model/Ativo';
-import { MetaInvestimento } from '../../model/MetaInvestimento';
+import {
+  AtualizarAtivo,
+  CadastrarAtivo,
+  ListaAtivoCalculado,
+} from '../../model/Ativo';
+import {
+  ListarMetaInvestimentoModel,
+  MetaInvestimento,
+} from '../../model/MetaInvestimento';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -36,6 +43,17 @@ export class FinancesService {
     return this.http.post(`${this.url}Ativos`, model, httpOptions);
   }
 
+  atualizarAtivo(model: AtualizarAtivo) {
+    return this.http.put(`${this.url}Ativos/EditarAtivo`, model, httpOptions);
+  }
+
+  deletarAtivo(idAtivo: number) {
+    return this.http.delete(
+      `${this.url}Ativos/Deletar/${idAtivo}`,
+      httpOptions
+    );
+  }
+
   buscarPorAtivo(symbol: string) {
     return this.http.get(`${this.url}BuscarPorAtivo?${symbol}`);
   }
@@ -50,7 +68,7 @@ export class FinancesService {
   }
 
   listarMetaInvestimento(idMeta: number) {
-    return this.http.get<MetaInvestimento[]>(
+    return this.http.get<ListarMetaInvestimentoModel[]>(
       `${this.url}api/MetasInvestimento/${idMeta}`
     );
   }
