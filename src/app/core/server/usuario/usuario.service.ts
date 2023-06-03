@@ -4,7 +4,10 @@ import { ReplaySubject, take } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import {
+  AtualizarPergunta,
+  CadastrarPergunta,
   CadastrarUsuario,
+  ListarPerguntas,
   LoginUsuario,
   UsuarioLogado,
 } from '../../model/Usuario';
@@ -66,5 +69,28 @@ export class UsuarioService {
     return this.http
       .post(`${this.url}Usuarios/upload-image/${idUsuario}`, formData)
       .pipe(take(1));
+  }
+
+  /////////////////////////////PERGUNTAS///////////////////////////////////
+  cadastrarPergunta(model: CadastrarPergunta) {
+    return this.http.post(`${this.url}Usuarios/cadastrarPergunta`, model);
+  }
+
+  buscarPergunta(idUsuario: number) {
+    return this.http.get<ListarPerguntas>(
+      `${this.url}Usuarios/buscarPerguntas/${idUsuario}`
+    );
+  }
+
+  atualizarPergunta(model: AtualizarPergunta) {
+    return this.http.put(
+      `${this.url}Usuarios/EditarPergunta`,
+      model,
+      httpOptions
+    );
+  }
+
+  deletarPergunta(idPergunta: number) {
+    return this.http.delete(`${this.url}Usuario/DeletarPergunta/${idPergunta}`);
   }
 }

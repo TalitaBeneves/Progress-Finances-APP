@@ -8,3 +8,7 @@ export enum Status {
   CONCLUIDA = 0,
   ANDAMENTO = 1,
 }
+export enum TipoAtivoPergunta {
+  ACOES = 1,
+  FIIs = 2,
+}

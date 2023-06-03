@@ -15,7 +15,7 @@ import {
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'X-HTTP-Method-Override': 'POST',
+    'X-HTTP-Method-Override': 'PUT',
   }),
 };
 
@@ -24,6 +24,7 @@ const httpOptions = {
 })
 export class MetasService {
   url: string = environment.url;
+  baseUrl: string = environment.urlBase;
 
   private _listners = new Subject<any>();
 
@@ -46,7 +47,7 @@ export class MetasService {
   }
 
   addMeta(model: CriarMetasModel) {
-    return this.http.post(`${this.url}`, model, httpOptions);
+    return this.http.post(`${this.url}/Metas`, model, httpOptions);
   }
 
   editMeta(model: EditarMetasModel) {
@@ -55,24 +56,24 @@ export class MetasService {
   }
 
   deletMeta(id: number) {
-    return this.http.delete(`${this.url}Metas/${id}`, httpOptions);
+    return this.http.delete(`${this.url}/Metas/${id}`, httpOptions);
   }
 
   getItems() {
-    return this.http.get<Items>(`${this.url}/Items`);
+    return this.http.get<Items>(`${this.baseUrl}Metas/Items`);
   }
 
   createItem(model: CreateItemsModel) {
-    return this.http.post(`${this.url}/Items`, model, httpOptions);
+    return this.http.post(`${this.baseUrl}Metas/Items`, model, httpOptions);
   }
 
   editarItem(model: EditarItemsModel) {
-    return this.http.put(`${this.url}/Items`, model, httpOptions);
+    return this.http.put(`${this.baseUrl}Metas/Items`, model, httpOptions);
   }
 
   deleteItem(idItem: number) {
     return this.http.delete<any>(
-      `${`${this.url}/Items`}/${idItem}`,
+      `${`${this.baseUrl}Metas/Items`}/${idItem}`,
       httpOptions
     );
   }

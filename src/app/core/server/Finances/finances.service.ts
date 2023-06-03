@@ -40,7 +40,11 @@ export class FinancesService {
   }
 
   cadastrarAtivo(model: CadastrarAtivo) {
-    return this.http.post(`${this.url}Ativos`, model, httpOptions);
+    return this.http.post(
+      `${this.url}Ativos/CadastrarAtivo`,
+      model,
+      httpOptions
+    );
   }
 
   atualizarAtivo(model: AtualizarAtivo) {

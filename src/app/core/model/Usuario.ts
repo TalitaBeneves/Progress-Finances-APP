@@ -1,3 +1,5 @@
+import { TipoAtivoPergunta } from './Enums';
+
 export interface LoginUsuario {
   senha: string;
   email: string;
@@ -23,4 +25,26 @@ export interface AtualizarDadosUsuarioModel {
   senhaAtual: string;
   novaSenha: string;
   imagemUrl?: string;
+}
+
+export interface CadastrarPergunta {
+  idUsuario: number;
+  marked: boolean;
+  tipo: TipoAtivoPergunta;
+  pergunta: string;
+}
+export interface AtualizarPergunta {
+  idUsuario: number;
+  id: number;
+  marked: boolean;
+  tipo: TipoAtivoPergunta;
+  pergunta: string;
+}
+
+export interface ListarPerguntas {
+  id: number;
+  idUsuario: number;
+  pergunta: string;
+  marked: boolean;
+  tipo: TipoAtivoPergunta;
 }
