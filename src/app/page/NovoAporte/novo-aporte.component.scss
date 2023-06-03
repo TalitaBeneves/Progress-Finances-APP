@@ -126,29 +126,7 @@ button {
   overflow-y: auto;
   overflow-x: hidden;
 }
-thead {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  padding: 20px;
-}
 
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-button:start:decrement,
-::-webkit-scrollbar-button:end:increment {
-  display: none;
-}
-
-::-webkit-scrollbar-track-piece {
-  background-color: #3b3b3b;
-  -webkit-border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:vertical {
-  background-color: #666;
-  -webkit-border-radius: 6px;
+:host ::ng-deep .mat-form-field-outline {
+  background-color: rgba(114, 114, 114, 0.5) !important;
 }

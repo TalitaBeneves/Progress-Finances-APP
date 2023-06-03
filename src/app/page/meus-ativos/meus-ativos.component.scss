@@ -1,15 +1,21 @@
 canvas {
   display: block;
   box-sizing: border-box;
-  height: 300px !important;
-  width: 300px !important;
+  height: 225px !important;
+  width: 228px !important;
+  margin-top: 38px;
 }
 
 .dash {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 110px;
+  padding-top: 26px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  background-color: #0000004a;
+  margin-bottom: -2px;
+  padding: 10px;
+  width: fit-content;
+  color: #fff;
+  padding: 8px 32px;
 }
 
 .acoes {
@@ -29,7 +35,6 @@ canvas {
   position: relative;
   width: 165px;
   height: 42px;
-  top: 18px;
   text-decoration: none;
   border: none;
   border-radius: 5px;
@@ -39,8 +44,84 @@ canvas {
   font-weight: 400;
   font-family: "Poppins";
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .custom-dialog {
   background-color: #313431;
+}
+
+.container-dash-table {
+  display: flex;
+  justify-content: center;
+  margin: 200px auto;
+}
+
+.tipoAtivo {
+  color: #fff;
+  background-color: rgb(79, 191, 181);
+  border-radius: 20px;
+  padding: 6px;
+  font-size: 15px;
+}
+.box {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.details {
+  margin-top: 40px;
+}
+.details ul {
+  list-style-type: none;
+  font-size: 16px;
+}
+.details ul li {
+  margin: 12px 0;
+}
+
+:host ::ng-deep li.list-item-0 {
+  list-style-type: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep li.list-item-0:before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.4em;
+  background-color: #17a2b8;
+  border-radius: 50%;
+}
+
+:host ::ng-deep .list-item-1 {
+  list-style-type: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+:host ::ng-deep li.list-item-1:before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.4em;
+  background-color: #fd7e14;
+  border-radius: 50%;
+}
+:host ::ng-deep .list-item-2 {
+  list-style-type: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+:host ::ng-deep li.list-item-2:before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.4em;
+  background-color: #20c997;
+  border-radius: 50%;
 }

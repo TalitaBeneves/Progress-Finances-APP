@@ -14,10 +14,11 @@ export class MeusAtivosComponent implements OnInit {
   @ViewChild('chart', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   items: any;
   getId: any;
-  acoes: number = 1;
-  fiis: number = 1;
-  rendaFixa: number = 1;
+  acoes: number = 0;
+  fiis: number = 0;
+  rendaFixa: number = 0;
   corFundo = '#4fbfb5';
+  chart!: Chart<'doughnut', number[], string>;
 
   constructor(
     private serviceFinances: FinancesService,
@@ -36,12 +37,18 @@ export class MeusAtivosComponent implements OnInit {
     this.listAtivos();
   }
 
+  ngAfterViewInit() {
+    this.montaLi();
+  }
+
   listAtivos() {
     this.serviceFinances.litarAtivosById(this.getId.idUsuario).subscribe({
       next: (res) => {
         this.items = res;
-        this.mondaDashboard();
+
         this.dashboard();
+        this.montaDash();
+        this.updateChart();
       },
     });
   }
@@ -72,39 +79,90 @@ export class MeusAtivosComponent implements OnInit {
   }
 
   dashboard() {
-    const ctx = this.canvas?.nativeElement.getContext('2d');
+    const ctx = this.canvas.nativeElement.getContext('2d');
     if (ctx) {
-      const myChart = new Chart(ctx, {
+      const colors = ['#17a2b8', '#fd7e14', '#20c997'];
+      this.chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
           labels: ['Ações', 'Fundos Imobiliários', 'Renda Fixa'],
           datasets: [
             {
-              data: [this.acoes, this.fiis, this.rendaFixa],
-              backgroundColor: [
-                'rgb(79, 191, 181, 0.50)',
-                'rgb(38, 213, 242, 0.50)',
-                'rgb(82, 155, 225, 0.50)',
-              ],
+              data: [this.acoes, 0, 0],
+              backgroundColor: colors,
               borderWidth: 1,
-              borderColor: '#4fbfb5',
+              borderColor: '#ffffff',
+            },
+            {
+              data: [0, this.fiis, 0],
+              backgroundColor: colors,
+              borderWidth: 1,
+
+              borderColor: '#ffffff',
+            },
+            {
+              data: [0, 0, this.rendaFixa],
+              backgroundColor: colors,
+              borderWidth: 1,
+              borderColor: '#ffffff',
             },
           ],
         },
-        options: {},
+        options: {
+          animation: {
+            animateRotate: false,
+            animateScale: false,
+            duration: 1000,
+            easing: 'easeInOutQuad',
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
       });
     }
   }
 
-  mondaDashboard() {
-    this.acoes = this.items.filter(
-      (item: { tipoAtivo: number }) => item.tipoAtivo === 3
-    ).length;
-    this.fiis = this.items.filter(
-      (item: { tipoAtivo: number }) => item.tipoAtivo === 1
-    ).length;
-    this.rendaFixa = this.items.filter(
-      (item: { tipoAtivo: number }) => item.tipoAtivo === 2
-    ).length;
+  montaLi(newData?: any) {
+    const ul = document.querySelector('.dash .details ul');
+
+    this.chart?.data?.labels?.forEach((label, i) => {
+      var li = document.createElement('li');
+      li.innerHTML = `${label}`;
+      li.classList.add('list-item-' + i);
+      ul?.appendChild(li);
+    });
+  }
+
+  updateChart() {
+    const newData = [this.acoes, this.fiis, this.rendaFixa];
+    const soma = this.acoes + this.fiis + this.rendaFixa;
+
+    this.chart.data.datasets[0].data = newData;
+
+    if (
+      this.chart.options.plugins &&
+      this.chart.options.plugins.legend &&
+      this.chart.options.plugins.legend.title
+    ) {
+      this.chart.options.plugins.legend.title.text = `Valor Total ${soma.toString()}`;
+    }
+
+    this.montaLi();
+    this.chart.update();
+  }
+
+  montaDash() {
+    this.items.forEach((ativo) => {
+      if (ativo.tipoAtivo === 3) {
+        this.acoes += ativo.valorAtualDoAtivo;
+      } else if (ativo.tipoAtivo === 1) {
+        this.fiis += ativo.valorAtualDoAtivo;
+      } else if (ativo.tipoAtivo === 2) {
+        this.rendaFixa += ativo.valorAtualDoAtivo;
+      }
+    });
   }
 }

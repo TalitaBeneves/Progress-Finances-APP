@@ -1,8 +1,4 @@
 <section class="container">
-  <div style="display: flex; justify-content: end">
-    <button (click)="addMeta()">+Adicionar Meta</button>
-  </div>
-
   <mat-tab-group
     mat-align-tabs="center"
     style="
@@ -17,6 +13,10 @@
       <app-meta-investimento></app-meta-investimento>
     </mat-tab>
     <mat-tab>
+      <div style="display: flex; justify-content: end">
+        <button (click)="addMeta()">+Adicionar Meta</button>
+      </div>
+      <br />
       <ng-template mat-tab-label> Metas em Andamento </ng-template>
       <app-metas-andamento
         [filtroStatusAndamentos]="filtroStatusAndamentos"

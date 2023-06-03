@@ -3,7 +3,13 @@
     <h4 class="text-light py-3">
       Edite os itens para ajustar suas metas de investimento
     </h4>
-    <button type="submit" (click)="salvarMetaInvestimento()">Salvar</button>
+    <button
+      type="submit"
+      (click)="salvarMetaInvestimento()"
+      *ngIf="formAcoes.dirty || formFiis.dirty || formFixa.dirty"
+    >
+      Salvar
+    </button>
   </div>
 
   <div style="display: flex">

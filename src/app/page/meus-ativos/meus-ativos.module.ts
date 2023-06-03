@@ -13,6 +13,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/core/shared/shared.module';
 import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialog-meus-ativos.component';
 import { MeusAtivosComponent } from './meus-ativos.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { MeusAtivosComponent } from './meus-ativos.component';
     MatSlideToggleModule,
     MatSelectModule,
     SharedModule,
+    CurrencyMaskModule,
+    NgxMaskModule.forChild(),
   ],
   declarations: [MeusAtivosComponent, DialogMeusAtivosComponent],
 })

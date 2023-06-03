@@ -12,7 +12,8 @@ import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
   styleUrls: ['./novo-aporte.component.scss'],
 })
 export class NovoAporteComponent implements OnInit {
-  @ViewChild('chart', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('chartAporte', { static: true })
+  canvas: ElementRef<HTMLCanvasElement>;
 
   valorInvestimento = new FormControl(null, Validators.required);
   items: any;
@@ -37,12 +38,12 @@ export class NovoAporteComponent implements OnInit {
     this.seviceFinaces.litarAtivosById(this.getIdUser.idUsuario).subscribe({
       next: (res) => {
         this.items = res;
+        this.dashboard();
         this.montaDash();
         this.updateChart();
       },
       error: (e) => console.error(e),
     });
-    this.dashboard();
   }
 
   ngAfterViewInit() {
@@ -95,6 +96,7 @@ export class NovoAporteComponent implements OnInit {
       });
     }
   }
+
   calcular() {
     const valor = parseInt(this.valorInvestimento.value);
     if (this.valorInvestimento.invalid) {
@@ -126,7 +128,9 @@ export class NovoAporteComponent implements OnInit {
     const newData = [this.acoes, this.fiis, this.rendaFixa];
     const soma = this.acoes + this.fiis + this.rendaFixa;
 
-    this.chart.data.datasets[0].data = newData;
+    if (newData) {
+      this.chart.data.datasets[0].data = newData;
+    }
 
     if (
       this.chart.options.plugins &&
@@ -152,13 +156,13 @@ export class NovoAporteComponent implements OnInit {
         if (listItem) {
           switch (i) {
             case 0:
-              listItem.innerHTML = `Ações: ${value}`;
+              listItem.innerHTML = `Ações: ${value.toFixed(2)}`;
               break;
             case 1:
-              listItem.innerHTML = `Fundos Imobiliários: ${value}`;
+              listItem.innerHTML = `Fundos Imobiliários: ${value.toFixed(2)}`;
               break;
             case 2:
-              listItem.innerHTML = `Renda Fixa: ${value}`;
+              listItem.innerHTML = `Renda Fixa: ${value.toFixed(2)}`;
               break;
 
             default:
@@ -180,11 +184,11 @@ export class NovoAporteComponent implements OnInit {
   montaDash() {
     this.items.forEach((ativo: ListaAtivoCalculado) => {
       if (ativo.tipoAtivo === 3) {
-        this.acoes += ativo.valorTotalInvestido;
+        this.acoes += ativo.sugestaoInvestimento;
       } else if (ativo.tipoAtivo === 1) {
-        this.fiis += ativo.valorTotalInvestido;
+        this.fiis += ativo.sugestaoInvestimento;
       } else if (ativo.tipoAtivo === 2) {
-        this.rendaFixa += ativo.valorTotalInvestido;
+        this.rendaFixa += ativo.sugestaoInvestimento;
       }
     });
   }

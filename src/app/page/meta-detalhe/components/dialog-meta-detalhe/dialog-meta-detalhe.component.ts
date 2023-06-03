@@ -89,10 +89,11 @@ export class DialogMetaDetalheComponent implements OnInit {
     this.verificacaoValid();
     const model: CreateItemsModel = {
       valorDepositado: Number(this.form.value.valorDeposito),
-      dataDeposito: this.form.value.dataDeposito,
+      dataDeposito: new Date(this.form.value.dataDeposito),
       idMeta: this.data.dados.id,
       progressFinanceModelId: this.data.dados.id,
     };
+    console.log(this.form.value.dataDeposito);
     this.serviceMeta.createItem(model).subscribe({
       next: (res) => {
         this.toastr.success('Meta foi cadastrado com sucesso!', 'Sucesso');

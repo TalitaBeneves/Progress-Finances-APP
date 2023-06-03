@@ -43,7 +43,32 @@ p {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 20px;
+}
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  display: none;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #3b3b3b;
+  -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  background-color: #666;
+  -webkit-border-radius: 6px;
+}
 .toast-container {
   pointer-events: none;
   position: fixed;

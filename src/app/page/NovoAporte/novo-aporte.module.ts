@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormatTipoAtivoPipe } from 'src/app/core/pipe/format-tipoAtivo.pipe';
 import { SharedModule } from 'src/app/core/shared/shared.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ReactiveFormsModule,
     SharedModule,
     MatToolbarModule,
+    CurrencyMaskModule,
   ],
   declarations: [NovoAporteComponent],
 })

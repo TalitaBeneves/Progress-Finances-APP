@@ -54,7 +54,7 @@
         <th scope="row">{{ item.id }}</th>
         <td>{{ item.dataDeposito | date : "dd/MM/yyyy" }}</td>
         <td>{{ item.dataDeposito | date : "HH:mm" }}</td>
-        <td>{{ item.valorDepositado }}</td>
+        <td>{{ item.valorDepositado | currency }}</td>
         <td>
           <img
             src="../../assets/img/icon.png"

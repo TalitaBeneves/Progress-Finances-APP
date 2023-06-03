@@ -128,7 +128,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
     const percentualRecomendado =
-      (sugestaoInvestimento / calculaTotal / this.dadosMeta.acoes) * 100;
+      (sugestaoInvestimento / calculaTotal / this.dadosMeta.rendaFixa) * 100;
 
     const model: CadastrarAtivo = {
       idUsuario: this.getIdUser.idUsuario,
@@ -141,7 +141,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       localAlocado: this.form.value.localAlocado,
       quantidadeDeAtivo: parseInt(this.form.value.quantidadeDeAtivo),
       valorTotalInvestido: calculaTotal,
-      valorAtualDoAtivo: parseInt(this.form.value.valorAtualDoAtivo),
+      valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
     };
 
     this.serviceFinances.cadastrarAtivo(model).subscribe({
@@ -167,7 +167,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       nome: this.form.value.nome,
       localAlocado: this.form.value.localAlocado,
       quantidadeDeAtivo: parseInt(this.form.value.quantidadeDeAtivo),
-      valorAtualDoAtivo: parseInt(this.form.value.valorAtualDoAtivo),
+      valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
       valorTotalInvestido: calculaTotal,
       nota: this.data.nota,
       recomendacaoPorcentagem: this.data.recomendacaoPorcentagem,

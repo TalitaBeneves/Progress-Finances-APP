@@ -13,8 +13,7 @@
         matInput
         formControlName="valorInicial"
         [(ngModel)]="data.valorInicial"
-        mask="separator.2"
-        thousandSeparator="."
+        currencyMask
       />
     </mat-form-field>
     <br />
@@ -24,8 +23,7 @@
         matInput
         formControlName="objetivo"
         [(ngModel)]="data.valorMeta"
-        mask="separator.2"
-        thousandSeparator="."
+        currencyMask
       />
     </mat-form-field>
     <br />

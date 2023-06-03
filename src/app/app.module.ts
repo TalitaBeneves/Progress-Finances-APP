@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -17,6 +17,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {
+  CURRENCY_MASK_CONFIG,
+  CurrencyMaskConfig,
+  CurrencyMaskModule,
+} from 'ng2-currency-mask';
 import { MenuComponent } from './components/menu/menu.component';
 import { DashboardModule } from './page/Dashboard/dashboard.module';
 import { NovoAporteModule } from './page/NovoAporte/novo-aporte.module';
@@ -31,6 +36,16 @@ import { MeusAtivosModule } from './page/meus-ativos/meus-ativos.module';
 import { CadastroModule } from './user/cadastro/cadastro.module';
 import { LoginModule } from './user/login/login.module';
 import { PerfilModule } from './user/perfil/perfil.module';
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: 'left',
+  allowNegative: true,
+  decimal: ',',
+  precision: 2,
+  prefix: 'R$ ',
+  suffix: '',
+  thousands: '.',
+};
 
 @NgModule({
   declarations: [
@@ -62,6 +77,7 @@ import { PerfilModule } from './user/perfil/perfil.module';
     NovoAporteModule,
     DashboardModule,
     PerfilModule,
+    CurrencyMaskModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true,
     }),
@@ -73,7 +89,13 @@ import { PerfilModule } from './user/perfil/perfil.module';
     LoginModule,
     CadastroModule,
   ],
-  providers: [],
+  providers: [
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL',
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
