@@ -13,6 +13,7 @@ import {
   ListarMetaInvestimentoModel,
   MetaInvestimento,
 } from 'src/app/core/model/MetaInvestimento';
+import { UsuarioLogado } from 'src/app/core/model/Usuario';
 
 @Component({
   selector: 'app-dialog-meus-ativos',
@@ -39,7 +40,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
   dadosMeta: ListarMetaInvestimentoModel;
-  getIdUser: any;
+  getIdUser: UsuarioLogado;
 
   ativos = [
     { value: 3, viewValue: 'Ações' },
@@ -82,15 +83,22 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   onSelectionChange() {
-    this.perguntas = this.servicePergunta.getPerguntas();
+    this.serviceUsuario.buscarPergunta(this.getIdUser.idUsuario).subscribe({
+      next: (res) => {
+        this.perguntas = res;
 
-    this.perguntas = this.perguntas.filter(
-      (item: { tipo: number }) => item.tipo == this.value
-    );
+        console.log(this.perguntas);
 
-    this.checked = this.perguntas.filter(
-      (item: { checked: boolean }) => item.checked == false
-    );
+        if (this.perguntas) {
+          this.perguntas = this.perguntas.filter(
+            (item: { tipo: number }) => item.tipo == this.value
+          );
+        }
+      },
+      error: (e) => {
+        console.error(e);
+      },
+    });
   }
 
   onQtdPontosChange(perguntaId: any) {

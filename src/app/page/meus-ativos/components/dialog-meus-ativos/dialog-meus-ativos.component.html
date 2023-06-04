@@ -46,10 +46,10 @@
       <div class="box">
         <div class="positivo">Pontos Positivos {{ qtdPontos }}</div>
         <div class="negativo">
-          Pontos Negativos {{ checked.length - qtdPontos }}
+          Pontos Negativos {{ checked?.length - qtdPontos }}
         </div>
         <div class="final">
-          Pontuação Final {{ ((qtdPontos / checked.length) * 10).toFixed(0) }}
+          Pontuação Final {{ ((qtdPontos / checked?.length) * 10).toFixed(0) }}
         </div>
       </div>
       <br />
@@ -66,12 +66,11 @@
         </thead>
         <tbody *ngFor="let pergunta of perguntas">
           <tr>
-            <td>{{ pergunta.question }}</td>
-            <td>{{ pergunta.criterio }}</td>
+            <td>{{ pergunta.pergunta }}</td>
             <td>
               <div class="custom-control custom-checkbox">
                 <input
-                  [(ngModel)]="pergunta.checked"
+                  [(ngModel)]="pergunta.marked"
                   (change)="onQtdPontosChange(pergunta)"
                   type="checkbox"
                   class="custom-control-input"
@@ -86,6 +85,12 @@
             <td></td>
           </tr>
         </tbody>
+        <div *ngIf="perguntas == null" class="my-3">
+          <h3 class="text-center font-weight-bold">
+            Nenhuma pergunta cadastrada. Favor cadastrar uma pergunta na tela de
+            "Suas perguntas" para continuar o cadastro do seu ativo.
+          </h3>
+        </div>
       </table>
     </div>
   </div>

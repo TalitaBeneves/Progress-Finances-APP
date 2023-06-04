@@ -38,11 +38,48 @@
         </div>
         <div class="details_ativo">
           <ul></ul>
-          <p style="padding-left: 41px">
-            <!--  -->
-          </p>
+          <!-- <p style="padding-left: 41px">
+
+   </p> -->
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="p-3 my-4" style="margin: auto 196px">
+  <h2 class="text-light ml-3">
+    Acompanhe a sua quantidade total investida nos seus ativos
+  </h2>
+  <div
+    *ngFor="let item of items"
+    class="progress"
+    style="
+      height: 33px;
+      border-radius: 20px;
+      margin-top: 40px;
+      background-color: transparent;
+    "
+  >
+    <div
+      class="progress-bar bg-danger"
+      role="progressbar"
+      [style.width]="item.valorTotalInvestido + 'px'"
+    ></div>
+
+    <p
+      style="
+        text-align: end;
+        color: #fff;
+        padding-top: 10px;
+        font-size: 18px;
+        padding-right: 20px;
+        padding-left: 12px;
+      "
+    >
+      {{ item.valorTotalInvestido | currency }} -
+      {{ item.nome }}
+    </p>
+  </div>
+  <br />
+</div>

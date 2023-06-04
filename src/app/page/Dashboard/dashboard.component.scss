@@ -22,7 +22,10 @@ p {
     margin-bottom: 0px;
   }
 }
-
+.bg-danger {
+  background-color: #ef4b21 !important;
+  border-radius: 20px;
+}
 canvas {
   display: block;
   box-sizing: border-box;

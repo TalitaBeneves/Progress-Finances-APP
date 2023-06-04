@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
   dadosUsuario: UsuarioLogado;
   items: any;
   listasCriadas = false;
-
   saudacao: string;
 
   constructor(
@@ -151,7 +150,7 @@ export class DashboardComponent implements OnInit {
     );
 
     if (!this.listasCriadas) {
-      this.chart.data?.labels?.forEach((label, i) => {
+      this.chart?.data?.labels?.forEach((label, i) => {
         var li = document.createElement('li');
         li.innerHTML = `${label}`;
         li.classList.add('list-item-meta-' + i);
