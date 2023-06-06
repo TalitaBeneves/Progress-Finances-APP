@@ -1,15 +1,23 @@
-<div class="">
+<div style="margin: 200px auto">
+  <div class="container b">
+    <div style="margin-left: -171px">
+      <h1 class="mb-0">Filtrar por:</h1>
+      <ul>
+        <li class="acoes" (click)="filtra($event)">Ações</li>
+        <li class="fiis" (click)="filtra($event)">FIIs</li>
+        <li class="fixa" (click)="filtra($event)">Renda Fixa</li>
+        <li class="limpaFiltro" (click)="filtra($event)">Limpar filtro</li>
+      </ul>
+    </div>
+  </div>
+
   <div
-    style="
-      display: flex;
-      align-items: end;
-      justify-content: end;
-      margin-right: 4px;
-    "
-    class="b"
+    class="container b"
+    style="justify-content: end; align-items: end; display: flex"
   >
     <button (click)="openDialogCadastrar()">+Cadastrar Ativo</button>
   </div>
+
   <div class="rounded container-dash-table">
     <div class="dash">
       <div class=" ">
@@ -17,6 +25,7 @@
       </div>
 
       <div class="details">
+        <!-- //aqui eu crio a lista dos tipos de ativo -->
         <ul></ul>
         <p style="padding-left: 41px; color: #ffffff">
           Valor total {{ (acoes + fiis + rendaFixa).toFixed(2) | currency }}
@@ -24,7 +33,7 @@
       </div>
     </div>
     <div class="box">
-      <table class="table table-dark text-center mb-0">
+      <table class="table table-dark text-center mb-0" style="max-height: 100%">
         <table class="table table-dark text-center">
           <thead style="background-color: #161819 !important">
             <tr>
@@ -98,11 +107,12 @@
             </tr>
           </tbody>
         </table>
+        <div *ngIf="items == 0">
+          <p style="color: #ffffff; text-align: center">
+            Nenhum ativo cadastrado
+          </p>
+        </div>
       </table>
-    </div>
-
-    <div *ngIf="items == 0">
-      <p style="color: #ffffff; text-align: center">Nenhum ativo cadastrado</p>
     </div>
   </div>
 </div>

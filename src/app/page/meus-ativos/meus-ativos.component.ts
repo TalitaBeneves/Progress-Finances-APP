@@ -4,6 +4,7 @@ import Chart from 'chart.js/auto';
 import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialog-meus-ativos.component';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-meus-ativos',
@@ -19,11 +20,13 @@ export class MeusAtivosComponent implements OnInit {
   rendaFixa: number = 0;
   corFundo = '#4fbfb5';
   chart!: Chart<'doughnut', number[], string>;
-
+  array: any = [];
+  ativos: any;
   constructor(
     private serviceFinances: FinancesService,
     public dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     this.serviceFinances.listen().subscribe((e) => {
       this.listAtivos();
@@ -42,15 +45,19 @@ export class MeusAtivosComponent implements OnInit {
   }
 
   listAtivos() {
-    this.serviceFinances.litarAtivosById(this.getId.idUsuario).subscribe({
-      next: (res) => {
-        this.items = res;
-
-        this.dashboard();
-        this.montaDash();
-        this.updateChart();
-      },
-    });
+    this.spinner.show();
+    this.serviceFinances
+      .litarAtivosById(this.getId.idUsuario)
+      .subscribe({
+        next: (res) => {
+          this.items = res;
+          this.ativos = res;
+          this.dashboard();
+          this.montaDash();
+          this.updateChart();
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   openDialogCadastrar(element?) {
@@ -67,15 +74,19 @@ export class MeusAtivosComponent implements OnInit {
   }
 
   deletarAtivo(e) {
-    this.serviceFinances.deletarAtivo(e.idAtivo).subscribe({
-      next: (res) => {
-        this.toastr.success('O ativo foi atualizado com sucesso!', 'Sucesso');
-        this.serviceFinances.filter(res);
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.spinner.show();
+    this.serviceFinances
+      .deletarAtivo(e.idAtivo)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success('O ativo foi atualizado com sucesso!', 'Sucesso');
+          this.serviceFinances.filter(res);
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   dashboard() {
@@ -164,5 +175,41 @@ export class MeusAtivosComponent implements OnInit {
         this.rendaFixa += ativo.valorAtualDoAtivo;
       }
     });
+  }
+
+  filtra(event) {
+    var e = event.target.className;
+    var tipoAtivo = 0;
+
+    switch (e) {
+      case 'acoes':
+        tipoAtivo = 3;
+        this.array = [];
+        break;
+      case 'fiis':
+        tipoAtivo = 1;
+        this.array = [];
+        break;
+      case 'fixa':
+        tipoAtivo = 2;
+        this.array = [];
+        break;
+      case 'limpaFiltro':
+        this.items = this.ativos;
+        break;
+
+      default:
+        break;
+    }
+
+    if (tipoAtivo > 0) {
+      this.ativos.forEach((element) => {
+        if (element.tipoAtivo == tipoAtivo) {
+          this.array.push(element);
+        }
+
+        this.items = this.array;
+      });
+    }
   }
 }
