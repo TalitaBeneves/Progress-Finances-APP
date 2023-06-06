@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +25,7 @@ import {
 } from 'ng2-currency-mask';
 import { MenuComponent } from './components/menu/menu.component';
 import { DashboardModule } from './page/Dashboard/dashboard.module';
-import { NovoAporteModule } from './page/NovoAporte/novo-aporte.module';
+import { NovoAporteModule } from './page/novo-aporte/novo-aporte.module';
 import { DialogMetaDetalheComponent } from './page/meta-detalhe/components/dialog-meta-detalhe/dialog-meta-detalhe.component';
 import { MetaDetalhesComponent } from './page/meta-detalhe/meta-detalhes.component';
 import { DialogMetaHomeComponent } from './page/meta-home/components/dialog-meta-home/dialog-meta-home.component';
@@ -86,6 +87,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+    NgxSpinnerModule,
     LoginModule,
     CadastroModule,
   ],

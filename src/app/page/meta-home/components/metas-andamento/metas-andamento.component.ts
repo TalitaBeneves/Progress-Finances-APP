@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { AllMetasModel } from 'src/app/core/model/Metas';
 import { MetasService } from 'src/app/core/server/metas.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-metas-andamento',
@@ -21,7 +22,8 @@ export class MetasAndamentoComponent {
     private router: Router,
     private serveMeta: MetasService,
     public dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     this.serveMeta.listen().subscribe((e) => {
       this.filtroStatusAndamentos = e;
@@ -49,15 +51,19 @@ export class MetasAndamentoComponent {
       confirmButtonText: 'Sim, Deletar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.serveMeta.deletMeta(meta.id).subscribe({
-          next: (res) => {
-            this.toastr.success('Meta foi deletada com sucesso!', 'Sucesso');
-            this.serveMeta.filter(res);
-          },
-          error: (e) => {
-            console.error(e);
-          },
-        });
+        this.spinner.show();
+        this.serveMeta
+          .deletMeta(meta.id)
+          .subscribe({
+            next: (res) => {
+              this.toastr.success('Meta foi deletada com sucesso!', 'Sucesso');
+              this.serveMeta.filter(res);
+            },
+            error: (e) => {
+              console.error(e);
+            },
+          })
+          .add(() => this.spinner.hide());
       }
     });
   }

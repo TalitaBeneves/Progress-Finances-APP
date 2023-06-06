@@ -7,7 +7,7 @@ import { MetaDetalhesComponent } from './page/meta-detalhe/meta-detalhes.compone
 import { MetaHomeComponent } from './page/meta-home/meta-home.component';
 import { MeusAtivosComponent } from './page/meus-ativos/meus-ativos.component';
 import { AuthGuard } from './core/guard/auth.guard';
-import { NovoAporteComponent } from './page/NovoAporte/novo-aporte.component';
+import { NovoAporteComponent } from './page/novo-aporte/novo-aporte.component';
 import { DashboardComponent } from './page/Dashboard/dashboard.component';
 import { PerfilComponent } from './user/perfil/perfil.component';
 

@@ -33,12 +33,9 @@ export interface CadastrarPergunta {
   tipo: TipoAtivoPergunta;
   pergunta: string;
 }
-export interface AtualizarPergunta {
-  idUsuario: number;
+
+export interface AtualizarPergunta extends CadastrarPergunta {
   id: number;
-  marked: boolean;
-  tipo: TipoAtivoPergunta;
-  pergunta: string;
 }
 
 export interface ListarPerguntas {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {
   AtualizarDadosUsuarioModel,
@@ -27,7 +28,8 @@ export class PerfilComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private serviceUsuario: UsuarioService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -71,9 +73,9 @@ export class PerfilComponent implements OnInit {
 
     if (this.formSenha.value.novaSenha !== this.formSenha.value.confirmaSenha) {
       this.toastr.warning('As senhas não correspondem!', 'Atenção');
-      alert('');
     }
 
+    this.spinner.show();
     const model: AtualizarDadosUsuarioModel = {
       idUsuario: this.dadosUser.idUsuario,
       email: this.form.value.email,
@@ -85,15 +87,18 @@ export class PerfilComponent implements OnInit {
       imagemUrl: this.dadosUser.imagemUrl ? this.dadosUser.imagemUrl : '',
     };
 
-    this.serviceUsuario.atualizarDados(model).subscribe({
-      next: (res) => {
-        this.serviceUsuario.setCurrentUser(res);
-        this.toastr.success('Dados atualizados com sucesso', 'Sucesso!');
-      },
-      error: (e) => {
-        this.toastr.error('Erro ao atualizr dados perfil', 'Erro!');
-      },
-    });
+    this.serviceUsuario
+      .atualizarDados(model)
+      .subscribe({
+        next: (res) => {
+          this.serviceUsuario.setCurrentUser(res);
+          this.toastr.success('Dados atualizados com sucesso', 'Sucesso!');
+        },
+        error: (e) => {
+          this.toastr.error('Erro ao atualizr dados perfil', 'Erro!');
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   onFileChange(ev: any): void {
@@ -109,6 +114,7 @@ export class PerfilComponent implements OnInit {
   }
 
   private uploadImagem(): void {
+    this.spinner.show();
     this.serviceUsuario
       .atualizarImagem(this.dadosUser.idUsuario, this.file)
       .subscribe({
@@ -119,9 +125,7 @@ export class PerfilComponent implements OnInit {
         error: (e) => {
           this.toastr.error('Erro ao atualizr imagem', 'Erro!');
         },
-      });
-    // this.spinner.show();
-
-    //   ).add(() => this.spinner.hide());
+      })
+      .add(() => this.spinner.hide());
   }
 }

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { DialogMetaDetalheComponent } from './components/dialog-meta-detalhe/dialog-meta-detalhe.component';
 import { MetasService } from 'src/app/core/server/metas.service';
 import { Items } from 'src/app/core/model/Metas';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-meta-detalhes',
@@ -23,7 +24,8 @@ export class MetaDetalhesComponent implements OnInit {
     private route: ActivatedRoute,
     private serviceMeta: MetasService,
     public dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     this.serviceMeta.listen().subscribe(() => {
       this.getById();
@@ -38,14 +40,18 @@ export class MetaDetalhesComponent implements OnInit {
   }
 
   getById() {
-    this.serviceMeta.getMetaById(this.id).subscribe({
-      next: (res) => {
-        this.items = res;
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.spinner.show();
+    this.serviceMeta
+      .getMetaById(this.id)
+      .subscribe({
+        next: (res) => {
+          this.items = res;
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   cadastrarItem() {
@@ -90,18 +96,22 @@ export class MetaDetalhesComponent implements OnInit {
       confirmButtonText: 'Sim, Deletar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.serviceMeta.deleteItem(item.id).subscribe({
-          next: (res) => {
-            this.toastr.success(
-              'Deposito foi deletado com sucesso!',
-              'Sucesso'
-            );
-            this.serviceMeta.filter(res);
-          },
-          error: (e) => {
-            console.error(e);
-          },
-        });
+        this.spinner.show();
+        this.serviceMeta
+          .deleteItem(item.id)
+          .subscribe({
+            next: (res) => {
+              this.toastr.success(
+                'Deposito foi deletado com sucesso!',
+                'Sucesso'
+              );
+              this.serviceMeta.filter(res);
+            },
+            error: (e) => {
+              console.error(e);
+            },
+          })
+          .add(() => this.spinner.hide());
       }
     });
   }

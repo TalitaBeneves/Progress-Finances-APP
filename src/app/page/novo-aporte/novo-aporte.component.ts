@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Chart } from 'chart.js';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ListaAtivoCalculado } from 'src/app/core/model/Ativo';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
@@ -29,21 +30,26 @@ export class NovoAporteComponent implements OnInit {
   constructor(
     private seviceFinaces: FinancesService,
     private serviceUsuario: UsuarioService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.getIdUser = this.serviceUsuario.getUserLocalStorage();
 
-    this.seviceFinaces.litarAtivosById(this.getIdUser.idUsuario).subscribe({
-      next: (res) => {
-        this.items = res;
-        this.dashboard();
-        this.montaDash();
-        this.updateChart();
-      },
-      error: (e) => console.error(e),
-    });
+    this.seviceFinaces
+      .litarAtivosById(this.getIdUser.idUsuario)
+      .subscribe({
+        next: (res) => {
+          this.items = res;
+          this.dashboard();
+          this.montaDash();
+          this.updateChart();
+        },
+        error: (e) => console.error(e),
+      })
+      .add(() => this.spinner.hide());
   }
 
   ngAfterViewInit() {
@@ -98,6 +104,7 @@ export class NovoAporteComponent implements OnInit {
   }
 
   calcular() {
+    this.spinner.show();
     const valor = parseInt(this.valorInvestimento.value);
     if (this.valorInvestimento.invalid) {
       this.toastr.warning('Favor preencher o campo!', 'Atenção');
@@ -121,7 +128,8 @@ export class NovoAporteComponent implements OnInit {
         },
 
         error: () => {},
-      });
+      })
+      .add(() => this.spinner.hide());
   }
 
   updateChart() {

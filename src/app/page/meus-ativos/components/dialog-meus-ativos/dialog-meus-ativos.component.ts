@@ -14,6 +14,7 @@ import {
   MetaInvestimento,
 } from 'src/app/core/model/MetaInvestimento';
 import { UsuarioLogado } from 'src/app/core/model/Usuario';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dialog-meus-ativos',
@@ -56,7 +57,8 @@ export class DialogMeusAtivosComponent implements OnInit {
     private serviceFinances: FinancesService,
     private toastr: ToastrService,
     private servicePergunta: PerguntasService,
-    private serviceUsuario: UsuarioService
+    private serviceUsuario: UsuarioService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -75,30 +77,38 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   getMetaId(id: number) {
-    this.serviceFinances.listarMetaInvestimento(id).subscribe({
-      next: (res) => {
-        this.dadosMeta = res[0];
-      },
-    });
+    this.spinner.show();
+    this.serviceFinances
+      .listarMetaInvestimento(id)
+      .subscribe({
+        next: (res) => {
+          this.dadosMeta = res[0];
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   onSelectionChange() {
-    this.serviceUsuario.buscarPergunta(this.getIdUser.idUsuario).subscribe({
-      next: (res) => {
-        this.perguntas = res;
+    this.spinner.show();
+    this.serviceUsuario
+      .buscarPergunta(this.getIdUser.idUsuario)
+      .subscribe({
+        next: (res) => {
+          this.perguntas = res;
 
-        console.log(this.perguntas);
+          console.log(this.perguntas);
 
-        if (this.perguntas) {
-          this.perguntas = this.perguntas.filter(
-            (item: { tipo: number }) => item.tipo == this.value
-          );
-        }
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+          if (this.perguntas) {
+            this.perguntas = this.perguntas.filter(
+              (item: { tipo: number }) => item.tipo == this.value
+            );
+          }
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   onQtdPontosChange(perguntaId: any) {
@@ -123,6 +133,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   cadastrarAtivo(): void {
+    this.spinner.show();
     const qtdPontos = this.qtdPontos;
     const checked = this.checked.length;
 
@@ -152,19 +163,23 @@ export class DialogMeusAtivosComponent implements OnInit {
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
     };
 
-    this.serviceFinances.cadastrarAtivo(model).subscribe({
-      next: (res) => {
-        this.toastr.success('O ativo foi cadastrado com sucesso!', 'Sucesso');
-        this.serviceFinances.filter(res);
-        this.dialogRef.close();
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.serviceFinances
+      .cadastrarAtivo(model)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success('O ativo foi cadastrado com sucesso!', 'Sucesso');
+          this.serviceFinances.filter(res);
+          this.dialogRef.close();
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   editarMeta(e?: any) {
+    this.spinner.show();
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
@@ -183,16 +198,19 @@ export class DialogMeusAtivosComponent implements OnInit {
       tipoAtivo: this.data.tipoAtivo,
     };
 
-    this.serviceFinances.atualizarAtivo(model).subscribe({
-      next: (res) => {
-        this.toastr.success('O ativo foi atualizado com sucesso!', 'Sucesso');
-        this.serviceFinances.filter(res);
-        this.dialogRef.close();
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.serviceFinances
+      .atualizarAtivo(model)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success('O ativo foi atualizado com sucesso!', 'Sucesso');
+          this.serviceFinances.filter(res);
+          this.dialogRef.close();
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   verificacaoValid() {

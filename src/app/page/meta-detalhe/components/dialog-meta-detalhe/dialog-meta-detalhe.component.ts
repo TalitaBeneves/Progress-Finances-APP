@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {
   CreateItemsModel,
@@ -35,7 +36,8 @@ export class DialogMetaDetalheComponent implements OnInit {
     },
     private fb: FormBuilder,
     private serviceMeta: MetasService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -65,6 +67,7 @@ export class DialogMetaDetalheComponent implements OnInit {
   }
 
   editarMeta(e?: any) {
+    this.spinner.show();
     this.verificacaoValid();
     const model: EditarItemsModel = {
       id: this.getId,
@@ -73,19 +76,23 @@ export class DialogMetaDetalheComponent implements OnInit {
       idMeta: this.data.dados.id,
       progressFinanceModelId: this.data.dados.id,
     };
-    this.serviceMeta.editarItem(model).subscribe({
-      next: (res) => {
-        this.toastr.success('Deposito foi editado com sucesso!', 'Sucesso');
-        this.serviceMeta.filter(res);
-        this.dialogRef.close();
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.serviceMeta
+      .editarItem(model)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success('Deposito foi editado com sucesso!', 'Sucesso');
+          this.serviceMeta.filter(res);
+          this.dialogRef.close();
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   createItem() {
+    this.spinner.show();
     this.verificacaoValid();
     const model: CreateItemsModel = {
       valorDepositado: Number(this.form.value.valorDeposito),
@@ -94,16 +101,19 @@ export class DialogMetaDetalheComponent implements OnInit {
       progressFinanceModelId: this.data.dados.id,
     };
     console.log(this.form.value.dataDeposito);
-    this.serviceMeta.createItem(model).subscribe({
-      next: (res) => {
-        this.toastr.success('Meta foi cadastrado com sucesso!', 'Sucesso');
-        this.serviceMeta.filter(res);
-        this.dialogRef.close();
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.serviceMeta
+      .createItem(model)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success('Meta foi cadastrado com sucesso!', 'Sucesso');
+          this.serviceMeta.filter(res);
+          this.dialogRef.close();
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   verificacaoValid() {

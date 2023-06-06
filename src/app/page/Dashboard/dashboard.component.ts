@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ListaAtivoCalculado } from 'src/app/core/model/Ativo';
 import { UsuarioLogado } from 'src/app/core/model/Usuario';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
@@ -29,10 +30,12 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private seviceFinaces: FinancesService,
-    private serviceUsuario: UsuarioService
+    private serviceUsuario: UsuarioService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.dadosUsuario = this.serviceUsuario.getUserLocalStorage();
 
     this.seviceFinaces
@@ -46,7 +49,8 @@ export class DashboardComponent implements OnInit {
           this.montaLi();
         },
         error: (e) => {},
-      });
+      })
+      .add(() => this.spinner.hide());
 
     this.seviceFinaces.litarAtivosById(this.dadosUsuario.idUsuario).subscribe({
       next: (res: any) => {

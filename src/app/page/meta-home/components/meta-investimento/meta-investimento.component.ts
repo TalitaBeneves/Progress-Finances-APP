@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Chart } from 'chart.js';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { MetaInvestimento } from 'src/app/core/model/MetaInvestimento';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
@@ -25,7 +26,8 @@ export class MetaInvestimentoComponent implements OnInit {
   constructor(
     private serviceUsuario: UsuarioService,
     private servicesFinance: FinancesService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class MetaInvestimentoComponent implements OnInit {
   }
 
   listarMetaInvestimento() {
+    this.spinner.show();
     this.servicesFinance
       .listarMetaInvestimento(this.getId.idUsuario)
       .subscribe({
@@ -46,10 +49,12 @@ export class MetaInvestimentoComponent implements OnInit {
           this.formFixa.setValue(res[0].rendaFixa);
         },
         error: (e) => console.error(e),
-      });
+      })
+      .add(() => this.spinner.hide());
   }
 
   salvarMetaInvestimento() {
+    this.spinner.show();
     const model: MetaInvestimento = {
       idUsuario: this.getId.idUsuario,
       nome: 'Meta investimento',
@@ -58,15 +63,18 @@ export class MetaInvestimentoComponent implements OnInit {
       rendaFixa: this.formFixa.value,
     };
 
-    this.servicesFinance.cadastrarOuAtualizarMetaInvestimento(model).subscribe({
-      next: (res) => {
-        this.toastr.success(
-          'O meta de investimento foi cadastrado com sucesso!',
-          'Sucesso'
-        );
-      },
-      error: (e) => console.error(e),
-    });
+    this.servicesFinance
+      .cadastrarOuAtualizarMetaInvestimento(model)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success(
+            'O meta de investimento foi cadastrado com sucesso!',
+            'Sucesso'
+          );
+        },
+        error: (e) => console.error(e),
+      })
+      .add(() => this.spinner.hide());
   }
 
   dashboard() {

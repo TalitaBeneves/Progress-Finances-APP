@@ -14,6 +14,7 @@ import {
   EditarMetasModel,
 } from 'src/app/core/model/Metas';
 import { MetasService } from 'src/app/core/server/metas.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dialog-meta-home',
@@ -36,7 +37,8 @@ export class DialogMetaHomeComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: AllMetasModel,
     private serveMeta: MetasService,
     private toastr: ToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -67,6 +69,7 @@ export class DialogMetaHomeComponent implements OnInit {
   }
 
   editarMeta() {
+    this.spinner.show();
     this.verificacaoValid();
     const model: EditarMetasModel = {
       id: this.getId,
@@ -77,16 +80,19 @@ export class DialogMetaHomeComponent implements OnInit {
       dataCadastro: new Date(),
     };
 
-    this.serveMeta.editMeta(model).subscribe({
-      next: (res) => {
-        this.toastr.success('Meta foi editada com sucesso!', 'Sucesso');
-        this.serveMeta.filter(res);
-        this.dialogRef.close();
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.serveMeta
+      .editMeta(model)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success('Meta foi editada com sucesso!', 'Sucesso');
+          this.serveMeta.filter(res);
+          this.dialogRef.close();
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   criarMeta() {
@@ -96,8 +102,10 @@ export class DialogMetaHomeComponent implements OnInit {
         'Alerta'
       );
       this.form.markAllAsTouched();
+      this.spinner.hide();
       return;
     }
+    this.spinner.show();
     const model: CriarMetasModel = {
       nomeMeta: this.form.value.nomeMeta,
       valorInicial: this.form.value.valorInicial,
@@ -107,16 +115,19 @@ export class DialogMetaHomeComponent implements OnInit {
       status: Status.ANDAMENTO,
       items: [],
     };
-    this.serveMeta.addMeta(model).subscribe({
-      next: (res) => {
-        this.toastr.success('Meta foi criada com sucesso!', 'Sucesso');
-        this.serveMeta.filter(res);
-        this.dialogRef.close();
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.serveMeta
+      .addMeta(model)
+      .subscribe({
+        next: (res) => {
+          this.toastr.success('Meta foi criada com sucesso!', 'Sucesso');
+          this.serveMeta.filter(res);
+          this.dialogRef.close();
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   verificacaoValid() {

@@ -5,6 +5,7 @@ import { DialogMetaHomeComponent } from './components/dialog-meta-home/dialog-me
 import { Status } from 'src/app/core/model/Enums';
 import { AllMetasModel } from 'src/app/core/model/Metas';
 import { MetasService } from 'src/app/core/server/metas.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-meta-home',
@@ -18,7 +19,11 @@ export class MetaHomeComponent implements OnInit {
   filtroStatusConcluidas: AllMetasModel;
   filtroStatusAndamentos: AllMetasModel;
 
-  constructor(private serveMeta: MetasService, public dialog: MatDialog) {
+  constructor(
+    private serveMeta: MetasService,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService
+  ) {
     this.serveMeta.listen().subscribe((e) => {
       this.getMeta();
     });
@@ -35,16 +40,20 @@ export class MetaHomeComponent implements OnInit {
   // }
 
   getMeta() {
-    this.serveMeta.getMeta().subscribe({
-      next: (res) => {
-        this.resultMeta = res;
-        this.filtro();
-        this.progresso = res.porcentagem;
-      },
-      error: (e) => {
-        console.error(e);
-      },
-    });
+    this.spinner.show();
+    this.serveMeta
+      .getMeta()
+      .subscribe({
+        next: (res) => {
+          this.resultMeta = res;
+          this.filtro();
+          this.progresso = res.porcentagem;
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   addMeta() {
