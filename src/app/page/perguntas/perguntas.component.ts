@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UsuarioLogado } from 'src/app/core/model/Usuario';
 import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
+import { DialogPerguntasComponent } from './components/dialog-perguntas/dialog-perguntas.component';
 
 @Component({
   selector: 'app-perguntas',
@@ -9,7 +11,11 @@ import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 })
 export class PerguntasComponent implements OnInit {
   local: any;
-  constructor(private serviceUsuario: UsuarioService) {}
+  items;
+  constructor(
+    private serviceUsuario: UsuarioService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -24,11 +30,20 @@ export class PerguntasComponent implements OnInit {
   buscarPerguntas() {
     this.serviceUsuario.buscarPergunta(this.local.idUsuario).subscribe({
       next: (res) => {
-        console.log(res);
+        this.items = res;
       },
       error: (e) => {
         console.error(e);
       },
     });
+  }
+
+  openDialogPerguntas(element?) {
+    const dialog = this.dialog.open(DialogPerguntasComponent, {
+      width: '600px',
+      data: element,
+    });
+
+    dialog.afterClosed().subscribe((result) => {});
   }
 }
