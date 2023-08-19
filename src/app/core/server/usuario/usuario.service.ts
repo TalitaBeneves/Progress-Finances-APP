@@ -23,7 +23,7 @@ const httpOptions = {
 export class UsuarioService {
   private currentUserSource = new ReplaySubject<any>(1);
   url: string = environment.urlBase;
-  local: string | null;
+  local: string | null | UsuarioLogado;
   constructor(private http: HttpClient) {}
 
   cadastrarUsuario(model: CadastrarUsuario) {

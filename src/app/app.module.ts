@@ -37,6 +37,7 @@ import { MeusAtivosModule } from './page/meus-ativos/meus-ativos.module';
 import { CadastroModule } from './user/cadastro/cadastro.module';
 import { LoginModule } from './user/login/login.module';
 import { PerfilModule } from './user/perfil/perfil.module';
+import { PerguntasModule } from './page/perguntas/perguntas.module';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -79,6 +80,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DashboardModule,
     PerfilModule,
     CurrencyMaskModule,
+    PerguntasModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true,
     }),

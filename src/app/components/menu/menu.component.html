@@ -57,6 +57,18 @@
     <li
       class="item-menu"
       class="item-menu ativo"
+      [ngClass]="{ active: activeItem === 'perguntas' }"
+      (click)="activeItem = 'perguntas'"
+    >
+      <a routerLink="/perguntas">
+        <span class="icon"><i class="bi bi-journal-text"></i></span>
+        <span class="ml-4">Suas perguntas</span>
+      </a>
+    </li>
+
+    <li
+      class="item-menu"
+      class="item-menu ativo"
       [ngClass]="{ active: activeItem === 'Perfil' }"
       (click)="activeItem = 'Perfil'"
     >

@@ -10,6 +10,7 @@ import { AuthGuard } from './core/guard/auth.guard';
 import { NovoAporteComponent } from './page/novo-aporte/novo-aporte.component';
 import { DashboardComponent } from './page/Dashboard/dashboard.component';
 import { PerfilComponent } from './user/perfil/perfil.component';
+import { PerguntasComponent } from './page/perguntas/perguntas.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,6 +43,11 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'perguntas',
+    component: PerguntasComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', component: LoginComponent },
