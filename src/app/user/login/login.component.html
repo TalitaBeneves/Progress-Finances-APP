@@ -1,53 +1,25 @@
 <section class="area_login">
-  <div class="login">
+  <div
+    class="rounded-left"
+    style="width: 467px; height: 65%; background-color: var(--color-progress)"
+  >
+    <div class="text-center" style="margin: 40% auto">
+      <h1 class="my-0">Bem vindo (a)</h1>
+      <p class="my-0">Gerencie seu ativos de uma forma descomplicada!</p>
+    </div>
+  </div>
+  <div class="login rounded-right">
     <p><b>PROGRESS FINANCE</b></p>
 
     <form [formGroup]="form" class="form">
       <input type="email" formControlName="email" placeholder="E-mail" />
-      <input
-        type="password"
-        [(ngModel)]="senha"
-        (input)="verificarSenha()"
-        formControlName="senha"
-        placeholder="senha"
-      />
-
-      <ul>
-        <li [class.valido]="requisitos.tamanho">
-          <span *ngIf="requisitos.tamanho" class="check">&#x2713;</span>
-          <span *ngIf="!requisitos.tamanho" class="x">x</span>
-          Tamanho mínimo de 8 caracteres
-        </li>
-        <li [class.valido]="requisitos.letraMaiuscula">
-          <span *ngIf="requisitos.letraMaiuscula" class="check">&#x2713;</span>
-          <span *ngIf="!requisitos.letraMaiuscula" class="x">x</span>
-          Pelo menos uma letra maiúscula
-        </li>
-        <li [class.valido]="requisitos.letraMinuscula">
-          <span *ngIf="requisitos.letraMinuscula" class="check">&#x2713;</span>
-          <span *ngIf="!requisitos.letraMinuscula" class="x">x</span>
-          Pelo menos uma letra minúscula
-        </li>
-        <li [class.valido]="requisitos.numero">
-          <span *ngIf="requisitos.numero" class="check">&#x2713;</span>
-          <span *ngIf="!requisitos.numero" class="x">x</span>
-          Pelo menos um número
-        </li>
-        <li [class.valido]="requisitos.caractereEspecial">
-          <span *ngIf="requisitos.caractereEspecial" class="check"
-            >&#x2713;</span
-          >
-          <span *ngIf="!requisitos.caractereEspecial" class="x">x</span>
-          Pelo menos um caractere especial
-        </li>
-      </ul>
-
-      <button type="submit" (click)="login()">Entrar</button>
+      <input type="password" formControlName="senha" placeholder="senha" />
+      <button class="my-3" type="submit" (click)="login()">Entrar</button>
     </form>
 
     <p>
       Ainda não tem conta?
-      <a href="/cadastro" style="color: blue">Cadastre-se agora</a>
+      <a href="/cadastro" style="color: rgb(134, 158, 45)">Cadastre-se </a>agora
     </p>
   </div>
 </section>

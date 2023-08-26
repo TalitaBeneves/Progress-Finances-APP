@@ -16,9 +16,8 @@ body {
   align-items: center;
   background-color: #181920;
   width: 467px;
-  height: 410px;
+  height: 65%;
   padding: 42px;
-  border-radius: 10px;
 }
 
 .login form {
@@ -61,17 +60,4 @@ p {
   color: #cbd8f7;
   text-decoration: none;
   margin-top: 11px;
-}
-
-.valido {
-  color: green;
-}
-
-.check,
-.x {
-  margin-left: 10px;
-}
-
-.x {
-  color: red;
 }

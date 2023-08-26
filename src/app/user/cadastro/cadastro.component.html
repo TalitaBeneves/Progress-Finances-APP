@@ -1,17 +1,68 @@
-<section class="area_login">
-  <div class="login">
+<section class="area_cadastro">
+  <div
+    class="rounded-left"
+    style="width: 467px; height: 65%; background-color: var(--color-progress)"
+  >
+    <div class="text-center" style="margin: 40% auto">
+      <h1 class="my-0">Cadastre-se agora</h1>
+      <p class="my-0">
+        Cadastre-se para ter uma gerencia dos seus ativos <br />
+        de uma forma descomplicada!
+      </p>
+    </div>
+  </div>
+  <div class="cadastro rounded-right">
     <p><b>PROGRESS FINANCE</b></p>
 
     <form [formGroup]="form" class="form">
       <input type="text" formControlName="nome" placeholder="Nome" />
       <input type="email" formControlName="email" placeholder="E-mail" />
-      <input type="password" formControlName="senha" placeholder="senha" />
+      <input
+        type="password"
+        formControlName="senha"
+        placeholder="senha"
+        [(ngModel)]="senha"
+        (input)="verificarSenha()"
+      />
 
-      <button type="submit" (click)="cadastrarUsuario()">Cadastrar</button>
+      <ul class="text-white mt-3 mx-4" style="list-style-type: none">
+        <li [class.valido]="requisitos.tamanho">
+          <span *ngIf="requisitos.tamanho" class="check">&#x2713;</span>
+          <span *ngIf="!requisitos.tamanho" class="x">x</span>
+          Tamanho mínimo de 8 caracteres
+        </li>
+        <li [class.valido]="requisitos.letraMaiuscula">
+          <span *ngIf="requisitos.letraMaiuscula" class="check">&#x2713;</span>
+          <span *ngIf="!requisitos.letraMaiuscula" class="x">x</span>
+          Pelo menos uma letra maiúscula
+        </li>
+        <li [class.valido]="requisitos.letraMinuscula">
+          <span *ngIf="requisitos.letraMinuscula" class="check">&#x2713;</span>
+          <span *ngIf="!requisitos.letraMinuscula" class="x">x</span>
+          Pelo menos uma letra minúscula
+        </li>
+        <li [class.valido]="requisitos.numero">
+          <span *ngIf="requisitos.numero" class="check">&#x2713;</span>
+          <span *ngIf="!requisitos.numero" class="x">x</span>
+          Pelo menos um número
+        </li>
+        <li [class.valido]="requisitos.caractereEspecial">
+          <span *ngIf="requisitos.caractereEspecial" class="check"
+            >&#x2713;</span
+          >
+          <span *ngIf="!requisitos.caractereEspecial" class="x">x</span>
+          Pelo menos um caractere especial
+        </li>
+      </ul>
+
+      <button class="my-3" type="submit" (click)="cadastrarUsuario()">
+        Cadastrar
+      </button>
     </form>
 
     <p>
-      Já tem conta? faça o <a href="/login" style="color: blue">login aqui</a>
+      Já tem conta? faça o
+      <a href="/login" style="color: rgb(134, 158, 45)">login aqui</a>
     </p>
   </div>
 </section>

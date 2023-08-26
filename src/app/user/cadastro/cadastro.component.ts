@@ -2,9 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { CadastrarUsuario } from 'src/app/core/model/Usuario';
 import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 
+export class MeuComponente {
+  senha: string;
+  requisitos: any = {
+    tamanho: false,
+    letraMaiuscula: false,
+    letraMinuscula: false,
+    numero: false,
+    caractereEspecial: false,
+  };
+}
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -12,11 +23,14 @@ import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 })
 export class CadastroComponent implements OnInit {
   form: FormGroup;
+  senha: string;
+  requisitos: any = {};
   constructor(
     private fb: FormBuilder,
     private serviceUsuario: UsuarioService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -47,8 +61,19 @@ export class CadastroComponent implements OnInit {
         },
         error: (e) => {
           console.error(e);
+          this.toastr.error(`${e.error}`, 'danger');
         },
       })
       .add(() => this.spinner.hide());
+  }
+
+  verificarSenha(): void {
+    this.requisitos = {
+      tamanho: this.senha.length >= 8,
+      letraMaiuscula: /[A-Z]/.test(this.senha),
+      letraMinuscula: /[a-z]/.test(this.senha),
+      numero: /\d/.test(this.senha),
+      caractereEspecial: /[!@#$%^&*]/.test(this.senha),
+    };
   }
 }
