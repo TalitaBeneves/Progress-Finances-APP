@@ -3,7 +3,7 @@
     class="container b"
     style="justify-content: end; align-items: end; display: flex"
   >
-    <button (click)="openDialogPerguntas()">+Cadastrar Ativo</button>
+    <button (click)="openDialogPerguntas()">+Cadastrar Pergunta</button>
   </div>
 
   <div class="text-white">
@@ -13,20 +13,19 @@
           <tr>
             <th scope="col">Pergunta</th>
             <th scope="col" class="pl-4">Tipo</th>
-            <th scope="col" class="pl-4">Usar?</th>
+            <th scope="col" class="pl-4">Habilitado</th>
             <th scope="col">Ação</th>
           </tr>
         </thead>
 
         <tbody *ngFor="let item of items">
           <tr>
-            <td class="pl-4" style="text-transform: uppercase">
-              {{ item.nome }}
+            <td>{{ item.pergunta }}</td>
+            <td>{{ item.tipo == 1 ? "Ação" : "FIIs" }}</td>
+            <td>
+              <mat-slide-toggle [(ngModel)]="item.marked"></mat-slide-toggle>
             </td>
-            <td>{{ item.Pergunta }}</td>
-            <td>{{ item.Tipo }}</td>
-            <td>{{ item.Marked }}</td>
-            <!-- <td>
+            <td>
               <button
                 type="button"
                 (click)="getDadosTabela(item)"
@@ -41,7 +40,7 @@
               >
                 <i class="bi bi-trash3"></i>
               </button>
-            </td> -->
+            </td>
           </tr>
         </tbody>
       </table>

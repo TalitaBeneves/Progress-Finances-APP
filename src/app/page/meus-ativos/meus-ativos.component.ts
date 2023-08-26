@@ -79,7 +79,7 @@ export class MeusAtivosComponent implements OnInit {
       .deletarAtivo(e.idAtivo)
       .subscribe({
         next: (res) => {
-          this.toastr.success('O ativo foi atualizado com sucesso!', 'Sucesso');
+          this.toastr.success('O ativo foi deletado com sucesso!', 'Sucesso');
           this.serviceFinances.filter(res);
         },
         error: (e) => {

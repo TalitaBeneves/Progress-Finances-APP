@@ -73,7 +73,11 @@ export class UsuarioService {
 
   /////////////////////////////PERGUNTAS///////////////////////////////////
   cadastrarPergunta(model: CadastrarPergunta) {
-    return this.http.post(`${this.url}Usuarios/cadastrarPergunta`, model);
+    return this.http.post(
+      `${this.url}Usuarios/cadastrarPergunta`,
+      model,
+      httpOptions
+    );
   }
 
   buscarPergunta(idUsuario: number) {
@@ -91,6 +95,8 @@ export class UsuarioService {
   }
 
   deletarPergunta(idPergunta: number) {
-    return this.http.delete(`${this.url}Usuario/DeletarPergunta/${idPergunta}`);
+    return this.http.delete(
+      `${this.url}Usuarios/DeletarPergunta/${idPergunta}`
+    );
   }
 }
