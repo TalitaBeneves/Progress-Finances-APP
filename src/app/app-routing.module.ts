@@ -29,26 +29,44 @@ const routes: Routes = [
     path: 'meus-ativos',
     component: MeusAtivosComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./page/meus-ativos/meus-ativos.module').then(
+        (m) => m.MeusAtivosModule
+      ),
   },
   {
     path: 'novo-aporte',
     component: NovoAporteComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./page/novo-aporte/novo-aporte.module').then(
+        (m) => m.NovoAporteModule
+      ),
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./page/Dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
   },
   {
     path: 'perfil',
     component: PerfilComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./user/perfil/perfil.module').then((m) => m.PerfilModule),
   },
   {
     path: 'perguntas',
     component: PerguntasComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./page/perguntas/perguntas.module').then(
+        (m) => m.PerguntasModule
+      ),
   },
   { path: '**', component: LoginComponent },
   // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
