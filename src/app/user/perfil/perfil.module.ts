@@ -9,6 +9,10 @@ import { SharedModule } from 'src/app/core/shared/shared.module';
 import { PerfilComponent } from './perfil.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { FormDadosComponent } from './components/form-dados/form-dados.component';
+import { FormSenhaComponent } from './components/form-senha/form-senha.component';
+import { DeletarContaComponent } from './components/deletar-conta/deletar-conta.component';
 
 @NgModule({
   imports: [
@@ -23,7 +27,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
+    MatTabsModule,
   ],
-  declarations: [PerfilComponent],
+  declarations: [
+    PerfilComponent,
+    FormDadosComponent,
+    FormSenhaComponent,
+    DeletarContaComponent,
+  ],
 })
 export class PerfilModule {}

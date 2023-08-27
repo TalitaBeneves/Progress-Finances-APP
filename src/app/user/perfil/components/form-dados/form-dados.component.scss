@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 
 body {
@@ -26,6 +27,7 @@ button {
   text-align: center;
   transition: ease 1s;
 }
+
 button:hover {
   background: #f5633fc4;
 }
@@ -41,10 +43,6 @@ button:hover {
 input.example-right-align::-webkit-outer-spin-button,
 input.example-right-align::-webkit-inner-spin-button {
   display: none;
-}
-
-input.example-right-align {
-  -moz-appearance: textfield;
 }
 
 .img img {
