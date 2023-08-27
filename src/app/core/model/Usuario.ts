@@ -22,9 +22,9 @@ export interface AtualizarDadosUsuarioModel {
   idUsuario: number;
   email: string;
   nome: string;
-  senhaAtual: string;
-  novaSenha: string;
   imagemUrl?: string;
+  senhaAtual?: string;
+  novaSenha?: string;
 }
 
 export interface CadastrarPergunta {

@@ -71,6 +71,12 @@ export class UsuarioService {
       .pipe(take(1));
   }
 
+  deletarConta(idUsuario: number) {
+    return this.http.delete<any>(
+      `${this.url}Usuarios/DeletarUsuario/${idUsuario}`
+    );
+  }
+
   /////////////////////////////PERGUNTAS///////////////////////////////////
   cadastrarPergunta(model: CadastrarPergunta) {
     return this.http.post(

@@ -1,66 +1,71 @@
-<form [formGroup]="form">
-  <div class="w-100">
-    <mat-form-field appearance="outline" class="col-sm-7">
-      <mat-label>Senha atual</mat-label>
-      <input
-        matInput
-        [type]="hideSenhaAtual ? 'password' : 'text'"
-        formControlName="senhaAtual"
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hideSenhaAtual = !hideSenhaAtual"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hideSenhaAtual"
-      >
-        <mat-icon>{{
-          hideSenhaAtual ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-    </mat-form-field>
-    <div class="w-100"></div>
+<section>
+  <form [formGroup]="form">
+    <div class="w-100 pt-3">
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Senha atual</mat-label>
+        <input
+          matInput
+          [type]="hideSenhaAtual ? 'password' : 'text'"
+          formControlName="senhaAtual"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideSenhaAtual = !hideSenhaAtual"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideSenhaAtual"
+        >
+          <mat-icon>{{
+            hideSenhaAtual ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="col-sm-7">
-      <mat-label>Nova senha</mat-label>
-      <input
-        matInput
-        [type]="hideNovaSenha ? 'password' : 'text'"
-        formControlName="novaSenha"
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        [type]="hideNovaSenha ? 'password' : 'text'"
-        (click)="hideNovaSenha = !hideNovaSenha"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hideNovaSenha"
-      >
-        <mat-icon>{{
-          hideNovaSenha ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-    </mat-form-field>
+      <div class="w-100"></div>
 
-    <div class="w-100"></div>
-    <mat-form-field appearance="outline" class="col-sm-7">
-      <mat-label>Confirma nova senha</mat-label>
-      <input
-        matInput
-        formControlName="confirmaSenha"
-        [type]="hideConfirmarSenha ? 'password' : 'text'"
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hideConfirmarSenha = !hideConfirmarSenha"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hideConfirmarSenha"
-      >
-        <mat-icon>{{
-          hideConfirmarSenha ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Nova senha</mat-label>
+        <input
+          matInput
+          [type]="hideNovaSenha ? 'password' : 'text'"
+          formControlName="novaSenha"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          [type]="hideNovaSenha ? 'password' : 'text'"
+          (click)="hideNovaSenha = !hideNovaSenha"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideNovaSenha"
+        >
+          <mat-icon>{{
+            hideNovaSenha ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Confirma nova senha</mat-label>
+        <input
+          matInput
+          formControlName="confirmaSenha"
+          [type]="hideConfirmarSenha ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideConfirmarSenha = !hideConfirmarSenha"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideConfirmarSenha"
+        >
+          <mat-icon>{{
+            hideConfirmarSenha ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </form>
+  <div style="display: flex; justify-content: flex-start" *ngIf="form.dirty">
+    <button type="submit" (click)="editarUser()">Salvar alterações</button>
   </div>
-</form>
+</section>

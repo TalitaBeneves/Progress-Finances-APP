@@ -1,0 +1,17 @@
+button {
+  position: relative;
+  width: 148px;
+  height: 35px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  background: #ef4b21;
+  color: #fff;
+  font-weight: 400;
+  font-family: "Poppins";
+  text-align: center;
+  transition: ease 1s;
+}
+button:hover {
+  background: #f5633fc4;
+}

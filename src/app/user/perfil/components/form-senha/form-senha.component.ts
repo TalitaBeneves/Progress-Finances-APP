@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { AtualizarDadosUsuarioModel } from 'src/app/core/model/Usuario';
+import {
+  AtualizarDadosUsuarioModel,
+  UsuarioLogado,
+} from 'src/app/core/model/Usuario';
 import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 
 @Component({
@@ -15,6 +18,7 @@ export class FormSenhaComponent implements OnInit {
   hideSenhaAtual: boolean = true;
   hideNovaSenha: boolean = true;
   hideConfirmarSenha: boolean = true;
+  dadosUser: UsuarioLogado;
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +29,8 @@ export class FormSenhaComponent implements OnInit {
 
   ngOnInit() {
     this.montaFormSenha();
+
+    this.dadosUser = this.serviceUsuario.getUserLocalStorage();
   }
 
   montaFormSenha() {
@@ -36,7 +42,7 @@ export class FormSenhaComponent implements OnInit {
   }
 
   editarUser() {
-    if (this.form.invalid || this.form.invalid) {
+    if (this.form.invalid) {
       this.toastr.warning('Favor preencher os dados!', 'Atenção');
     }
 
@@ -52,26 +58,25 @@ export class FormSenhaComponent implements OnInit {
     }
 
     this.spinner.show();
-    // const model: AtualizarDadosUsuarioModel = {
-    //   idUsuario: this.dadosUser.idUsuario,
-    //   email: this.form.value.email,
-    //   nome: this.form.value.nome,
-    //   senhaAtual: this.form.value.senhaAtual,
-    //   novaSenha: this.form.value.novaSenha ? this.form.value.novaSenha : null,
-    //   imagemUrl: this.dadosUser.imagemUrl ? this.dadosUser.imagemUrl : '',
-    // };
+    const model: AtualizarDadosUsuarioModel = {
+      idUsuario: this.dadosUser.idUsuario,
+      senhaAtual: this.form.value.senhaAtual,
+      novaSenha: this.form.value.novaSenha ? this.form.value.novaSenha : null,
+      email: this.dadosUser.email,
+      nome: this.dadosUser.nome,
+    };
 
-    // this.serviceUsuario
-    //   .atualizarDados(model)
-    //   .subscribe({
-    //     next: (res) => {
-    //       this.serviceUsuario.setCurrentUser(res);
-    //       this.toastr.success('Dados atualizados com sucesso', 'Sucesso!');
-    //     },
-    //     error: (e) => {
-    //       this.toastr.error('Erro ao atualizr dados perfil', 'Erro!');
-    //     },
-    //   })
-    //   .add(() => this.spinner.hide());
+    this.serviceUsuario
+      .atualizarDados(model)
+      .subscribe({
+        next: (res) => {
+          this.serviceUsuario.setCurrentUser(res);
+          this.toastr.success('Senha atualizada com sucesso', 'Sucesso!');
+        },
+        error: (e) => {
+          this.toastr.error('Erro ao atualizr senha', 'Erro!');
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 }

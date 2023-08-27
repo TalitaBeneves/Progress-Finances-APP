@@ -61,8 +61,6 @@ export class FormDadosComponent implements OnInit {
       idUsuario: this.dadosUser.idUsuario,
       email: this.form.value.email,
       nome: this.form.value.nome,
-      senhaAtual: this.form.value.senhaAtual,
-      novaSenha: this.form.value.novaSenha ? this.form.value.novaSenha : null,
       imagemUrl: this.dadosUser.imagemUrl ? this.dadosUser.imagemUrl : '',
     };
 

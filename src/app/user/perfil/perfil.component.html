@@ -1,13 +1,8 @@
 <section class="container">
-  <div class="container mr-0 pr-0">
+  <div class="mr-0 pr-0" style="display: flex; height: 46%">
     <div
       class="rounded-left"
-      style="
-        width: 302px;
-        background-color: var(--color-progress);
-        height: 38%;
-        margin-left: 60%;
-      "
+      style="width: 302px; background-color: var(--color-progress)"
     >
       <div class="img">
         <div
@@ -25,37 +20,36 @@
             </div>
           </div>
         </div>
+
         <img
           [src]="imagemURL"
           (click)="file.click()"
           name="aboutme"
           style="cursor: pointer"
         />
-        <span class="text-white ml-5">
+
+        <span style="color: #fff; display: block; text-align: center">
           {{ teste }}
         </span>
       </div>
     </div>
-  </div>
 
-  <div
-    class=""
-    style="background-color: rgb(35, 121, 192) !important; margin-right: 96px"
-  >
-    <div class="text-white">
-      <mat-tab-group
-        class="w-100"
-        mat-stretch-tabs="false"
-        mat-align-tabs="center"
-      >
-        <mat-tab label="Dados"
-          ><app-form-dados (changeName)="teste = $event"></app-form-dados
-        ></mat-tab>
-        <mat-tab label="Senha"><app-form-senha></app-form-senha></mat-tab>
-        <mat-tab label="Deletar Conta"
-          ><app-deletar-conta></app-deletar-conta
-        ></mat-tab>
-      </mat-tab-group>
+    <div class="py-4 rounded-right bg-white">
+      <div>
+        <mat-tab-group
+          class="w-100"
+          mat-stretch-tabs="false"
+          mat-align-tabs="center"
+        >
+          <mat-tab label="Dados"
+            ><app-form-dados (changeName)="teste = $event"></app-form-dados
+          ></mat-tab>
+          <mat-tab label="Senha"><app-form-senha></app-form-senha></mat-tab>
+          <mat-tab label="Deletar Conta"
+            ><app-deletar-conta></app-deletar-conta
+          ></mat-tab>
+        </mat-tab-group>
+      </div>
     </div>
   </div>
 </section>

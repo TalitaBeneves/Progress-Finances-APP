@@ -55,3 +55,7 @@ input.example-right-align {
   height: 137px;
   margin: 26px auto;
 }
+
+::ng-deep .mat-tab-label {
+  color: #000;
+}
