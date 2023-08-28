@@ -16,6 +16,7 @@ export class NovoAporteComponent implements OnInit {
   @ViewChild('chartAporte', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
 
+  isChecked = true;
   valorInvestimento = new FormControl(null, Validators.required);
   items: any;
   corFundo = '#4fbfb5';

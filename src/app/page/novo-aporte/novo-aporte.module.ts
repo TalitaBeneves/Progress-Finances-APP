@@ -9,6 +9,7 @@ import { FormatTipoAtivoPipe } from 'src/app/core/pipe/format-tipoAtivo.pipe';
 import { SharedModule } from 'src/app/core/shared/shared.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     SharedModule,
     MatToolbarModule,
     CurrencyMaskModule,
+    MatSlideToggleModule,
   ],
   declarations: [NovoAporteComponent],
 })
