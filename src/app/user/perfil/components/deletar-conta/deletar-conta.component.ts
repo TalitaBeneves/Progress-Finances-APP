@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioLogado } from 'src/app/core/model/Usuario';
 import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
@@ -14,7 +15,8 @@ export class DeletarContaComponent implements OnInit {
 
   constructor(
     private serviceUsuario: UsuarioService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -35,6 +37,8 @@ export class DeletarContaComponent implements OnInit {
         this.serviceUsuario.deletarConta(this.dadosUser.idUsuario).subscribe({
           next: () => {
             this.toastr.success('Conta deletada com sucesso', 'sucess');
+            localStorage.removeItem('usuario');
+            this.router.navigate(['/cadastro']);
           },
           error: (e) => {
             console.error(e);
