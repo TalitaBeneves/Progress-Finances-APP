@@ -201,4 +201,20 @@ export class NovoAporteComponent implements OnInit {
       }
     });
   }
+
+  naoCalcula(model: any, e) {
+    this.seviceFinaces
+      .naoCalcularInvestimento(model.idUsuario, model.idAtivo, e)
+      .subscribe({
+        next: () => {
+          this.toastr.success(
+            'Este ativo agora não esta na fila de calculo.',
+            'Sucesso'
+          );
+        },
+        error: (e) => {
+          console.error(e);
+        },
+      });
+  }
 }

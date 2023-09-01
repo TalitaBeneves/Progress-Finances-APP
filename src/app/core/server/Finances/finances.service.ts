@@ -58,6 +58,17 @@ export class FinancesService {
     );
   }
 
+  naoCalcularInvestimento(
+    idUsuario: number,
+    idAtivo: number,
+    checked: boolean
+  ) {
+    return this.http.put(
+      `${this.url}Ativos/naoCalcularInvestimento?idUsuario=${idUsuario}&idAtivo=${idAtivo}&chekedParaCalcular=${checked}`,
+      httpOptions
+    );
+  }
+
   buscarPorAtivo(symbol: string) {
     return this.http.get(`${this.url}BuscarPorAtivo?${symbol}`);
   }
