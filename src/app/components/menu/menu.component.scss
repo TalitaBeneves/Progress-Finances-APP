@@ -11,15 +11,49 @@ nav.menu-lateral {
   overflow: hidden;
   transition: 0.5s;
   z-index: 222;
+
+  .mostra {
+    display: none;
+    width: 63px;
+    height: 24px;
+    display: block;
+
+    font-size: 44px !important;
+    color: #f13707;
+  }
+
+  p {
+    display: none;
+  }
 }
 
 nav.menu-lateral:hover {
-  width: 300px;
+  //quando menu-lateral for === 80px eu mostro o icone
+  width: 250px;
+
+  // .btn-expandir .mostra {
+  //   display: none;
+
+  // }
+
+  p {
+    display: block;
+  }
+  .mostra {
+    display: none;
+  }
 }
 
 .btn-expandir {
   width: 100%;
   padding-left: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .btn-expandir > i {
@@ -40,10 +74,6 @@ ul li.item-menu {
   transition: 0.2s;
 }
 
-ul li.ativo {
-  // background-color: #ff0077;
-}
-
 ul li.item-menu:hover {
   border-start-start-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -54,7 +84,7 @@ ul li.item-menu a {
   color: #fff;
   text-decoration: none;
   font-size: 20px;
-  padding: 20px 4%;
+  padding: 10px 4%;
   display: flex;
   margin-bottom: 10px;
   line-height: 40px;
