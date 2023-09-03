@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +38,8 @@ import { CadastroModule } from './user/cadastro/cadastro.module';
 import { LoginModule } from './user/login/login.module';
 import { PerfilModule } from './user/perfil/perfil.module';
 import { PerguntasModule } from './page/perguntas/perguntas.module';
+import { UsuarioService } from './core/server/usuario/usuario.service';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -94,6 +96,12 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CadastroModule,
   ],
   providers: [
+    UsuarioService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     {
       provide: DEFAULT_CURRENCY_CODE,
