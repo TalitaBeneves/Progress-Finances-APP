@@ -39,7 +39,7 @@ export class PerguntasComponent implements OnInit {
   }
 
   buscarPerguntas() {
-    this.serviceUsuario.buscarPergunta(this.local.idUsuario).subscribe({
+    this.serviceUsuario.buscarPergunta(this.local.usuario_Id).subscribe({
       next: (res) => {
         this.items = res;
       },

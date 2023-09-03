@@ -58,10 +58,10 @@ export class DialogPerguntasComponent implements OnInit {
   cadastrarPergunta() {
     this.spinner.show();
     const model: CadastrarPergunta = {
-      marked: this.form.value.marked,
+      ativo: this.form.value.marked,
       tipo: parseInt(this.form.value.tipo),
       pergunta: this.form.value.pergunta,
-      idUsuario: this.data.userId,
+      usuario_Id: this.data.userId,
     };
     this.serviceUser
       .cadastrarPergunta(model)
@@ -82,9 +82,9 @@ export class DialogPerguntasComponent implements OnInit {
   editarPergunta() {
     this.spinner.show();
     const model: AtualizarPergunta = {
-      id: this.data.element.id,
-      idUsuario: this.data.element.idUsuario,
-      marked: this.form.value.marked,
+      id: this.data.element.pergunta_id,
+      usuario_Id: this.data.element.usuario_Id,
+      ativo: this.form.value.marked,
       tipo: parseInt(this.form.value.tipo),
       pergunta: this.form.value.pergunta,
     };

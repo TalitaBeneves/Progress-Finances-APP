@@ -1,15 +1,15 @@
 export interface MetaInvestimento {
-  idUsuario: number;
+  usuario_Id: number;
   nome: string;
   acoes: number;
   fiis: number;
-  rendaFixa: number;
+  fixa: number;
 }
 export interface ListarMetaInvestimentoModel {
-  idUsuario: number;
-  idMeta: number;
+  usuario_Id: number;
+  meta_id: number;
   nome: string;
   acoes: number;
   fiis: number;
-  rendaFixa: number;
+  fixa: number;
 }

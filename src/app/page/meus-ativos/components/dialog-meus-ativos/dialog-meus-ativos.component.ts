@@ -65,7 +65,7 @@ export class DialogMeusAtivosComponent implements OnInit {
     this.montaForm();
 
     this.getIdUser = this.serviceUsuario.getUserLocalStorage();
-    this.getMetaId(this.getIdUser.idUsuario);
+    this.getMetaId(this.getIdUser.usuario_Id);
 
     if (this.data) {
       this.btnTitle = 'Editar ativo';
@@ -91,7 +91,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   onSelectionChange() {
     this.spinner.show();
     this.serviceUsuario
-      .buscarPergunta(this.getIdUser.idUsuario)
+      .buscarPergunta(this.getIdUser.usuario_Id)
       .subscribe({
         next: (res) => {
           this.perguntas = res;
@@ -147,11 +147,11 @@ export class DialogMeusAtivosComponent implements OnInit {
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
     const percentualRecomendado =
-      (sugestaoInvestimento / calculaTotal / this.dadosMeta.rendaFixa) * 100;
+      (sugestaoInvestimento / calculaTotal / this.dadosMeta.fixa) * 100;
 
     const model: CadastrarAtivo = {
-      idUsuario: this.getIdUser.idUsuario,
-      idMeta: this.dadosMeta.idMeta,
+      usuario_Id: this.getIdUser.usuario_Id,
+      // idMeta: this.dadosMeta.idMeta,
       nome: this.form.value.nome,
       nota: pontuacao,
       recomendacaoPorcentagem: percentualRecomendado,
@@ -184,9 +184,9 @@ export class DialogMeusAtivosComponent implements OnInit {
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
     const model: AtualizarAtivo = {
-      idUsuario: this.data.idUsuario,
-      idMeta: this.data.idMeta,
-      idAtivo: this.data.idAtivo,
+      usuario_Id: this.data.idUsuario,
+      // idMeta: this.data.idMeta,
+      ativo_id: this.data.idAtivo,
       nome: this.form.value.nome,
       localAlocado: this.form.value.localAlocado,
       quantidadeDeAtivo: parseInt(this.form.value.quantidadeDeAtivo),

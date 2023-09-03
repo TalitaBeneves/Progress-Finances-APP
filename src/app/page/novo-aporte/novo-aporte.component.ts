@@ -40,7 +40,7 @@ export class NovoAporteComponent implements OnInit {
     this.getIdUser = this.serviceUsuario.getUserLocalStorage();
 
     this.seviceFinaces
-      .litarAtivosById(this.getIdUser.idUsuario)
+      .litarAtivosById(this.getIdUser.usuario_Id)
       .subscribe({
         next: (res) => {
           this.items = res;

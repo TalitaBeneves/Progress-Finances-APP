@@ -1,12 +1,12 @@
 export enum TipoAtivo {
-  ACOES = 3,
   FUNDOS_IMOBILIARIOS = 1,
   RENDA_FIXA = 2,
+  ACOES = 3,
 }
 
 export enum Status {
-  CONCLUIDA = 0,
   ANDAMENTO = 1,
+  CONCLUIDA = 2,
 }
 export enum TipoAtivoPergunta {
   ACOES = 1,

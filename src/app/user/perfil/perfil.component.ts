@@ -46,7 +46,7 @@ export class PerfilComponent implements OnInit {
   private uploadImagem(): void {
     this.spinner.show();
     this.serviceUsuario
-      .atualizarImagem(this.dadosUser.idUsuario, this.file)
+      .atualizarImagem(this.dadosUser.usuario_Id, this.file)
       .subscribe({
         next: (res) => {
           this.toastr.success('Imagem atualizada com Sucesso', 'Sucesso!');

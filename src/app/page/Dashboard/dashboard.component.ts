@@ -37,9 +37,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.dadosUsuario = this.serviceUsuario.getUserLocalStorage();
-
+    console.log('-->', this.dadosUsuario.usuario_Id);
     this.seviceFinaces
-      .listarMetaInvestimento(this.dadosUsuario.idUsuario)
+      .listarMetaInvestimento(this.dadosUsuario.usuario_Id)
       .subscribe({
         next: (res: any) => {
           this.acoes = res[0].acoes;
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
       })
       .add(() => this.spinner.hide());
 
-    this.seviceFinaces.litarAtivosById(this.dadosUsuario.idUsuario).subscribe({
+    this.seviceFinaces.litarAtivosById(this.dadosUsuario.usuario_Id).subscribe({
       next: (res: any) => {
         this.items = res;
         this.montaDashAtivos();

@@ -41,12 +41,12 @@ export class MetaInvestimentoComponent implements OnInit {
   listarMetaInvestimento() {
     this.spinner.show();
     this.servicesFinance
-      .listarMetaInvestimento(this.getId.idUsuario)
+      .listarMetaInvestimento(this.getId.usuario_Id)
       .subscribe({
         next: (res) => {
           this.formAcoes.setValue(res[0].acoes);
           this.formFiis.setValue(res[0].fiis);
-          this.formFixa.setValue(res[0].rendaFixa);
+          this.formFixa.setValue(res[0].fixa);
         },
         error: (e) => console.error(e),
       })
@@ -56,11 +56,11 @@ export class MetaInvestimentoComponent implements OnInit {
   salvarMetaInvestimento() {
     this.spinner.show();
     const model: MetaInvestimento = {
-      idUsuario: this.getId.idUsuario,
+      usuario_Id: this.getId.usuario_Id,
       nome: 'Meta investimento',
       acoes: this.formAcoes.value,
       fiis: this.formFiis.value,
-      rendaFixa: this.formFixa.value,
+      fixa: this.formFixa.value,
     };
 
     this.servicesFinance

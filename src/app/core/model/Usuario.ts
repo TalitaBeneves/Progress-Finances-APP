@@ -13,13 +13,15 @@ export interface CadastrarUsuario {
 }
 
 export interface UsuarioLogado {
-  idUsuario: number;
+  usuario_Id: number;
   email: string;
   nome: string;
   imagemUrl?: string;
+  token?: string;
 }
+
 export interface AtualizarDadosUsuarioModel {
-  idUsuario: number;
+  usuario_Id: number;
   email: string;
   nome: string;
   imagemUrl?: string;
@@ -28,8 +30,8 @@ export interface AtualizarDadosUsuarioModel {
 }
 
 export interface CadastrarPergunta {
-  idUsuario: number;
-  marked: boolean;
+  usuario_Id: number;
+  ativo: boolean;
   tipo: TipoAtivoPergunta;
   pergunta: string;
 }
@@ -39,9 +41,9 @@ export interface AtualizarPergunta extends CadastrarPergunta {
 }
 
 export interface ListarPerguntas {
-  id: number;
-  idUsuario: number;
+  pergunta_id: number;
+  usuario_Id: number;
   pergunta: string;
-  marked: boolean;
+  ativo: boolean;
   tipo: TipoAtivoPergunta;
 }

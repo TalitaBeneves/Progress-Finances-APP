@@ -47,7 +47,7 @@ export class MeusAtivosComponent implements OnInit {
   listAtivos() {
     this.spinner.show();
     this.serviceFinances
-      .litarAtivosById(this.getId.idUsuario)
+      .litarAtivosById(this.getId.usuario_Id)
       .subscribe({
         next: (res) => {
           this.items = res;
