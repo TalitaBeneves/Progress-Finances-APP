@@ -15,6 +15,9 @@ import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialo
 import { MeusAtivosComponent } from './meus-ativos.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { FiltrarPorAtivosComponent } from './components/filtrar-por-ativos/filtrar-por-ativos.component';
+import { DashboardMeusAtivosComponent } from './components/dashboard-meus-ativos/dashboard-meus-ativos.component';
+import { TableMeusAtivosComponent } from './components/table-meus-ativos/table-meus-ativos.component';
 
 @NgModule({
   imports: [
@@ -34,6 +37,12 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     CurrencyMaskModule,
     NgxMaskModule.forChild(),
   ],
-  declarations: [MeusAtivosComponent, DialogMeusAtivosComponent],
+  declarations: [
+    MeusAtivosComponent,
+    DialogMeusAtivosComponent,
+    FiltrarPorAtivosComponent,
+    DashboardMeusAtivosComponent,
+    TableMeusAtivosComponent,
+  ],
 })
 export class MeusAtivosModule {}

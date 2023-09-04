@@ -1,0 +1,13 @@
+<div class="dash">
+  <div class=" ">
+    <canvas #chart></canvas>
+  </div>
+
+  <div class="details">
+    <!-- //aqui eu crio a lista dos tipos de ativo -->
+    <ul></ul>
+    <p style="padding-left: 41px; color: #ffffff">
+      Valor total {{ (acoes + fiis + rendaFixa).toFixed(2) | currency }}
+    </p>
+  </div>
+</div>

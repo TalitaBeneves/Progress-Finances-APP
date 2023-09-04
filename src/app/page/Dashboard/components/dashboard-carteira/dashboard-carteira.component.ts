@@ -8,8 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { Chart } from 'chart.js';
-
+import Chart from 'chart.js/auto';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { ListaAtivoCalculado } from 'src/app/core/model/Ativo';

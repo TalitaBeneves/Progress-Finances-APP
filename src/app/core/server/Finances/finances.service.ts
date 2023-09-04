@@ -24,6 +24,7 @@ const httpOptions = {
 export class FinancesService {
   url: string = environment.urlBase;
   private _listners = new Subject<any>();
+  private _listnersByFiltro = new Subject<any>();
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +34,14 @@ export class FinancesService {
 
   filter(filterBy: any) {
     this._listners.next(filterBy);
+  }
+
+  listenFiltro(): Observable<any> {
+    return this._listnersByFiltro.asObservable();
+  }
+
+  filterByFiltro(filterBy: any) {
+    this._listnersByFiltro.next(filterBy);
   }
 
   litarAtivosById(idUsuario: number) {
