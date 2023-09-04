@@ -131,11 +131,13 @@ export class DialogMeusAtivosComponent implements OnInit {
     const checked = this.checked;
 
     const percentual = qtdPontos / checked;
+
     let pontuacao = Math.round(percentual * 10);
     if (this.value == 2) pontuacao = 10;
 
     const sugestaoInvestimento =
       pontuacao * parseInt(this.form.value.valorAtualDoAtivo);
+
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
@@ -162,6 +164,7 @@ export class DialogMeusAtivosComponent implements OnInit {
         },
         error: (e) => {
           console.error(e);
+          this.toastr.error('Erro ao cadastrar seu ativo!', 'Erro');
         },
       })
       .add(() => this.spinner.hide());
@@ -169,9 +172,11 @@ export class DialogMeusAtivosComponent implements OnInit {
 
   editarMeta(e?: any) {
     this.spinner.show();
+
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
+
     const model: AtualizarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
       ativo_id: this.data.ativo_id,
@@ -195,6 +200,7 @@ export class DialogMeusAtivosComponent implements OnInit {
         },
         error: (e) => {
           console.error(e);
+          this.toastr.error('Erro ao editar seu ativo!', 'Erro');
         },
       })
       .add(() => this.spinner.hide());

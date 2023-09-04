@@ -27,7 +27,7 @@ export class PerfilComponent implements OnInit {
 
     if (this.dadosUser.imagemUrl !== '') {
       this.imagemURL =
-        environment.urlBase + 'resources/images/' + this.dadosUser.imagemUrl;
+        environment.urlImg + 'resources/images/' + this.dadosUser.imagemUrl;
     }
   }
 
