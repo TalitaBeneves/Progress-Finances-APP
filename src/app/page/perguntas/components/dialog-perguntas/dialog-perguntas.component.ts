@@ -12,6 +12,7 @@ import {
   ListarPerguntas,
 } from 'src/app/core/model/Usuario';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
+import { PerguntasService } from 'src/app/core/server/perguntas/perguntas.service';
 import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class DialogPerguntasComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogPerguntasComponent>,
-    private serviceUser: UsuarioService,
+    private servicePerguntas: PerguntasService,
     @Inject(MAT_DIALOG_DATA)
     public data: {
       element: ListarPerguntas;
@@ -63,7 +64,7 @@ export class DialogPerguntasComponent implements OnInit {
       pergunta: this.form.value.pergunta,
       usuario_Id: this.data.userId,
     };
-    this.serviceUser
+    this.servicePerguntas
       .cadastrarPergunta(model)
       .subscribe({
         next: (res) => {
@@ -89,7 +90,7 @@ export class DialogPerguntasComponent implements OnInit {
       pergunta: this.form.value.pergunta,
     };
     console.log(model);
-    this.serviceUser
+    this.servicePerguntas
       .atualizarPergunta(model)
       .subscribe({
         next: (res) => {

@@ -6,6 +6,7 @@ import { DialogPerguntasComponent } from './components/dialog-perguntas/dialog-p
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { PerguntasService } from 'src/app/core/server/perguntas/perguntas.service';
 
 @Component({
   selector: 'app-perguntas',
@@ -17,6 +18,7 @@ export class PerguntasComponent implements OnInit {
   items;
   isChecked = true;
   constructor(
+    private servicePerguntas: PerguntasService,
     private serviceUsuario: UsuarioService,
     private serviceFinances: FinancesService,
     private dialog: MatDialog,
@@ -39,7 +41,7 @@ export class PerguntasComponent implements OnInit {
   }
 
   buscarPerguntas() {
-    this.serviceUsuario.buscarPergunta(this.local.usuario_Id).subscribe({
+    this.servicePerguntas.buscarPergunta(this.local.usuario_Id).subscribe({
       next: (res) => {
         this.items = res;
       },
@@ -67,7 +69,7 @@ export class PerguntasComponent implements OnInit {
 
   deletarAtivo(e) {
     this.spinner.show();
-    this.serviceUsuario
+    this.servicePerguntas
       .deletarPergunta(e.pergunta_Id)
       .subscribe({
         next: (res) => {

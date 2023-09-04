@@ -76,7 +76,7 @@ export class FinancesService {
   //Meta Investimento
   cadastrarOuAtualizarMetaInvestimento(model: MetaInvestimento) {
     return this.http.post(
-      `${this.url}api/MetasInvestimento/CadastrarOuAtualizarMetaInvestimento`,
+      `${this.url}MetasInvestimento/CadastrarOuAtualizarMetaInvestimento`,
       model,
       httpOptions
     );
@@ -84,7 +84,7 @@ export class FinancesService {
 
   listarMetaInvestimento(idMeta: number) {
     return this.http.get<ListarMetaInvestimentoModel[]>(
-      `${this.url}api/MetasInvestimento/${idMeta}`
+      `${this.url}MetasInvestimento/${idMeta}`
     );
   }
 
@@ -94,7 +94,7 @@ export class FinancesService {
     valorInvestimento: number
   ) {
     return this.http.get<ListaAtivoCalculado>(
-      `${this.url}api/CalcularInvestimento?idUsuario=${idUsuario}&valorInvestimento=${valorInvestimento}`
+      `${this.url}CalcularInvestimento?idUsuario=${idUsuario}&valorInvestimento=${valorInvestimento}`
     );
   }
 }

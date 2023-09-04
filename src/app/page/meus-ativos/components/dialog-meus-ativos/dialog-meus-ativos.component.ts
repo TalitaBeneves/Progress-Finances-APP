@@ -1,20 +1,16 @@
-import { TipoAtivo } from './../../../../core/model/Enums';
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 
-import { PerguntasService } from '../../perguntas.service';
-import { AtualizarAtivo, CadastrarAtivo } from 'src/app/core/model/Ativo';
-import { FinancesService } from 'src/app/core/server/Finances/finances.service';
-import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
-import {
-  ListarMetaInvestimentoModel,
-  MetaInvestimento,
-} from 'src/app/core/model/MetaInvestimento';
-import { UsuarioLogado } from 'src/app/core/model/Usuario';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AtualizarAtivo, CadastrarAtivo } from 'src/app/core/model/Ativo';
+import { ListarMetaInvestimentoModel } from 'src/app/core/model/MetaInvestimento';
+import { UsuarioLogado } from 'src/app/core/model/Usuario';
+import { FinancesService } from 'src/app/core/server/Finances/finances.service';
+import { PerguntasService } from 'src/app/core/server/perguntas/perguntas.service';
+import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 
 @Component({
   selector: 'app-dialog-meus-ativos',
@@ -90,7 +86,7 @@ export class DialogMeusAtivosComponent implements OnInit {
 
   onSelectionChange() {
     this.spinner.show();
-    this.serviceUsuario
+    this.servicePergunta
       .buscarPergunta(this.getIdUser.usuario_Id)
       .subscribe({
         next: (res) => {

@@ -4,10 +4,7 @@ import { ReplaySubject, take } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import {
-  AtualizarPergunta,
-  CadastrarPergunta,
   CadastrarUsuario,
-  ListarPerguntas,
   LoginUsuario,
   UsuarioLogado,
 } from '../../model/Usuario';
@@ -77,35 +74,6 @@ export class UsuarioService {
   deletarConta(idUsuario: number) {
     return this.http.delete<any>(
       `${this.url}Usuarios/DeletarUsuario/${idUsuario}`
-    );
-  }
-
-  /////////////////////////////PERGUNTAS///////////////////////////////////
-  cadastrarPergunta(model: CadastrarPergunta) {
-    return this.http.post(
-      `${this.url}Usuarios/cadastrarPergunta`,
-      model,
-      httpOptions
-    );
-  }
-
-  buscarPergunta(idUsuario: number) {
-    return this.http.get<ListarPerguntas>(
-      `${this.url}Usuarios/buscarPerguntas/${idUsuario}`
-    );
-  }
-
-  atualizarPergunta(model: AtualizarPergunta) {
-    return this.http.put(
-      `${this.url}Usuarios/EditarPergunta`,
-      model,
-      httpOptions
-    );
-  }
-
-  deletarPergunta(idPergunta: number) {
-    return this.http.delete(
-      `${this.url}Usuarios/DeletarPergunta/${idPergunta}`
     );
   }
 }

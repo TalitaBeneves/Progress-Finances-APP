@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   url: 'https://localhost:7162/controller',
-  urlBase: 'https://localhost:7162/',
+  urlBase: 'https://localhost:7162/api/',
 };
 
 /*
