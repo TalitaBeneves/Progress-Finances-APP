@@ -139,14 +139,11 @@ export class DialogMeusAtivosComponent implements OnInit {
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
-    const percentualRecomendado =
-      (sugestaoInvestimento / calculaTotal / this.dadosMeta.fixa) * 100;
 
     const model: CadastrarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
       nome: this.form.value.nome,
       nota: pontuacao,
-      recomendacaoPorcentagem: percentualRecomendado,
       sugestaoInvestimento: sugestaoInvestimento,
       tipo: this.form.value.tipoAtivo,
       localAlocado: this.form.value.localAlocado,
