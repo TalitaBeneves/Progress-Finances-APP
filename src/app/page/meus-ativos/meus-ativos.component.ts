@@ -167,11 +167,11 @@ export class MeusAtivosComponent implements OnInit {
 
   montaDash() {
     this.items.forEach((ativo) => {
-      if (ativo.tipoAtivo === 3) {
+      if (ativo.tipo === 3) {
         this.acoes += ativo.valorAtualDoAtivo;
-      } else if (ativo.tipoAtivo === 1) {
+      } else if (ativo.tipo === 1) {
         this.fiis += ativo.valorAtualDoAtivo;
-      } else if (ativo.tipoAtivo === 2) {
+      } else if (ativo.tipo === 2) {
         this.rendaFixa += ativo.valorAtualDoAtivo;
       }
     });
@@ -204,7 +204,7 @@ export class MeusAtivosComponent implements OnInit {
 
     if (tipoAtivo > 0) {
       this.ativos.forEach((element) => {
-        if (element.tipoAtivo == tipoAtivo) {
+        if (element.tipo == tipoAtivo) {
           this.array.push(element);
         }
 

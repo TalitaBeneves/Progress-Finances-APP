@@ -7,9 +7,9 @@ export interface CadastrarAtivo {
   nota: number;
   recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
-  tipoAtivo: TipoAtivo;
+  tipo: TipoAtivo;
   localAlocado: string;
-  quantidadeDeAtivo: number;
+  qtdAtivos: number;
   valorTotalInvestido: number;
   valorAtualDoAtivo: number;
 }
@@ -23,20 +23,18 @@ export interface ListaAtivoCalculado {
   recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
   valorTotalInvestido: number;
-  tipoAtivo: TipoAtivo;
+  tipo: TipoAtivo;
 }
 
 export interface AtualizarAtivo {
   usuario_Id: number;
-  // idMeta: number;
   ativo_id: number;
   nome: string;
   nota: number;
-  recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
-  tipoAtivo: TipoAtivo;
+  tipo: TipoAtivo;
   localAlocado: string;
-  quantidadeDeAtivo: number;
+  qtdAtivos: number;
   valorTotalInvestido: number;
   valorAtualDoAtivo: number;
 }

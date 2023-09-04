@@ -54,7 +54,7 @@ export class PerguntasComponent implements OnInit {
       width: '600px',
       data: {
         element: element,
-        userId: this.local.idUsuario,
+        userId: this.local.usuario_Id,
       },
     });
 
@@ -68,7 +68,7 @@ export class PerguntasComponent implements OnInit {
   deletarAtivo(e) {
     this.spinner.show();
     this.serviceUsuario
-      .deletarPergunta(e.id)
+      .deletarPergunta(e.pergunta_Id)
       .subscribe({
         next: (res) => {
           this.toastr.success('Pergunta deletada com sucesso!', 'Sucesso');

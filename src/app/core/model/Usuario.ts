@@ -37,11 +37,11 @@ export interface CadastrarPergunta {
 }
 
 export interface AtualizarPergunta extends CadastrarPergunta {
-  id: number;
+  pergunta_Id: number;
 }
 
 export interface ListarPerguntas {
-  pergunta_id: number;
+  pergunta_Id: number;
   usuario_Id: number;
   pergunta: string;
   ativo: boolean;

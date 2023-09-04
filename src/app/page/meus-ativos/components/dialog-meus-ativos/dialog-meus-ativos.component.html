@@ -38,18 +38,16 @@
   </form>
 
   <div
-    *ngIf="(value && value != 2) || (data != null && data?.tipoAtivo != 2)"
+    *ngIf="(value && value != 2) || (data != null && data?.tipo != 2)"
     class="py-4"
   >
     <h5 style="font-size: 17px">Responda as perguntas com sinceridade</h5>
     <div class="caixa">
       <div class="box">
         <div class="positivo">Pontos Positivos {{ qtdPontos }}</div>
-        <div class="negativo">
-          Pontos Negativos {{ checked?.length - qtdPontos }}
-        </div>
+        <div class="negativo">Pontos Negativos {{ checked - qtdPontos }}</div>
         <div class="final">
-          Pontuação Final {{ ((qtdPontos / checked?.length) * 10).toFixed(0) }}
+          Pontuação Final: {{ ((qtdPontos / checked) * 10).toFixed(0) }}
         </div>
       </div>
       <br />
@@ -60,7 +58,6 @@
         <thead>
           <tr>
             <th scope="col">Pergunta</th>
-            <th scope="col">Criterio</th>
             <th scope="col">resposta</th>
           </tr>
         </thead>
@@ -70,19 +67,18 @@
             <td>
               <div class="custom-control custom-checkbox">
                 <input
-                  [(ngModel)]="pergunta.marked"
+                  [(ngModel)]="pergunta.ativo"
                   (change)="onQtdPontosChange(pergunta)"
                   type="checkbox"
                   class="custom-control-input"
-                  id="{{ pergunta.id }}"
+                  id="{{ pergunta.pergunta_Id }}"
                 />
                 <label
                   class="custom-control-label"
-                  for="{{ pergunta.id }}"
+                  for="{{ pergunta.pergunta_Id }}"
                 ></label>
               </div>
             </td>
-            <td></td>
           </tr>
         </tbody>
         <div *ngIf="perguntas == null" class="my-3">
@@ -97,7 +93,9 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="cancelar()">
+    Cancelar
+  </button>
   <button mat-raised-button color="warn" (click)="salvar()">
     {{ btnTitle }}
   </button>

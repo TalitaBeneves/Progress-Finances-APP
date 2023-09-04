@@ -24,10 +24,16 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     const token = this.usuarioService.getUserLocalStorage();
 
-    if (token.token) {
+    if (token?.token) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token.token}`,
+        },
+      });
+    } else {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer`,
         },
       });
     }

@@ -39,7 +39,6 @@
             <th scope="col">Tipo</th>
             <th scope="col" class="pl-5">Nome</th>
             <th scope="col">Nota</th>
-            <th scope="col">Recomendado %</th>
             <th scope="col" class="text-success font-weight-bold">
               Valor sugerido
             </th>
@@ -53,27 +52,26 @@
           <tr>
             <td
               [ngClass]="{
-                corFundo: item.tipoAtivo === 3,
-                fiis: item.tipoAtivo === 1,
-                rendaFixa: item.tipoAtivo === 2
+                corFundo: item.tipo === 3,
+                fiis: item.tipo === 1,
+                rendaFixa: item.tipo === 2
               }"
             >
               <div
                 class="tipoAtivo"
                 [style.background-color]="
-                  item.tipoAtivo === 3
+                  item.tipo === 3
                     ? '#17a2b8'
-                    : item.tipoAtivo === 1
+                    : item.tipo === 1
                     ? '#fd7e14'
                     : '#20c997'
                 "
               >
-                {{ item.tipoAtivo | formatTipoAtivo }}
+                {{ item.tipo | formatTipoAtivo }}
               </div>
             </td>
             <td class="pl-5">{{ item.nome }}</td>
             <td>{{ item.nota }}</td>
-            <td>{{ item.recomendacaoPorcentagem.toFixed(2) + "%" }}</td>
             <td class="text-success font-weight-bold">
               {{ item.sugestaoInvestimento.toFixed(2) | currency }}
             </td>
@@ -83,7 +81,7 @@
             <td>
               <mat-slide-toggle
                 (change)="naoCalcula(item, $event.checked)"
-                [(ngModel)]="item.chekedParaCalcular"
+                [(ngModel)]="item.chekedParaCalculo"
               ></mat-slide-toggle>
             </td>
           </tr>

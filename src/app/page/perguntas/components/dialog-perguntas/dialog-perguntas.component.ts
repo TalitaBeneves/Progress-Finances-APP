@@ -82,12 +82,13 @@ export class DialogPerguntasComponent implements OnInit {
   editarPergunta() {
     this.spinner.show();
     const model: AtualizarPergunta = {
-      id: this.data.element.pergunta_id,
-      usuario_Id: this.data.element.usuario_Id,
+      pergunta_Id: this.data.element.pergunta_Id,
+      usuario_Id: this.data.userId,
       ativo: this.form.value.marked,
       tipo: parseInt(this.form.value.tipo),
       pergunta: this.form.value.pergunta,
     };
+    console.log(model);
     this.serviceUser
       .atualizarPergunta(model)
       .subscribe({

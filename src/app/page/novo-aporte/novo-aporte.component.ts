@@ -120,7 +120,7 @@ export class NovoAporteComponent implements OnInit {
     this.rendaFixa = 0;
 
     this.seviceFinaces
-      .calcularRecomendacaoInvestimento(this.getIdUser.idUsuario, valor)
+      .calcularRecomendacaoInvestimento(this.getIdUser.usuario_Id, valor)
       .subscribe({
         next: (res) => {
           this.items = res;
@@ -192,19 +192,20 @@ export class NovoAporteComponent implements OnInit {
 
   montaDash() {
     this.items.forEach((ativo: ListaAtivoCalculado) => {
-      if (ativo.tipoAtivo === 3) {
+      if (ativo.tipo === 3) {
         this.acoes += ativo.sugestaoInvestimento;
-      } else if (ativo.tipoAtivo === 1) {
+      } else if (ativo.tipo === 1) {
         this.fiis += ativo.sugestaoInvestimento;
-      } else if (ativo.tipoAtivo === 2) {
+      } else if (ativo.tipo === 2) {
         this.rendaFixa += ativo.sugestaoInvestimento;
       }
     });
   }
 
   naoCalcula(model: any, e) {
+    console.log(model);
     this.seviceFinaces
-      .naoCalcularInvestimento(model.idUsuario, model.idAtivo, e)
+      .naoCalcularInvestimento(model.usuario_id, model.ativo_id, e)
       .subscribe({
         next: () => {
           this.toastr.success(

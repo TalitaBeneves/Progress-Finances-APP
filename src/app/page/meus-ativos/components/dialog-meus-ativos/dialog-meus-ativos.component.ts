@@ -69,7 +69,7 @@ export class DialogMeusAtivosComponent implements OnInit {
 
     if (this.data) {
       this.btnTitle = 'Editar ativo';
-      this.value = this.data.tipoAtivo;
+      this.value = this.data.tipo;
       this.form.get('tipoAtivo')?.disable();
       this.form.get('tipoAtivo')?.setValue(this.value);
       this.form.patchValue(this.data);
@@ -96,12 +96,12 @@ export class DialogMeusAtivosComponent implements OnInit {
         next: (res) => {
           this.perguntas = res;
 
-          console.log(this.perguntas);
-
           if (this.perguntas) {
             this.perguntas = this.perguntas.filter(
               (item: { tipo: number }) => item.tipo == this.value
             );
+
+            this.checked = this.perguntas.length;
           }
         },
         error: (e) => {
@@ -111,15 +111,12 @@ export class DialogMeusAtivosComponent implements OnInit {
       .add(() => this.spinner.hide());
   }
 
-  onQtdPontosChange(perguntaId: any) {
-    if (perguntaId.checked) {
+  onQtdPontosChange(pergunta: any) {
+    if (pergunta.ativo) {
       this.qtdPontos += 1;
-      // this.perguntas.forEach((element) => {
-      //   if (element == perguntaId) {
-      //     element.checked = true;
-      //   }
-      // });
-    } else this.qtdPontos -= 1;
+    } else {
+      this.qtdPontos -= 1;
+    }
   }
 
   montaForm() {
@@ -135,7 +132,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   cadastrarAtivo(): void {
     this.spinner.show();
     const qtdPontos = this.qtdPontos;
-    const checked = this.checked.length;
+    const checked = this.checked;
 
     const percentual = qtdPontos / checked;
     let pontuacao = Math.round(percentual * 10);
@@ -151,14 +148,13 @@ export class DialogMeusAtivosComponent implements OnInit {
 
     const model: CadastrarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
-      // idMeta: this.dadosMeta.idMeta,
       nome: this.form.value.nome,
       nota: pontuacao,
       recomendacaoPorcentagem: percentualRecomendado,
       sugestaoInvestimento: sugestaoInvestimento,
-      tipoAtivo: this.form.value.tipoAtivo,
+      tipo: this.form.value.tipoAtivo,
       localAlocado: this.form.value.localAlocado,
-      quantidadeDeAtivo: parseInt(this.form.value.quantidadeDeAtivo),
+      qtdAtivos: parseInt(this.form.value.quantidadeDeAtivo),
       valorTotalInvestido: calculaTotal,
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
     };
@@ -184,18 +180,16 @@ export class DialogMeusAtivosComponent implements OnInit {
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.quantidadeDeAtivo);
     const model: AtualizarAtivo = {
-      usuario_Id: this.data.idUsuario,
-      // idMeta: this.data.idMeta,
-      ativo_id: this.data.idAtivo,
+      usuario_Id: this.getIdUser.usuario_Id,
+      ativo_id: this.data.ativo_id,
       nome: this.form.value.nome,
       localAlocado: this.form.value.localAlocado,
-      quantidadeDeAtivo: parseInt(this.form.value.quantidadeDeAtivo),
+      qtdAtivos: parseInt(this.form.value.quantidadeDeAtivo),
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
       valorTotalInvestido: calculaTotal,
       nota: this.data.nota,
-      recomendacaoPorcentagem: this.data.recomendacaoPorcentagem,
       sugestaoInvestimento: this.data.sugestaoInvestimento,
-      tipoAtivo: this.data.tipoAtivo,
+      tipo: this.data.tipo,
     };
 
     this.serviceFinances
@@ -227,5 +221,9 @@ export class DialogMeusAtivosComponent implements OnInit {
   salvar() {
     if (this.data) this.editarMeta();
     else this.cadastrarAtivo();
+  }
+
+  cancelar() {
+    this.dialogRef.close();
   }
 }

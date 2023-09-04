@@ -13,7 +13,7 @@
           <tr>
             <th scope="col">Pergunta</th>
             <th scope="col" class="pl-4">Tipo</th>
-            <th scope="col" class="pl-4">Habilitado</th>
+            <th scope="col" class="pl-4">Ativo?</th>
             <th scope="col">Ação</th>
           </tr>
         </thead>
@@ -21,9 +21,9 @@
         <tbody *ngFor="let item of items">
           <tr>
             <td>{{ item.pergunta }}</td>
-            <td>{{ item.tipo == 1 ? "Ação" : "FIIs" }}</td>
+            <td>{{ item.tipo == 1 ? "FIIs" : "Ação" }}</td>
             <td>
-              <mat-slide-toggle [(ngModel)]="item.marked"></mat-slide-toggle>
+              <mat-slide-toggle [(ngModel)]="item.ativo"></mat-slide-toggle>
             </td>
             <td>
               <button

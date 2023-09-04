@@ -174,11 +174,11 @@ export class DashboardComponent implements OnInit {
 
   montaDashAtivos() {
     this.items.forEach((ativo: ListaAtivoCalculado) => {
-      if (ativo.tipoAtivo === 3) {
+      if (ativo.tipo === 3) {
         this.acoesAtivo += ativo.valorTotalInvestido;
-      } else if (ativo.tipoAtivo === 1) {
+      } else if (ativo.tipo === 1) {
         this.fiisAtivo += ativo.valorTotalInvestido;
-      } else if (ativo.tipoAtivo === 2) {
+      } else if (ativo.tipo === 2) {
         this.rendaFixaAtivo += ativo.valorTotalInvestido;
       }
     });

@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       senha: this.form.value.senha,
       email: this.form.value.email,
     };
+
     this.serviceUsuario
       .login(model)
       .subscribe({
