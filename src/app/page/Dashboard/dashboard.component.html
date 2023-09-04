@@ -3,7 +3,7 @@
     <div class="ml-3 boxDados">
       <div class="text">
         <p>
-          {{ saudacao }}, <b>{{ dadosUsuario.nome }}</b>
+          {{ saudacao }} <b>{{ dadosUsuario.nome }}</b>
         </p>
         <p>{{ dadosUsuario.email }}</p>
       </div>
@@ -11,75 +11,48 @@
   </div>
 
   <div class="d-flex" style="margin: 30px auto">
-    <div class="bg-dark rounded w-100 p-3">
-      <h1>Meta</h1>
-      <p class="ml-4">
-        Meta definida, para mudar a meta vá para tela de "Minha metas
+    <app-dashboard-meta [dadosUsuario]="dadosUsuario"></app-dashboard-meta>
+
+    <app-dashboard-carteira
+      [dadosUsuario]="dadosUsuario"
+      (ativosRes)="items = $event"
+    ></app-dashboard-carteira>
+  </div>
+
+  <div>
+    <h2 class="text-light ml-3">
+      Acompanhe a sua quantidade total investida nos seus ativos
+    </h2>
+    <div *ngFor="let item of items">
+      <div
+        class="progress"
+        style="
+          height: 33px;
+          border-radius: 20px;
+          margin-top: 40px;
+          background-color: transparent;
+        "
+      >
+        <div
+          class="progress-bar bg-danger"
+          role="progressbar"
+          [style.width]="item.valorTotalInvestido + 'px'"
+        ></div>
+      </div>
+      <p
+        style="
+          text-align: start;
+          color: #fff;
+          padding-top: 10px;
+          font-size: 18px;
+          padding-right: 20px;
+          padding-left: 12px;
+        "
+      >
+        {{ item.valorTotalInvestido | currency }} -
+        {{ item.nome }}
       </p>
-      <div class="programming-stats">
-        <div class="dash pt-5" style="margin: auto 30px">
-          <canvas #chart></canvas>
-        </div>
-        <div class="details_meta">
-          <ul></ul>
-        </div>
-      </div>
     </div>
-    <div class="bg-dark ml-4 rounded w-100 p-3">
-      <h1>Carteira</h1>
-      <p class="pb-0 ml-4">Distribuição de ativos</p>
-
-      <div class="programming-stats">
-        <p class="text-center">
-          Valor total {{ acoesAtivo + fiisAtivo + rendaFixaAtivo | currency }}
-        </p>
-        <div class="dash pt-3" style="margin: auto 40px">
-          <canvas #chart2></canvas>
-        </div>
-        <div class="details_ativo">
-          <ul></ul>
-          <!-- <p style="padding-left: 41px">
-
-   </p> -->
-        </div>
-      </div>
-    </div>
+    <br />
   </div>
 </section>
-
-<div class="p-3 my-4" style="margin: auto 196px">
-  <h2 class="text-light ml-3">
-    Acompanhe a sua quantidade total investida nos seus ativos
-  </h2>
-  <div
-    *ngFor="let item of items"
-    class="progress"
-    style="
-      height: 33px;
-      border-radius: 20px;
-      margin-top: 40px;
-      background-color: transparent;
-    "
-  >
-    <div
-      class="progress-bar bg-danger"
-      role="progressbar"
-      [style.width]="item.valorTotalInvestido + 'px'"
-    ></div>
-
-    <p
-      style="
-        text-align: end;
-        color: #fff;
-        padding-top: 10px;
-        font-size: 18px;
-        padding-right: 20px;
-        padding-left: 12px;
-      "
-    >
-      {{ item.valorTotalInvestido | currency }} -
-      {{ item.nome }}
-    </p>
-  </div>
-  <br />
-</div>

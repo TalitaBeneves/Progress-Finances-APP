@@ -1,0 +1,92 @@
+.boxRigth {
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+  color: #fff;
+}
+
+p {
+  color: #ffff;
+  text-transform: initial;
+}
+
+.boxDados {
+  background-color: #646464;
+  padding: 5px 0 15px 15px;
+  text-align: start;
+  border-radius: 15px;
+  width: 205px;
+  height: 53px;
+
+  .text p {
+    margin-bottom: 0px;
+  }
+}
+.bg-danger {
+  background-color: #ef4b21 !important;
+  border-radius: 20px;
+}
+canvas {
+  display: block;
+  box-sizing: border-box;
+  height: 400px !important;
+  width: 400px !important;
+}
+.programming-stats {
+  color: #fff;
+  padding: 8px 32px;
+}
+
+.details_ativo ul {
+  list-style-type: none;
+  font-size: 16px;
+}
+
+.details_ativo ul li {
+  margin: 12px 0;
+}
+
+:host ::ng-deep li.list-item-ativo-0 {
+  list-style-type: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep li.list-item-ativo-0:before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.4em;
+  background-color: #17a2b8;
+  border-radius: 50%;
+}
+
+:host ::ng-deep .list-item-ativo-1 {
+  list-style-type: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+:host ::ng-deep li.list-item-ativo-1:before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.4em;
+  background-color: #fd7e14;
+  border-radius: 50%;
+}
+:host ::ng-deep .list-item-ativo-2 {
+  list-style-type: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+:host ::ng-deep li.list-item-ativo-2:before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.4em;
+  background-color: #20c997;
+  border-radius: 50%;
+}

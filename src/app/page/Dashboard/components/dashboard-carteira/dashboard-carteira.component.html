@@ -1,0 +1,16 @@
+<div class="bg-dark ml-4 rounded w-100 p-3">
+  <h1>Carteira</h1>
+  <p class="pb-0 ml-4">Distribuição de ativos</p>
+
+  <div class="programming-stats">
+    <p class="text-center">
+      Valor total {{ acoesAtivo + fiisAtivo + rendaFixaAtivo | currency }}
+    </p>
+    <div class="dash pt-3" style="margin: auto 40px">
+      <canvas #chart></canvas>
+    </div>
+    <div class="details_ativo">
+      <ul></ul>
+    </div>
+  </div>
+</div>

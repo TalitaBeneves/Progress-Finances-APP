@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CadastroComponent } from './user/cadastro/cadastro.component';
-import { LoginComponent } from './user/login/login.component';
+import { AuthGuard } from './core/guard/auth.guard';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { MetaDetalhesComponent } from './page/meta-detalhe/meta-detalhes.component';
 import { MetaHomeComponent } from './page/meta-home/meta-home.component';
 import { MeusAtivosComponent } from './page/meus-ativos/meus-ativos.component';
-import { AuthGuard } from './core/guard/auth.guard';
 import { NovoAporteComponent } from './page/novo-aporte/novo-aporte.component';
-import { DashboardComponent } from './page/Dashboard/dashboard.component';
-import { PerfilComponent } from './user/perfil/perfil.component';
 import { PerguntasComponent } from './page/perguntas/perguntas.component';
+
+import { CadastroComponent } from './components/user/cadastro/cadastro.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { PerfilComponent } from './components/user/perfil/perfil.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -48,7 +49,7 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./page/Dashboard/dashboard.module').then(
+      import('./page/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
   },
@@ -57,7 +58,9 @@ const routes: Routes = [
     component: PerfilComponent,
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./user/perfil/perfil.module').then((m) => m.PerfilModule),
+      import('./components/user/perfil/perfil.module').then(
+        (m) => m.PerfilModule
+      ),
   },
   {
     path: 'perguntas',
@@ -69,7 +72,6 @@ const routes: Routes = [
       ),
   },
   { path: '**', component: LoginComponent },
-  // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
