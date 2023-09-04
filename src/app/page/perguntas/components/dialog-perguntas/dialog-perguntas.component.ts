@@ -1,19 +1,17 @@
-import { PerguntasModule } from './../../perguntas.module';
-import { Component, ElementRef, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { TipoAtivoPergunta } from 'src/app/core/model/Enums';
+
 import {
-  AtualizarDadosUsuarioModel,
   AtualizarPergunta,
   CadastrarPergunta,
   ListarPerguntas,
 } from 'src/app/core/model/Usuario';
 import { FinancesService } from 'src/app/core/server/Finances/finances.service';
 import { PerguntasService } from 'src/app/core/server/perguntas/perguntas.service';
-import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 
 @Component({
   selector: 'app-dialog-perguntas',

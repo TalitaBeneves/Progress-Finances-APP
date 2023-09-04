@@ -7,17 +7,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { SharedModule } from 'src/app/core/shared/shared.module';
-import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialog-meus-ativos.component';
-import { MeusAtivosComponent } from './meus-ativos.component';
-import { NgxMaskModule } from 'ngx-mask';
+
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { FiltrarPorAtivosComponent } from './components/filtrar-por-ativos/filtrar-por-ativos.component';
+import { NgxMaskModule } from 'ngx-mask';
+
+import { SharedModule } from 'src/app/core/shared/shared.module';
 import { DashboardMeusAtivosComponent } from './components/dashboard-meus-ativos/dashboard-meus-ativos.component';
+import { DialogMeusAtivosComponent } from './components/dialog-meus-ativos/dialog-meus-ativos.component';
+import { FiltrarPorAtivosComponent } from './components/filtrar-por-ativos/filtrar-por-ativos.component';
 import { TableMeusAtivosComponent } from './components/table-meus-ativos/table-meus-ativos.component';
+import { MeusAtivosComponent } from './meus-ativos.component';
 
 @NgModule({
   imports: [

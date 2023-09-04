@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UsuarioLogado } from 'src/app/core/model/Usuario';
-import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
-import { DialogPerguntasComponent } from './components/dialog-perguntas/dialog-perguntas.component';
-import { FinancesService } from 'src/app/core/server/Finances/finances.service';
+
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+
+import { FinancesService } from 'src/app/core/server/Finances/finances.service';
 import { PerguntasService } from 'src/app/core/server/perguntas/perguntas.service';
+import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
+import { DialogPerguntasComponent } from './components/dialog-perguntas/dialog-perguntas.component';
 
 @Component({
   selector: 'app-perguntas',
@@ -17,6 +18,7 @@ export class PerguntasComponent implements OnInit {
   local: any;
   items;
   isChecked = true;
+
   constructor(
     private servicePerguntas: PerguntasService,
     private serviceUsuario: UsuarioService,

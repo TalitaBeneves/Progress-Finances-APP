@@ -1,0 +1,54 @@
+<div class="box w-100">
+  <table class="table table-dark text-center w-100 mb-0">
+    <thead style="background-color: #161819 !important">
+      <tr>
+        <th scope="col">Tipo</th>
+        <th scope="col" class="pl-5">Nome</th>
+        <th scope="col">Nota</th>
+        <th scope="col" class="text-success font-weight-bold">
+          Valor sugerido
+        </th>
+        <th scope="col" class="text-success font-weight-bold">Valor ativo</th>
+        <th scope="col">Usar no calculo?</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of items" style="width: 104% !important">
+      <tr>
+        <td
+          [ngClass]="{
+            corFundo: item.tipo === 3,
+            fiis: item.tipo === 1,
+            rendaFixa: item.tipo === 2
+          }"
+        >
+          <div
+            class="tipoAtivo"
+            [style.background-color]="
+              item.tipo === 3
+                ? '#17a2b8'
+                : item.tipo === 1
+                ? '#fd7e14'
+                : '#20c997'
+            "
+          >
+            {{ item.tipo | formatTipoAtivo }}
+          </div>
+        </td>
+        <td class="pl-5">{{ item.nome }}</td>
+        <td>{{ item.nota }}</td>
+        <td class="text-success font-weight-bold">
+          {{ item.sugestaoInvestimento.toFixed(2) | currency }}
+        </td>
+        <td class="text-success font-weight-bold">
+          {{ item.valorAtualDoAtivo | currency }}
+        </td>
+        <td>
+          <mat-slide-toggle
+            (change)="naoCalcula(item, $event.checked)"
+            [(ngModel)]="item.chekedParaCalculo"
+          ></mat-slide-toggle>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

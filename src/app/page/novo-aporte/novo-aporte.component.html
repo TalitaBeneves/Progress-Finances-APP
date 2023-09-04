@@ -1,6 +1,4 @@
 <section class="container pt-5">
-  <!-- <p>Quanto você vai investir esse mês? coloque seu aporte abaixo</p> -->
-
   <div class="containerHeader">
     <div class="topInput mt-5 pr-4">
       <mat-form-field appearance="outline" class="w-20">
@@ -12,81 +10,21 @@
           class="mat-form-field text-light"
         />
       </mat-form-field>
-      <button type="submit" class="mb-3" (click)="calcular()">Calcular</button>
+      <button type="submit" class="mb-3" (click)="calcularInvestimento()">
+        Calcular
+      </button>
     </div>
 
-    <div class="programming-stats">
-      <div class="dash pt-5">
-        <canvas #chartAporte></canvas>
-      </div>
-
-      <div class="details">
-        <ul></ul>
-        <p style="padding-left: 41px">
-          Valor total {{ (acoes + fiis + rendaFixa).toFixed(2) | currency }}
-        </p>
-      </div>
-    </div>
+    <app-dashboard-novo-aporte
+      (ativos)="ativos = $event"
+      [calculo]="ativos"
+      [idUsuario]="getIdUser"
+    ></app-dashboard-novo-aporte>
   </div>
 
   <div class="rounded">
     <h1 class="p-0 pt-3">Histórico de Aportes</h1>
 
-    <div class="box w-100">
-      <table class="table table-dark text-center w-100 mb-0">
-        <thead style="background-color: #161819 !important">
-          <tr>
-            <th scope="col">Tipo</th>
-            <th scope="col" class="pl-5">Nome</th>
-            <th scope="col">Nota</th>
-            <th scope="col" class="text-success font-weight-bold">
-              Valor sugerido
-            </th>
-            <th scope="col" class="text-success font-weight-bold">
-              Valor ativo
-            </th>
-            <th scope="col">Usar no calculo?</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let item of items" style="width: 104% !important">
-          <tr>
-            <td
-              [ngClass]="{
-                corFundo: item.tipo === 3,
-                fiis: item.tipo === 1,
-                rendaFixa: item.tipo === 2
-              }"
-            >
-              <div
-                class="tipoAtivo"
-                [style.background-color]="
-                  item.tipo === 3
-                    ? '#17a2b8'
-                    : item.tipo === 1
-                    ? '#fd7e14'
-                    : '#20c997'
-                "
-              >
-                {{ item.tipo | formatTipoAtivo }}
-              </div>
-            </td>
-            <td class="pl-5">{{ item.nome }}</td>
-            <td>{{ item.nota }}</td>
-            <td class="text-success font-weight-bold">
-              {{ item.sugestaoInvestimento.toFixed(2) | currency }}
-            </td>
-            <td class="text-success font-weight-bold">
-              {{ item.valorAtualDoAtivo | currency }}
-            </td>
-            <td>
-              <mat-slide-toggle
-                (change)="naoCalcula(item, $event.checked)"
-                [(ngModel)]="item.chekedParaCalculo"
-              ></mat-slide-toggle>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-table-novo-aporte [items]="ativos"></app-table-novo-aporte>
   </div>
 </section>
