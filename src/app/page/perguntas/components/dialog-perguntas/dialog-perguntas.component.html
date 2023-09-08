@@ -6,28 +6,17 @@
       <input matInput formControlName="pergunta" />
     </mat-form-field>
 
-    <mat-radio-group
-      aria-labelledby="example-radio-group-label"
-      class="example-radio-group"
-      formControlName="tipo"
-    >
+    <mat-radio-group aria-labelledby="acao" class="example-radio-group" formControlName="tipo">
       <mat-radio-button class="example-radio-button" value="3">
         Ação
       </mat-radio-button>
-    </mat-radio-group>
-    <mat-radio-group
-      aria-labelledby="example-radio-group-label"
-      class="example-radio-group"
-    >
       <mat-radio-button class="example-radio-button" value="1">
         FIIs
       </mat-radio-button>
     </mat-radio-group>
 
     <section class="example-section">
-      <mat-checkbox class="example-margin" formControlName="marked"
-        >Habilitar?</mat-checkbox
-      >
+      <mat-checkbox class="example-margin" formControlName="ativo">Ativo?</mat-checkbox>
     </section>
   </form>
 </div>

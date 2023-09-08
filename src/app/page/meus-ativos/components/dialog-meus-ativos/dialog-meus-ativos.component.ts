@@ -126,6 +126,14 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   cadastrarAtivo(): void {
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
     this.spinner.show();
     const qtdPontos = this.qtdPontos;
     const checked = this.checked;
@@ -171,8 +179,16 @@ export class DialogMeusAtivosComponent implements OnInit {
   }
 
   editarMeta(e?: any) {
-    this.spinner.show();
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
 
+    this.spinner.show();
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
       parseInt(this.form.value.qtdAtivos);
@@ -204,17 +220,6 @@ export class DialogMeusAtivosComponent implements OnInit {
         },
       })
       .add(() => this.spinner.hide());
-  }
-
-  verificacaoValid() {
-    if (this.form.invalid) {
-      this.toastr.warning(
-        'Favor preencher todos os campos obrigatorios',
-        'Alerta'
-      );
-      this.form.markAllAsTouched();
-      return;
-    }
   }
 
   salvar() {

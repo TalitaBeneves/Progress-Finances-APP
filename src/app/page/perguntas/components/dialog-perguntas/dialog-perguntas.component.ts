@@ -35,7 +35,7 @@ export class DialogPerguntasComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private serviceFinances: FinancesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.montaForm();
@@ -50,14 +50,22 @@ export class DialogPerguntasComponent implements OnInit {
     this.form = this.fb.group({
       pergunta: [null, Validators.required],
       tipo: [null, Validators.required],
-      marked: [null],
+      ativo: [null],
     });
   }
 
   cadastrarPergunta() {
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
     this.spinner.show();
     const model: CadastrarPergunta = {
-      ativo: this.form.value.marked,
+      ativo: this.form.value.ativo,
       tipo: parseInt(this.form.value.tipo),
       pergunta: this.form.value.pergunta,
       usuario_Id: this.data.userId,
@@ -79,15 +87,23 @@ export class DialogPerguntasComponent implements OnInit {
   }
 
   editarPergunta() {
+    if (this.form.invalid) {
+      this.toastr.warning(
+        'Favor preencher todos os campos obrigatorios',
+        'Alerta'
+      );
+      this.form.markAllAsTouched();
+      return;
+    }
     this.spinner.show();
     const model: AtualizarPergunta = {
       pergunta_Id: this.data.element.pergunta_Id,
       usuario_Id: this.data.userId,
-      ativo: this.form.value.marked,
+      ativo: this.form.value.ativo,
       tipo: parseInt(this.form.value.tipo),
       pergunta: this.form.value.pergunta,
     };
-    console.log(model);
+
     this.servicePerguntas
       .atualizarPergunta(model)
       .subscribe({

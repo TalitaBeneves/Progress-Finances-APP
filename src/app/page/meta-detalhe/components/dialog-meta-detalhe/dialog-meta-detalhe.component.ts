@@ -38,7 +38,7 @@ export class DialogMetaDetalheComponent implements OnInit {
     private serviceMeta: MetasService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.data.cadastro != true) {
@@ -100,7 +100,7 @@ export class DialogMetaDetalheComponent implements OnInit {
       idMeta: this.data.dados.id,
       progressFinanceModelId: this.data.dados.id,
     };
-    console.log(this.form.value.dataDeposito);
+
     this.serviceMeta
       .createItem(model)
       .subscribe({

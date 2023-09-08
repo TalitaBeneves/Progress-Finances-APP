@@ -79,7 +79,7 @@ export class PerguntasComponent implements OnInit {
           this.serviceFinances.filter(res);
         },
         error: (e) => {
-          console.log(e);
+          console.error(e);
         },
       })
       .add(() => this.spinner.hide());

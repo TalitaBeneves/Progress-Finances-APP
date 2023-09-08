@@ -23,7 +23,7 @@ export class NovoAporteComponent implements OnInit {
     private serviceUsuario: UsuarioService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getIdUser = this.serviceUsuario.getUserLocalStorage();
@@ -33,7 +33,7 @@ export class NovoAporteComponent implements OnInit {
     this.spinner.show();
     const valor = parseInt(this.valorInvestimento.value);
     if (this.valorInvestimento.invalid) {
-      this.toastr.warning('Favor preencher o campo!', 'Atenção');
+      this.toastr.warning('Favor preencher o de valor investimento!', 'Atenção');
       this.spinner.hide();
       return;
     } else if (valor < 100) {

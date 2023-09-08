@@ -168,7 +168,7 @@ export class DashboardNovoAporteComponent implements OnInit {
   updateChart() {
     const newData = [this.acoes, this.fiis, this.rendaFixa];
     const soma = this.acoes + this.fiis + this.rendaFixa;
-    console.log(newData);
+
     if (newData) {
       this.chart.data.datasets[0].data = newData;
     }
