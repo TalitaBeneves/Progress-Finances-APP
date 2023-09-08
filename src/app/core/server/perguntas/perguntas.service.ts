@@ -24,7 +24,7 @@ export class PerguntasService {
 
   cadastrarPergunta(model: CadastrarPergunta) {
     return this.http.post(
-      `${this.url}Usuarios/cadastrarPergunta`,
+      `${this.url}Usuario/cadastrarPergunta`,
       model,
       httpOptions
     );

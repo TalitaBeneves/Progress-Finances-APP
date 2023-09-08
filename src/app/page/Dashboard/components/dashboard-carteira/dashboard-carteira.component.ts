@@ -18,7 +18,7 @@ import { FinancesService } from 'src/app/core/server/Finances/finances.service';
 @Component({
   selector: 'app-dashboard-carteira',
   templateUrl: './dashboard-carteira.component.html',
-  styleUrls: ['./dashboard-carteira.component.css'],
+  styleUrls: ['./dashboard-carteira.component.scss'],
 })
 export class DashboardCarteiraComponent implements OnInit {
   @ViewChild('chart', { static: true }) canvas2: ElementRef<HTMLCanvasElement>;

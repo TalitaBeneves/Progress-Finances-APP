@@ -8,7 +8,7 @@ import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 @Component({
   selector: 'app-dashboard-meta',
   templateUrl: './dashboard-meta.component.html',
-  styleUrls: ['./dashboard-meta.component.css'],
+  styleUrls: ['./dashboard-meta.component.scss'],
 })
 export class DashboardMetaComponent implements OnInit {
   @ViewChild('chart', { static: true }) canvas: ElementRef<HTMLCanvasElement>;

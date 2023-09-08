@@ -27,11 +27,11 @@ export class UsuarioService {
   constructor(private http: HttpClient) {}
 
   cadastrarUsuario(model: CadastrarUsuario) {
-    return this.http.post(`${this.url}Usuarios/cadastrarUsuario`, model);
+    return this.http.post(`${this.url}Usuario/cadastrarUsuario`, model);
   }
 
   login(model: LoginUsuario) {
-    return this.http.post(`${this.url}Usuarios/Login`, model);
+    return this.http.post(`${this.url}Usuario/Login`, model);
   }
 
   setCurrentUser(user: any): void {
@@ -49,13 +49,13 @@ export class UsuarioService {
 
   buscarMetaInvestimentoPeloId(idUsuario: number) {
     return this.http.get(
-      `${this.url}Usuarios/buscarMetaInvestimentoPeloId/${idUsuario}`
+      `${this.url}Usuario/buscarMetaInvestimentoPeloId/${idUsuario}`
     );
   }
 
   atualizarDados(model: UsuarioLogado) {
     return this.http.put(
-      `${this.url}Usuarios/EditarUsuario`,
+      `${this.url}Usuario/EditarUsuario`,
       model,
       httpOptions
     );
@@ -67,13 +67,13 @@ export class UsuarioService {
     formData.append('file', fileToUpload);
 
     return this.http
-      .post(`${this.url}Usuarios/upload-image/${idUsuario}`, formData)
+      .post(`${this.url}Usuario/upload-image/${idUsuario}`, formData)
       .pipe(take(1));
   }
 
   deletarConta(idUsuario: number) {
     return this.http.delete<any>(
-      `${this.url}Usuarios/DeletarUsuario/${idUsuario}`
+      `${this.url}Usuario/DeletarUsuario/${idUsuario}`
     );
   }
 }

@@ -41,14 +41,14 @@ export class CadastroComponent implements OnInit {
     this.form = this.fb.group({
       email: [null, Validators.required],
       senha: [null, Validators.required],
-      usuario: [null, Validators.required],
+      nome: [null, Validators.required],
     });
   }
 
   cadastrarUsuario() {
     this.spinner.show();
     const model: CadastrarUsuario = {
-      nome: this.form.value.usuario,
+      nome: this.form.value.nome,
       senha: this.form.value.senha,
       email: this.form.value.email,
     };
