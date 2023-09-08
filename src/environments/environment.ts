@@ -4,9 +4,14 @@
 
 export const environment = {
   production: false,
-  url: 'https://localhost:7162/controller',
-  urlBase: 'https://localhost:7162/api/',
-  urlImg: 'https://localhost:7162/',
+  // url: 'http://progress-finances-v4-env.eba-3vkummbp.us-east-2.elasticbeanstalk.com/controller',
+  // urlBase:
+  //   'http://progress-finances-v4-env.eba-3vkummbp.us-east-2.elasticbeanstalk.com/api/',
+  // urlImg:
+  //   'http://progress-finances-v4-env.eba-3vkummbp.us-east-2.elasticbeanstalk.com/',
+  url: 'https://localhost:7195/controller',
+  urlBase: 'https://localhost:7195/api/',
+  urlImg: 'https://localhost:7195/',
 };
 
 /*

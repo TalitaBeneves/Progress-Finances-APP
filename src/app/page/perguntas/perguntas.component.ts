@@ -62,7 +62,7 @@ export class PerguntasComponent implements OnInit {
       },
     });
 
-    dialog.afterClosed().subscribe((result) => {});
+    dialog.afterClosed().subscribe((result) => { });
   }
 
   getDadosTabela(e) {

@@ -55,7 +55,7 @@ export class DialogMeusAtivosComponent implements OnInit {
     private servicePergunta: PerguntasService,
     private serviceUsuario: UsuarioService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.montaForm();
@@ -119,7 +119,7 @@ export class DialogMeusAtivosComponent implements OnInit {
     this.form = this.fb.group({
       tipoAtivo: [null, Validators.required],
       nome: [null, Validators.required],
-      quantidadeDeAtivo: [null, Validators.required],
+      qtdAtivos: [null, Validators.required],
       localAlocado: [null, Validators.required],
       valorAtualDoAtivo: [null, Validators.required],
     });
@@ -140,7 +140,7 @@ export class DialogMeusAtivosComponent implements OnInit {
 
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
-      parseInt(this.form.value.quantidadeDeAtivo);
+      parseInt(this.form.value.qtdAtivos);
 
     const model: CadastrarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
@@ -149,7 +149,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       sugestaoInvestimento: sugestaoInvestimento,
       tipo: this.form.value.tipoAtivo,
       localAlocado: this.form.value.localAlocado,
-      qtdAtivos: parseInt(this.form.value.quantidadeDeAtivo),
+      qtdAtivos: parseInt(this.form.value.qtdAtivos),
       valorTotalInvestido: calculaTotal,
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
     };
@@ -175,14 +175,14 @@ export class DialogMeusAtivosComponent implements OnInit {
 
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
-      parseInt(this.form.value.quantidadeDeAtivo);
+      parseInt(this.form.value.qtdAtivos);
 
     const model: AtualizarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
       ativo_id: this.data.ativo_id,
       nome: this.form.value.nome,
       localAlocado: this.form.value.localAlocado,
-      qtdAtivos: parseInt(this.form.value.quantidadeDeAtivo),
+      qtdAtivos: parseInt(this.form.value.qtdAtivos),
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
       valorTotalInvestido: calculaTotal,
       nota: this.data.nota,

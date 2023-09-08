@@ -20,11 +20,11 @@ const httpOptions = {
 export class PerguntasService {
   url: string = environment.urlBase;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   cadastrarPergunta(model: CadastrarPergunta) {
     return this.http.post(
-      `${this.url}Usuario/cadastrarPergunta`,
+      `${this.url}Perguntas/cadastrarPergunta`,
       model,
       httpOptions
     );
