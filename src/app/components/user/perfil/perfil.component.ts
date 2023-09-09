@@ -20,7 +20,7 @@ export class PerfilComponent implements OnInit {
     private serviceUsuario: UsuarioService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dadosUser = this.serviceUsuario.getUserLocalStorage();
@@ -28,6 +28,8 @@ export class PerfilComponent implements OnInit {
     if (this.dadosUser.imagemUrl !== '') {
       this.imagemURL =
         environment.urlImg + 'resources/images/' + this.dadosUser.imagemUrl;
+    } else {
+      this.imagemURL = 'assets/img/avatar.jpg'
     }
   }
 
