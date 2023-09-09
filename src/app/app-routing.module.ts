@@ -71,6 +71,15 @@ const routes: Routes = [
         (m) => m.PerguntasModule
       ),
   },
+  {
+    path: '**',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./page/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
   { path: '**', component: LoginComponent },
 ];
 
@@ -78,4 +87,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

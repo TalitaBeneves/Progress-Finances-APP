@@ -87,7 +87,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   onSelectionChange() {
     this.spinner.show();
     this.servicePergunta
-      .buscarPergunta(this.getIdUser.usuario_Id)
+      .buscarPerguntasAtivasIdUsuario(this.getIdUser.usuario_Id)
       .subscribe({
         next: (res) => {
           this.perguntas = res;

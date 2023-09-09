@@ -59,7 +59,7 @@
             </td>
           </tr>
         </tbody>
-        <div *ngIf="perguntas.length == 0" class="my-3">
+        <div *ngIf="perguntas?.length == 0" class="my-3">
           <h3 class="text-center font-weight-bold">
             Nenhuma pergunta cadastrada. Favor cadastrar uma pergunta na tela de
             "Suas perguntas" para continuar o cadastro do seu ativo.
@@ -74,7 +74,7 @@
   <button mat-raised-button color="primary" (click)="cancelar()">
     Cancelar
   </button>
-  <button mat-raised-button color="warn" [disabled]="perguntas.length == 0" (click)="salvar()">
+  <button mat-raised-button color="warn" [disabled]="perguntas?.length == 0" (click)="salvar()">
     {{ btnTitle }}
   </button>
 </div>

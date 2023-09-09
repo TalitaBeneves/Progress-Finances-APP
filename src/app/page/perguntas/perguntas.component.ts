@@ -84,4 +84,16 @@ export class PerguntasComponent implements OnInit {
       })
       .add(() => this.spinner.hide());
   }
+
+  habilitaDesabilitaPergunta(model: any, e) {
+    this.servicePerguntas
+      .habilitaDesabilitaPergunta(model.usuario_Id, model.pergunta_Id, e)
+      .subscribe({
+        next: () => { },
+        error: (e) => {
+          console.error(e);
+          this.toastr.error(`${e.messege}`, 'Erro');
+        },
+      });
+  }
 }

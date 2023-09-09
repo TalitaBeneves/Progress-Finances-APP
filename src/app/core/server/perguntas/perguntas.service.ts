@@ -36,6 +36,12 @@ export class PerguntasService {
     );
   }
 
+  buscarPerguntasAtivasIdUsuario(idUsuario: number) {
+    return this.http.get<ListarPerguntas>(
+      `${this.url}Perguntas/buscarPerguntasAtivasIdUsuario/${idUsuario}`
+    );
+  }
+
   atualizarPergunta(model: AtualizarPergunta) {
     return this.http.put(
       `${this.url}Perguntas/EditarPergunta`,
@@ -49,4 +55,16 @@ export class PerguntasService {
       `${this.url}Perguntas/DeletarPergunta/${idPergunta}`
     );
   }
+
+  habilitaDesabilitaPergunta(
+    idUsuario: number,
+    idPergunta: number,
+    ativo: boolean
+  ) {
+    return this.http.put(
+      `${this.url}Perguntas/habilitaDesabilitaPergunta?idUsuario=${idUsuario}&idPergunta=${idPergunta}&ativo=${ativo}`,
+      httpOptions
+    );
+  }
+
 }

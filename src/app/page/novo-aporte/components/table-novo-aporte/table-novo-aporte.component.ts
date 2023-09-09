@@ -15,16 +15,16 @@ export class TableNovoAporteComponent {
   constructor(
     private seviceFinaces: FinancesService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   naoCalcula(model: any, e) {
     this.seviceFinaces
       .naoCalcularInvestimento(model.usuario_id, model.ativo_id, e)
       .subscribe({
-        next: () => {},
+        next: () => { },
         error: (e) => {
           console.error(e);
-          this.toastr.success(`${e.messege}`, 'Erro');
+          this.toastr.error(`${e.messege}`, 'Erro');
         },
       });
   }

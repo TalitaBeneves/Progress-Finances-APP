@@ -31,7 +31,7 @@ export class CadastroComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.montaForm();

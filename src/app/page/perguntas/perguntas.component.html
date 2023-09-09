@@ -1,8 +1,5 @@
 <section class="container" style="margin: 200px auto">
-  <div
-    class="container b"
-    style="justify-content: end; align-items: end; display: flex"
-  >
+  <div class="container b" style="justify-content: end; align-items: end; display: flex">
     <button (click)="openDialogPerguntas()">+Cadastrar Pergunta</button>
   </div>
 
@@ -23,21 +20,14 @@
             <td>{{ item.pergunta }}</td>
             <td>{{ item.tipo == 1 ? "FIIs" : "Ação" }}</td>
             <td>
-              <mat-slide-toggle [(ngModel)]="item.ativo"></mat-slide-toggle>
+              <mat-slide-toggle (change)="habilitaDesabilitaPergunta(item, $event.checked)"
+                [(ngModel)]="item.ativo"></mat-slide-toggle>
             </td>
             <td>
-              <button
-                type="button"
-                (click)="getDadosTabela(item)"
-                class="btn btn-primary"
-              >
+              <button type="button" (click)="getDadosTabela(item)" class="btn btn-primary">
                 <i class="bi bi-pencil-square"></i>
               </button>
-              <button
-                type="button"
-                (click)="deletarAtivo(item)"
-                class="btn btn-danger ml-1"
-              >
+              <button type="button" (click)="deletarAtivo(item)" class="btn btn-danger ml-1">
                 <i class="bi bi-trash3"></i>
               </button>
             </td>
