@@ -33,7 +33,13 @@ export class DialogMeusAtivosComponent implements OnInit {
   disabled = false;
   perguntas: any;
   value: any;
-  qtdPontos: number = 0;
+  // qtdPontos: number = 0;
+  qtdPontosPositivos: number = 0;
+  qtdPontosNegativos: number = 0;
+  pontuacaoFinal: number = 0;
+  mostra = true
+  respostasPerguntas: { [perguntaId: number]: boolean } = {};
+
   recomendacaoPorcentagem: number;
   sugestaoInvestimento: number;
   dadosMeta: ListarMetaInvestimentoModel;
@@ -66,6 +72,7 @@ export class DialogMeusAtivosComponent implements OnInit {
     if (this.data) {
       this.btnTitle = 'Editar ativo';
       this.value = this.data.tipo;
+      this.mostra = false;
       this.form.get('tipoAtivo')?.disable();
       this.form.get('tipoAtivo')?.setValue(this.value);
       this.form.patchValue(this.data);
@@ -97,7 +104,7 @@ export class DialogMeusAtivosComponent implements OnInit {
               (item: { tipo: number }) => item.tipo == this.value
             );
 
-            this.checked = this.perguntas.length;
+            this.qtdPontosNegativos = this.perguntas.length;
           }
         },
         error: (e) => {
@@ -107,12 +114,23 @@ export class DialogMeusAtivosComponent implements OnInit {
       .add(() => this.spinner.hide());
   }
 
-  onQtdPontosChange(pergunta: any) {
-    if (pergunta.ativo) {
-      this.qtdPontos += 1;
-    } else {
-      this.qtdPontos -= 1;
+  onQtdPontosChange(perguntaId: number) {
+    const resposta = this.respostasPerguntas[perguntaId];
+
+    if (resposta === true) {
+      this.qtdPontosPositivos++;
+      this.qtdPontosNegativos--;
+    } else if (resposta === false) {
+      this.qtdPontosPositivos--;
+      this.qtdPontosNegativos++;
     }
+
+    this.calcularPontuacaoFinal();
+
+  }
+  calcularPontuacaoFinal() {
+    const pontuacaoPercentual = (this.qtdPontosPositivos / this.qtdPontosNegativos) * 10;
+    this.pontuacaoFinal = Math.min(pontuacaoPercentual, 10);
   }
 
   montaForm() {
@@ -135,16 +153,15 @@ export class DialogMeusAtivosComponent implements OnInit {
       return;
     }
     this.spinner.show();
-    const qtdPontos = this.qtdPontos;
-    const checked = this.checked;
+    const qtdPontos = this.qtdPontosPositivos;
+    const pontuacaoFinal = this.qtdPontosNegativos;
 
-    const percentual = qtdPontos / checked;
+    const percentual = qtdPontos / (qtdPontos + pontuacaoFinal);
 
-    let pontuacao = Math.round(percentual * 10);
-    if (this.value == 2) pontuacao = 10;
+    let nota = Math.min(percentual * 10, 10);
 
     const sugestaoInvestimento =
-      pontuacao * parseInt(this.form.value.valorAtualDoAtivo);
+      nota * parseInt(this.form.value.valorAtualDoAtivo);
 
     const calculaTotal =
       parseInt(this.form.value.valorAtualDoAtivo) *
@@ -153,7 +170,7 @@ export class DialogMeusAtivosComponent implements OnInit {
     const model: CadastrarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
       nome: this.form.value.nome,
-      nota: pontuacao,
+      nota: nota,
       sugestaoInvestimento: sugestaoInvestimento,
       tipo: this.form.value.tipoAtivo,
       localAlocado: this.form.value.localAlocado,

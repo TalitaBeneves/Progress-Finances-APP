@@ -29,43 +29,46 @@
     </mat-form-field>
   </form>
 
-  <div *ngIf="(value && value != 2) || (data != null && data?.tipo != 2)" class="py-4">
-    <h5 style="font-size: 17px">Responda as perguntas com sinceridade</h5>
-    <div class="caixa">
-      <div class="box">
-        <div class="positivo">Pontos Positivos {{ qtdPontos }}</div>
-        <div class="negativo">Pontos Negativos {{ checked - qtdPontos }}</div>
-        <div class="final">
-          Pontuação Final: {{ ((qtdPontos / checked) * 10).toFixed(0) }}
+  <div *ngIf="value && value != 2" class="py-4">
+    <div *ngIf="mostra">
+      <h5 style="font-size: 17px">Responda as perguntas com sinceridade</h5>
+      <div class="caixa">
+        <div class="box">
+          <div class="positivo">Pontos Positivos {{ qtdPontosPositivos }}</div>
+          <div class="negativo">Pontos Negativos {{ qtdPontosNegativos }}</div>
+          <div class="final">
+            Pontuação Final: {{ pontuacaoFinal.toFixed(0) }}
+          </div>
         </div>
+        <br />
+        <table class="table mt-4 text-left text-dark" style="background-color: #d9d9d9">
+          <thead>
+            <tr>
+              <th scope="col">Pergunta</th>
+              <th scope="col">Resposta</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let pergunta of perguntas">
+            <tr>
+              <td>{{ pergunta.pergunta }}</td>
+              <td>
+                <div class="custom-control custom-checkbox">
+                  <input [(ngModel)]="respostasPerguntas[pergunta.pergunta_Id]"
+                    (change)="onQtdPontosChange(pergunta.pergunta_Id)" type="checkbox" class="custom-control-input"
+                    id="{{ pergunta.pergunta_Id }}" />
+                  <label class="custom-control-label" for="{{ pergunta.pergunta_Id }}"></label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <div *ngIf="perguntas?.length == 0" class="my-3">
+            <h3 class="text-center font-weight-bold">
+              Nenhuma pergunta cadastrada. Favor cadastrar uma pergunta na tela de
+              "Suas perguntas" para continuar o cadastro do seu ativo.
+            </h3>
+          </div>
+        </table>
       </div>
-      <br />
-      <table class="table mt-4 text-left text-dark" style="background-color: #d9d9d9">
-        <thead>
-          <tr>
-            <th scope="col">Pergunta</th>
-            <th scope="col">resposta</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let pergunta of perguntas">
-          <tr>
-            <td>{{ pergunta.pergunta }}</td>
-            <td>
-              <div class="custom-control custom-checkbox">
-                <input ([ngModel])="pergunta.ativo" (change)="onQtdPontosChange(pergunta)" type="checkbox"
-                  class="custom-control-input" id="{{ pergunta.pergunta_Id }}" />
-                <label class="custom-control-label" for="{{ pergunta.pergunta_Id }}"></label>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-        <div *ngIf="perguntas?.length == 0" class="my-3">
-          <h3 class="text-center font-weight-bold">
-            Nenhuma pergunta cadastrada. Favor cadastrar uma pergunta na tela de
-            "Suas perguntas" para continuar o cadastro do seu ativo.
-          </h3>
-        </div>
-      </table>
     </div>
   </div>
 </div>
