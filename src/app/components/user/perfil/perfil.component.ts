@@ -25,9 +25,9 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
     this.dadosUser = this.serviceUsuario.getUserLocalStorage();
 
-    if (this.dadosUser.imagemUrl !== '') {
+    if (this.dadosUser.imagemUrl !== '' && this.dadosUser.imagemUrl !== null) {
       this.imagemURL =
-        environment.urlImg + 'resources/images/' + this.dadosUser.imagemUrl;
+        environment.urlImg + this.dadosUser.imagemUrl;
     } else {
       this.imagemURL = 'assets/img/avatar.jpg'
     }
