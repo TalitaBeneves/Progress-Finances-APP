@@ -159,13 +159,16 @@ export class DialogMeusAtivosComponent implements OnInit {
     const percentual = qtdPontos / (qtdPontos + pontuacaoFinal);
 
     let nota = Math.min(percentual * 10, 10);
+    if (this.value == 2) nota = 10;
 
     const sugestaoInvestimento =
       nota * parseInt(this.form.value.valorAtualDoAtivo);
 
+    const valorFormatado = this.form.value.qtdAtivos.replace(',', '.');
+
+    const numero = parseFloat(valorFormatado);
     const calculaTotal =
-      parseInt(this.form.value.valorAtualDoAtivo) *
-      parseInt(this.form.value.qtdAtivos);
+      parseFloat(this.form.value.valorAtualDoAtivo) * numero;
 
     const model: CadastrarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
@@ -174,7 +177,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       sugestaoInvestimento: Math.round(sugestaoInvestimento),
       tipo: this.form.value.tipoAtivo,
       localAlocado: this.form.value.localAlocado,
-      qtdAtivos: parseInt(this.form.value.qtdAtivos),
+      qtdAtivos: numero,
       valorTotalInvestido: calculaTotal,
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
       chekedParaCalculo: true
