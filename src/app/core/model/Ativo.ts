@@ -21,6 +21,7 @@ export interface CadastrarAtivo {
   qtdAtivos: number;
   valorTotalInvestido: number;
   valorAtualDoAtivo: number;
+  chekedParaCalculo: boolean;
 }
 
 export interface AtualizarAtivo extends CadastrarAtivo {

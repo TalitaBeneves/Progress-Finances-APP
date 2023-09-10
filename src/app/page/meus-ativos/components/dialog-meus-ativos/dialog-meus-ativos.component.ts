@@ -170,13 +170,14 @@ export class DialogMeusAtivosComponent implements OnInit {
     const model: CadastrarAtivo = {
       usuario_Id: this.getIdUser.usuario_Id,
       nome: this.form.value.nome,
-      nota: nota,
-      sugestaoInvestimento: sugestaoInvestimento,
+      nota: Math.round(nota),
+      sugestaoInvestimento: Math.round(sugestaoInvestimento),
       tipo: this.form.value.tipoAtivo,
       localAlocado: this.form.value.localAlocado,
       qtdAtivos: parseInt(this.form.value.qtdAtivos),
       valorTotalInvestido: calculaTotal,
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
+      chekedParaCalculo: true
     };
 
     this.serviceFinances
@@ -221,6 +222,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       nota: this.data.nota,
       sugestaoInvestimento: this.data.sugestaoInvestimento,
       tipo: this.data.tipo,
+      chekedParaCalculo: true
     };
 
     this.serviceFinances
