@@ -23,10 +23,11 @@ const httpOptions = {
 })
 export class FinancesService {
   url: string = environment.urlBase;
+
   private _listners = new Subject<any>();
   private _listnersByFiltro = new Subject<any>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   listen(): Observable<any> {
     return this._listners.asObservable();
@@ -80,6 +81,10 @@ export class FinancesService {
 
   buscarPorAtivo(symbol: string) {
     return this.http.get(`${this.url}BuscarPorAtivo?${symbol}`);
+  }
+
+  buscarValorAtivo(ativo: string) {
+    return this.http.get<any>(`${this.url}BuscaValorAtivo/${ativo}`)
   }
 
   //Meta Investimento

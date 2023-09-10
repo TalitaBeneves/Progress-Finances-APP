@@ -33,11 +33,12 @@ export class DialogMeusAtivosComponent implements OnInit {
   disabled = false;
   perguntas: any;
   value: any;
-  // qtdPontos: number = 0;
+
   qtdPontosPositivos: number = 0;
   qtdPontosNegativos: number = 0;
   pontuacaoFinal: number = 0;
   mostra = true
+  nome: string = '';
   respostasPerguntas: { [perguntaId: number]: boolean } = {};
 
   recomendacaoPorcentagem: number;
@@ -72,7 +73,6 @@ export class DialogMeusAtivosComponent implements OnInit {
     if (this.data) {
       this.btnTitle = 'Editar ativo';
       this.value = this.data.tipo;
-      this.mostra = false;
       this.form.get('tipoAtivo')?.disable();
       this.form.get('tipoAtivo')?.setValue(this.value);
       this.form.patchValue(this.data);
@@ -89,6 +89,17 @@ export class DialogMeusAtivosComponent implements OnInit {
         },
       })
       .add(() => this.spinner.hide());
+  }
+
+  getNomeAtivo(nome: string) {
+    if (nome.length >= 5) {
+      this.serviceFinances.buscarValorAtivo(nome).subscribe({
+        next: (res) => {
+          this.form.get('valorAtualDoAtivo')?.setValue(res.results[0].regularMarketPrice);
+        },
+        error: (e) => { console.error(e) },
+      })
+    }
   }
 
   onSelectionChange() {

@@ -13,7 +13,7 @@
     <br />
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Nome do ativo</mat-label>
-      <input matInput formControlName="nome" />
+      <input (change)="getNomeAtivo(nome)" [(ngModel)]="nome" matInput formControlName="nome" />
     </mat-form-field>
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Local alocado</mat-label>
