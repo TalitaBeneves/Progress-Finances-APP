@@ -30,7 +30,7 @@ export class MetaHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getMeta();
+    // this.getMeta();
   }
 
   // onPercentChange(newPercent: number) {
@@ -67,7 +67,7 @@ export class MetaHomeComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => { });
   }
 
   filtro() {

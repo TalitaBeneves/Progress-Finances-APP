@@ -1,18 +1,15 @@
 <section class="container">
-  <mat-tab-group
-    mat-align-tabs="center"
-    style="
+  <mat-tab-group mat-align-tabs="center" style="
       margin: 128px auto;
       background: rgba(0, 0, 0, 0.12);
       padding: 33px;
       border-radius: 12px;
-    "
-  >
+    ">
     <mat-tab>
       <ng-template mat-tab-label> Meta de Investimento </ng-template>
       <app-meta-investimento></app-meta-investimento>
     </mat-tab>
-    <mat-tab>
+    <!-- <mat-tab>
       <div style="display: flex; justify-content: end">
         <button (click)="addMeta()">+Adicionar Meta</button>
       </div>
@@ -27,6 +24,6 @@
       <app-metas-concluidas
         [filtroStatusConcluidas]="filtroStatusConcluidas"
       ></app-metas-concluidas>
-    </mat-tab>
+    </mat-tab> -->
   </mat-tab-group>
 </section>

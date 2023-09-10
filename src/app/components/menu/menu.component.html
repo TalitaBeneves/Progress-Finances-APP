@@ -4,7 +4,7 @@
     <!-- <img class="mostra" /> -->
     <!-- <i class="bi bi-bar-chart-line "></i> -->
     <i class="bi bi-bar-chart-fill mostra"></i>
-    <p style="color: #fff; text-align: center">Progress Finance</p>
+    <p style="color: #fff; text-align: center">Progress Finances</p>
   </div>
 
   <!-- <div style="display: flexs">
@@ -14,23 +14,15 @@
       <p class="text-white">talita@tallita.com</p>
     </div> -->
   <ul class="mt-5 ml-1">
-    <li
-      class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Dashboard' }"
-      (click)="activeItem = 'Dashboard'"
-    >
+    <li class="item-menu ativo" [ngClass]="{ active: activeItem === 'Dashboard' }" (click)="activeItem = 'Dashboard'">
       <a routerLink="/dashboard">
         <span class="icon"><i class="bi bi-pie-chart-fill"></i></span>
         <span class="ml-4">Dashboard</span>
       </a>
     </li>
 
-    <li
-      class="item-menu mb-0"
-      class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Minhas Metas' }"
-      (click)="activeItem = 'Minhas Metas'"
-    >
+    <li class="item-menu mb-0" class="item-menu ativo" [ngClass]="{ active: activeItem === 'Minhas Metas' }"
+      (click)="activeItem = 'Minhas Metas'">
       <a routerLink="/metas-home">
         <span class="icon">
           <i class="bi bi-graph-up"></i>
@@ -38,59 +30,39 @@
         <span class="ml-4">Minhas Metas</span>
       </a>
     </li>
-    <li
-      class="item-menu"
-      class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Meus Ativos' }"
-      (click)="activeItem = 'Meus Ativos'"
-    >
+    <li class="item-menu" class="item-menu ativo" [ngClass]="{ active: activeItem === 'Meus Ativos' }"
+      (click)="activeItem = 'Meus Ativos'">
       <a routerLink="/meus-ativos">
         <span class="icon"><i class="bi bi-wallet2"></i></span>
         <span class="ml-4">Meus Ativos</span>
       </a>
     </li>
 
-    <li
-      class="item-menu"
-      class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Aporte' }"
-      (click)="activeItem = 'Aporte'"
-    >
+    <li class="item-menu" class="item-menu ativo" [ngClass]="{ active: activeItem === 'Aporte' }"
+      (click)="activeItem = 'Aporte'">
       <a routerLink="/novo-aporte">
         <span class="icon"><i class="bi bi-clipboard-data"></i></span>
         <span class="ml-4">Novo Aporte</span>
       </a>
     </li>
 
-    <li
-      class="item-menu"
-      class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'perguntas' }"
-      (click)="activeItem = 'perguntas'"
-    >
+    <li class="item-menu" class="item-menu ativo" [ngClass]="{ active: activeItem === 'perguntas' }"
+      (click)="activeItem = 'perguntas'">
       <a routerLink="/perguntas">
         <span class="icon"><i class="bi bi-journal-text"></i></span>
         <span class="ml-4">Suas perguntas</span>
       </a>
     </li>
 
-    <li
-      class="item-menu"
-      class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Perfil' }"
-      (click)="activeItem = 'Perfil'"
-    >
+    <li class="item-menu" class="item-menu ativo" [ngClass]="{ active: activeItem === 'Perfil' }"
+      (click)="activeItem = 'Perfil'">
       <a routerLink="/perfil">
         <span class="icon"><i class="bi bi-person-circle"></i></span>
         <span class="ml-4">Perfil</span>
       </a>
     </li>
-    <li
-      class="item-menu"
-      class="item-menu ativo"
-      [ngClass]="{ active: activeItem === 'Sair' }"
-      (click)="activeItem = 'Sair'"
-    >
+    <li class="item-menu" class="item-menu ativo" [ngClass]="{ active: activeItem === 'Sair' }"
+      (click)="activeItem = 'Sair'">
       <a routerLink="/login" (click)="logout()">
         <span class="icon"><i class="bi bi-box-arrow-right"></i></span>
         <span class="ml-4">Sair</span>
