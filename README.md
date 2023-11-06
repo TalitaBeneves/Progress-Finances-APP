@@ -26,5 +26,10 @@ Para começar a usar o ProgressFinances, siga estas etapas:
 Talita Beneves
 talitabeneves15@gmail.com
 
+
+https://github.com/TalitaBeneves/Progress-Finances-APP/assets/83943087/98b013e9-1d9b-4243-a811-07c2cfa9e663
+
+https://github.com/TalitaBeneves/Progress-Finances-APP/assets/83943087/8a0bb1f2-2e2f-4630-9ea5-45cefb7ec0ef
+
 ## Licença
 Este projeto está licenciado sob a MIT License. Veja o arquivo LICENSE.md para mais detalhes.
