@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import {
   CadastrarUsuario,
   LoginUsuario,
+  RedefinirUsuarioModel,
   UsuarioLogado,
 } from '../../model/Usuario';
 const httpOptions = {
@@ -56,6 +57,14 @@ export class UsuarioService {
   atualizarDados(model: UsuarioLogado) {
     return this.http.put(
       `${this.url}Usuario/EditarUsuario`,
+      model,
+      httpOptions
+    );
+  }
+
+  redefinirSenha(model: RedefinirUsuarioModel) {
+    return this.http.put(
+      `${this.url}Usuario/RedefinirSenha`,
       model,
       httpOptions
     );

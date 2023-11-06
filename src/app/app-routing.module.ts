@@ -12,10 +12,12 @@ import { PerguntasComponent } from './page/perguntas/perguntas.component';
 import { CadastroComponent } from './components/user/cadastro/cadastro.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { PerfilComponent } from './components/user/perfil/perfil.component';
+import { RedefinirSenhaComponent } from './components/user/redefinir-senha/redefinir-senha.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
+  { path: 'redefinir-senha', component: RedefinirSenhaComponent },
   {
     path: 'metas-home',
     component: MetaHomeComponent,
@@ -87,4 +89,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

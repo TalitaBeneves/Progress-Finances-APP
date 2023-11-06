@@ -29,6 +29,12 @@ export interface AtualizarDadosUsuarioModel {
   novaSenha?: string;
 }
 
+export interface RedefinirUsuarioModel {
+  idUsuario: number;
+  email: string;
+  novaSenha: string;
+}
+
 export interface CadastrarPergunta {
   idUsuario: number;
   ativo: boolean;

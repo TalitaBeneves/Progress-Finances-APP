@@ -4,8 +4,7 @@
     style="width: 467px; height: 65%; background-color: var(--color-progress)"
   >
     <div class="text-center" style="margin: 40% auto">
-      <h1 class="my-0">Bem vindo (a)</h1>
-      <p class="my-0">Gerencie seu ativos de uma forma descomplicada!</p>
+      <h1 class="my-0">Redefina sua senha</h1>
     </div>
   </div>
   <div class="login rounded-right">
@@ -13,16 +12,13 @@
 
     <form [formGroup]="form" class="form">
       <input type="email" formControlName="email" placeholder="E-mail" />
-      <input type="password" formControlName="senha" placeholder="senha" />
-      <a class="text-right" *ngIf="mostraRedefinir" href="/redefinir-senha"
-        >Redefinir senha</a
-      >
-      <button class="my-3" type="submit" (click)="login()">Entrar</button>
+      <input type="password" formControlName="novaSenha" placeholder="Senha" />
+      <button class="my-3" type="submit" (click)="redefinir()">Entrar</button>
     </form>
 
     <p>
       Ainda não tem conta?
-      <a href="/cadastro" style="color: rgb(134, 158, 45)">Cadastre-se </a>agora
+      <a href="/login" style="color: rgb(134, 158, 45)">Login </a>
     </p>
   </div>
 </section>

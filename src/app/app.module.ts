@@ -40,6 +40,7 @@ import { MeusAtivosModule } from './page/meus-ativos/meus-ativos.module';
 import { NovoAporteModule } from './page/novo-aporte/novo-aporte.module';
 import { PerguntasModule } from './page/perguntas/perguntas.module';
 
+import { RedefinirSenhaModule } from './components/user/redefinir-senha/redefinir-senha.module';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { UsuarioService } from './core/server/usuario/usuario.service';
 
@@ -88,6 +89,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgxSpinnerModule,
     LoginModule,
     CadastroModule,
+    RedefinirSenhaModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true,
     }),

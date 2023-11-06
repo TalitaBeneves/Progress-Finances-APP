@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { LoginUsuario } from 'src/app/core/model/Usuario';
 import { UsuarioService } from 'src/app/core/server/usuario/usuario.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-redefinir-senha',
+  templateUrl: './redefinir-senha.component.html',
+  styleUrls: ['./redefinir-senha.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class RedefinirSenhaComponent implements OnInit {
   form: FormGroup;
-  user: any;
-  mostraRedefinir: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private serviceUsuario: UsuarioService,
@@ -30,29 +28,21 @@ export class LoginComponent implements OnInit {
   montaForm() {
     this.form = this.fb.group({
       email: [null, Validators.required],
-      senha: [null, Validators.required],
+      novaSenha: [null, Validators.required],
     });
   }
 
-  login() {
+  redefinir() {
     this.spinner.show();
-    const model: LoginUsuario = {
-      senha: this.form.value.senha,
-      email: this.form.value.email,
-    };
-
     this.serviceUsuario
-      .login(model)
+      .redefinirSenha(this.form.value)
       .subscribe({
-        next: (res) => {
-          this.user = res;
-          this.router.navigate(['metas-home']);
-          localStorage.setItem('usuario', JSON.stringify(this.user));
+        next: () => {
+          this.toastr.success('Você redefiniu sua senha', 'Sucesso');
+          this.router.navigate(['login']);
         },
         error: (e) => {
-          console.error(e);
           this.toastr.error(`${e.error}`, 'danger');
-          this.mostraRedefinir = true;
         },
       })
       .add(() => this.spinner.hide());
