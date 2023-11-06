@@ -27,9 +27,10 @@ Talita Beneves
 talitabeneves15@gmail.com
 
 
-https://github.com/TalitaBeneves/Progress-Finances-APP/assets/83943087/98b013e9-1d9b-4243-a811-07c2cfa9e663
 
-https://github.com/TalitaBeneves/Progress-Finances-APP/assets/83943087/8a0bb1f2-2e2f-4630-9ea5-45cefb7ec0ef
+https://github.com/TalitaBeneves/Progress-Finances-APP/assets/83943087/3fb59d6f-8f50-478e-8292-8e874dd7b19f
+
+https://github.com/TalitaBeneves/Progress-Finances-APP/assets/83943087/ac341960-0f49-47d2-981d-40799bb475f8
 
 ## Licença
 Este projeto está licenciado sob a MIT License. Veja o arquivo LICENSE.md para mais detalhes.
