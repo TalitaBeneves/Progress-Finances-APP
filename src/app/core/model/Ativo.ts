@@ -1,8 +1,8 @@
 import { TipoAtivo } from './Enums';
 
 export interface ListaAtivoCalculado {
-  usuario_Id: number;
-  ativo_id: number;
+  idUsuario: number;
+  idAtivo: number;
   nome: string;
   nota: number;
   recomendacaoPorcentagem: number;
@@ -12,7 +12,7 @@ export interface ListaAtivoCalculado {
 }
 
 export interface CadastrarAtivo {
-  usuario_Id: number;
+  idUsuario: number;
   nome: string;
   nota: number;
   sugestaoInvestimento: number;
@@ -25,5 +25,5 @@ export interface CadastrarAtivo {
 }
 
 export interface AtualizarAtivo extends CadastrarAtivo {
-  ativo_id: number;
+  idAtivo: number;
 }

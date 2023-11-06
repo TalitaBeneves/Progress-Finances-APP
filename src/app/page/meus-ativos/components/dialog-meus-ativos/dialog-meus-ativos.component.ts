@@ -37,7 +37,7 @@ export class DialogMeusAtivosComponent implements OnInit {
   qtdPontosPositivos: number = 0;
   qtdPontosNegativos: number = 0;
   pontuacaoFinal: number = 0;
-  mostra = true
+  mostra = true;
   nome: string = '';
   respostasPerguntas: { [perguntaId: number]: boolean } = {};
 
@@ -62,19 +62,20 @@ export class DialogMeusAtivosComponent implements OnInit {
     private servicePergunta: PerguntasService,
     private serviceUsuario: UsuarioService,
     private spinner: NgxSpinnerService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.montaForm();
 
     this.getIdUser = this.serviceUsuario.getUserLocalStorage();
-    this.getMetaId(this.getIdUser.usuario_Id);
+    this.getMetaId(this.getIdUser.idUsuario);
 
     if (this.data) {
       this.btnTitle = 'Editar ativo';
       this.value = this.data.tipo;
       this.form.get('tipoAtivo')?.disable();
       this.form.get('tipoAtivo')?.setValue(this.value);
+      this.nome = this.data.nome;
       this.form.patchValue(this.data);
     }
   }
@@ -95,17 +96,21 @@ export class DialogMeusAtivosComponent implements OnInit {
     if (nome.length >= 5) {
       this.serviceFinances.buscarValorAtivo(nome).subscribe({
         next: (res) => {
-          this.form.get('valorAtualDoAtivo')?.setValue(res.results[0].regularMarketPrice);
+          this.form
+            .get('valorAtualDoAtivo')
+            ?.setValue(res.results[0].regularMarketPrice);
         },
-        error: (e) => { console.error(e) },
-      })
+        error: (e) => {
+          console.error(e);
+        },
+      });
     }
   }
 
   onSelectionChange() {
     this.spinner.show();
     this.servicePergunta
-      .buscarPerguntasAtivasIdUsuario(this.getIdUser.usuario_Id)
+      .buscarPerguntasAtivasIdUsuario(this.getIdUser.idUsuario)
       .subscribe({
         next: (res) => {
           this.perguntas = res;
@@ -137,10 +142,10 @@ export class DialogMeusAtivosComponent implements OnInit {
     }
 
     this.calcularPontuacaoFinal();
-
   }
   calcularPontuacaoFinal() {
-    const pontuacaoPercentual = (this.qtdPontosPositivos / this.qtdPontosNegativos) * 10;
+    const pontuacaoPercentual =
+      (this.qtdPontosPositivos / this.qtdPontosNegativos) * 10;
     this.pontuacaoFinal = Math.min(pontuacaoPercentual, 10);
   }
 
@@ -178,11 +183,10 @@ export class DialogMeusAtivosComponent implements OnInit {
     const valorFormatado = this.form.value.qtdAtivos.replace(',', '.');
 
     const numero = parseFloat(valorFormatado);
-    const calculaTotal =
-      parseFloat(this.form.value.valorAtualDoAtivo) * numero;
+    const calculaTotal = parseFloat(this.form.value.valorAtualDoAtivo) * numero;
 
     const model: CadastrarAtivo = {
-      usuario_Id: this.getIdUser.usuario_Id,
+      idUsuario: this.getIdUser.idUsuario,
       nome: this.form.value.nome,
       nota: Math.round(nota),
       sugestaoInvestimento: Math.round(sugestaoInvestimento),
@@ -191,7 +195,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       qtdAtivos: numero,
       valorTotalInvestido: calculaTotal,
       valorAtualDoAtivo: this.form.value.valorAtualDoAtivo,
-      chekedParaCalculo: true
+      chekedParaCalculo: true,
     };
 
     this.serviceFinances
@@ -226,8 +230,8 @@ export class DialogMeusAtivosComponent implements OnInit {
       parseInt(this.form.value.qtdAtivos);
 
     const model: AtualizarAtivo = {
-      usuario_Id: this.getIdUser.usuario_Id,
-      ativo_id: this.data.ativo_id,
+      idUsuario: this.getIdUser.idUsuario,
+      idAtivo: this.data.idAtivo,
       nome: this.form.value.nome,
       localAlocado: this.form.value.localAlocado,
       qtdAtivos: parseInt(this.form.value.qtdAtivos),
@@ -236,7 +240,7 @@ export class DialogMeusAtivosComponent implements OnInit {
       nota: this.data.nota,
       sugestaoInvestimento: this.data.sugestaoInvestimento,
       tipo: this.data.tipo,
-      chekedParaCalculo: true
+      chekedParaCalculo: true,
     };
 
     this.serviceFinances

@@ -59,7 +59,7 @@ export class FormSenhaComponent implements OnInit {
 
     this.spinner.show();
     const model: AtualizarDadosUsuarioModel = {
-      usuario_Id: this.dadosUser.usuario_Id,
+      idUsuario: this.dadosUser.idUsuario,
       senhaAtual: this.form.value.senhaAtual,
       novaSenha: this.form.value.novaSenha ? this.form.value.novaSenha : null,
       email: this.dadosUser.email,

@@ -3,7 +3,11 @@
   <form [formGroup]="form">
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Tipo Ativo</mat-label>
-      <mat-select formControlName="tipoAtivo" [(ngModel)]="value" (ngModelChange)="onSelectionChange()">
+      <mat-select
+        formControlName="tipoAtivo"
+        [(ngModel)]="value"
+        (ngModelChange)="onSelectionChange()"
+      >
         <mat-option *ngFor="let ativo of ativos" [value]="ativo.value">
           {{ ativo.viewValue }}
         </mat-option>
@@ -13,11 +17,20 @@
     <br />
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Nome do ativo</mat-label>
-      <input (change)="getNomeAtivo(nome)" [(ngModel)]="nome" matInput formControlName="nome" />
+      <input
+        (change)="getNomeAtivo(nome)"
+        [(ngModel)]="nome"
+        matInput
+        formControlName="nome"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Local alocado</mat-label>
-      <input matInput formControlName="localAlocado" placeholder="Ex: NuInvest" />
+      <input
+        matInput
+        formControlName="localAlocado"
+        placeholder="Ex: NuInvest"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Valor atual do ativo</mat-label>
@@ -41,7 +54,10 @@
           </div>
         </div>
         <br />
-        <table class="table mt-4 text-left text-dark" style="background-color: #d9d9d9">
+        <table
+          class="table mt-4 text-left text-dark"
+          style="background-color: #d9d9d9"
+        >
           <thead>
             <tr>
               <th scope="col">Pergunta</th>
@@ -53,18 +69,25 @@
               <td>{{ pergunta.pergunta }}</td>
               <td>
                 <div class="custom-control custom-checkbox">
-                  <input [(ngModel)]="respostasPerguntas[pergunta.pergunta_Id]"
-                    (change)="onQtdPontosChange(pergunta.pergunta_Id)" type="checkbox" class="custom-control-input"
-                    id="{{ pergunta.pergunta_Id }}" />
-                  <label class="custom-control-label" for="{{ pergunta.pergunta_Id }}"></label>
+                  <input
+                    [(ngModel)]="respostasPerguntas[pergunta.idPergunta]"
+                    (change)="onQtdPontosChange(pergunta.idPergunta)"
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="{{ pergunta.idPergunta }}"
+                  />
+                  <label
+                    class="custom-control-label"
+                    for="{{ pergunta.idPergunta }}"
+                  ></label>
                 </div>
               </td>
             </tr>
           </tbody>
           <div *ngIf="perguntas?.length == 0" class="my-3">
             <h3 class="text-center font-weight-bold">
-              Nenhuma pergunta cadastrada. Favor cadastrar uma pergunta na tela de
-              "Suas perguntas" para continuar o cadastro do seu ativo.
+              Nenhuma pergunta cadastrada. Favor cadastrar uma pergunta na tela
+              de "Suas perguntas" para continuar o cadastro do seu ativo.
             </h3>
           </div>
         </table>

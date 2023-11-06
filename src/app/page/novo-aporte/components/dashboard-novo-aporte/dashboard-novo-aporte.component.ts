@@ -58,7 +58,7 @@ export class DashboardNovoAporteComponent implements OnInit {
   listarAtivos() {
     this.spinner.show();
     this.seviceFinaces
-      .litarAtivosById(this.idUsuario.usuario_Id)
+      .litarAtivosById(this.idUsuario.idUsuario)
       .subscribe({
         next: (res) => {
           this.items = res;

@@ -11,7 +11,8 @@ export const environment = {
   //   'http://progress-finances-v4-env.eba-3vkummbp.us-east-2.elasticbeanstalk.com/',
   url: 'https://localhost:7195/controller',
   urlBase: 'https://localhost:7195/api/',
-  urlImg: 'https://armazenamento-img-v1.s3.us-east-2.amazonaws.com/',
+  urlImg: 'https://localhost:7195/',
+  // urlImg: 'https://armazenamento-img-v1.s3.us-east-2.amazonaws.com/',
 };
 
 /*

@@ -35,7 +35,7 @@ export class DialogPerguntasComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private serviceFinances: FinancesService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.montaForm();
@@ -68,7 +68,7 @@ export class DialogPerguntasComponent implements OnInit {
       ativo: this.form.value.ativo,
       tipo: parseInt(this.form.value.tipo),
       pergunta: this.form.value.pergunta,
-      usuario_Id: this.data.userId,
+      idUsuario: this.data.userId,
     };
     this.servicePerguntas
       .cadastrarPergunta(model)
@@ -97,8 +97,8 @@ export class DialogPerguntasComponent implements OnInit {
     }
     this.spinner.show();
     const model: AtualizarPergunta = {
-      pergunta_Id: this.data.element.pergunta_Id,
-      usuario_Id: this.data.userId,
+      idPergunta: this.data.element.idPergunta,
+      idUsuario: this.data.userId,
       ativo: this.form.value.ativo,
       tipo: parseInt(this.form.value.tipo),
       pergunta: this.form.value.pergunta,

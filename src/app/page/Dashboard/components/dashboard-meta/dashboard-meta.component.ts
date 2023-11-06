@@ -33,7 +33,7 @@ export class DashboardMetaComponent implements OnInit {
 
   listaMeta() {
     this.seviceFinaces
-      .listarMetaInvestimento(this.dadosUsuario.usuario_Id)
+      .listarMetaInvestimento(this.dadosUsuario.idUsuario)
       .subscribe({
         next: (res: any) => {
           this.acoes = res[0].acoes;

@@ -23,6 +23,7 @@ export class MetaInvestimentoComponent implements OnInit {
   formFiis = new FormControl(null);
   formFixa = new FormControl(null);
   getId: any;
+  metaId: number;
   constructor(
     private serviceUsuario: UsuarioService,
     private servicesFinance: FinancesService,
@@ -41,9 +42,10 @@ export class MetaInvestimentoComponent implements OnInit {
   listarMetaInvestimento() {
     this.spinner.show();
     this.servicesFinance
-      .listarMetaInvestimento(this.getId.usuario_Id)
+      .listarMetaInvestimento(this.getId.idUsuario)
       .subscribe({
         next: (res) => {
+          this.metaId = res[0].idMeta;
           this.formAcoes.setValue(res[0].acoes);
           this.formFiis.setValue(res[0].fiis);
           this.formFixa.setValue(res[0].fixa);
@@ -56,7 +58,8 @@ export class MetaInvestimentoComponent implements OnInit {
   salvarMetaInvestimento() {
     this.spinner.show();
     const model: MetaInvestimento = {
-      usuario_Id: this.getId.usuario_Id,
+      idUsuario: this.getId.idUsuario,
+      idMeta: this.metaId,
       nome: 'Meta investimento',
       acoes: this.formAcoes.value,
       fiis: this.formFiis.value,

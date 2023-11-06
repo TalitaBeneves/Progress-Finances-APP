@@ -1,4 +1,4 @@
 export interface CalcularInvestimento {
-  usuario_Id: string;
+  idUsuario: string;
   valorInvestimento: number;
 }

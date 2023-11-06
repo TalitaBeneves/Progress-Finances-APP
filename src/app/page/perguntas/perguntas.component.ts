@@ -43,7 +43,7 @@ export class PerguntasComponent implements OnInit {
   }
 
   buscarPerguntas() {
-    this.servicePerguntas.buscarPergunta(this.local.usuario_Id).subscribe({
+    this.servicePerguntas.buscarPergunta(this.local.idUsuario).subscribe({
       next: (res) => {
         this.items = res;
       },
@@ -58,11 +58,11 @@ export class PerguntasComponent implements OnInit {
       width: '600px',
       data: {
         element: element,
-        userId: this.local.usuario_Id,
+        userId: this.local.idUsuario,
       },
     });
 
-    dialog.afterClosed().subscribe((result) => { });
+    dialog.afterClosed().subscribe((result) => {});
   }
 
   getDadosTabela(e) {
@@ -72,7 +72,7 @@ export class PerguntasComponent implements OnInit {
   deletarAtivo(e) {
     this.spinner.show();
     this.servicePerguntas
-      .deletarPergunta(e.pergunta_Id)
+      .deletarPergunta(e.idPergunta)
       .subscribe({
         next: (res) => {
           this.toastr.success('Pergunta deletada com sucesso!', 'Sucesso');
@@ -87,9 +87,9 @@ export class PerguntasComponent implements OnInit {
 
   habilitaDesabilitaPergunta(model: any, e) {
     this.servicePerguntas
-      .habilitaDesabilitaPergunta(model.usuario_Id, model.pergunta_Id, e)
+      .habilitaDesabilitaPergunta(model.idUsuario, model.idPergunta, e)
       .subscribe({
-        next: () => { },
+        next: () => {},
         error: (e) => {
           console.error(e);
           this.toastr.error(`${e.messege}`, 'Erro');

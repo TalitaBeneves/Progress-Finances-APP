@@ -34,7 +34,7 @@ export class DeletarContaComponent implements OnInit {
       confirmButtonText: 'Sim, Deletar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.serviceUsuario.deletarConta(this.dadosUser.usuario_Id).subscribe({
+        this.serviceUsuario.deletarConta(this.dadosUser.idUsuario).subscribe({
           next: () => {
             this.toastr.success('Conta deletada com sucesso', 'sucess');
             localStorage.removeItem('usuario');

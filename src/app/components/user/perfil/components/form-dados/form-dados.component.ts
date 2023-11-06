@@ -58,7 +58,7 @@ export class FormDadosComponent implements OnInit {
 
     this.spinner.show();
     const model: AtualizarDadosUsuarioModel = {
-      usuario_Id: this.dadosUser.usuario_Id,
+      idUsuario: this.dadosUser.idUsuario,
       email: this.form.value.email,
       nome: this.form.value.nome,
       imagemUrl: this.dadosUser.imagemUrl ? this.dadosUser.imagemUrl : '',

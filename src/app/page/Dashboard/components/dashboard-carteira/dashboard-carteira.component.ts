@@ -100,7 +100,7 @@ export class DashboardCarteiraComponent implements OnInit {
     this.spinner.show();
 
     this.seviceFinaces
-      .litarAtivosById(this.dadosUsuario.usuario_Id)
+      .litarAtivosById(this.dadosUsuario.idUsuario)
       .subscribe({
         next: (res: any) => {
           this.ativos = res;

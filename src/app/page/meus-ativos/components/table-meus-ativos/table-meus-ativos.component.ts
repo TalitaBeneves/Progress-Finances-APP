@@ -34,7 +34,7 @@ export class TableMeusAtivosComponent {
   deletarAtivo(e) {
     this.spinner.show();
     this.serviceFinances
-      .deletarAtivo(e.ativo_id)
+      .deletarAtivo(e.idAtivo)
       .subscribe({
         next: (res) => {
           this.toastr.success('O ativo foi deletado com sucesso!', 'Sucesso');
@@ -53,6 +53,6 @@ export class TableMeusAtivosComponent {
       data: element,
     });
 
-    dialogRef.afterClosed().subscribe((result) => { });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

@@ -20,16 +20,15 @@ export class PerfilComponent implements OnInit {
     private serviceUsuario: UsuarioService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.dadosUser = this.serviceUsuario.getUserLocalStorage();
 
     if (this.dadosUser.imagemUrl !== '' && this.dadosUser.imagemUrl !== null) {
-      this.imagemURL =
-        environment.urlImg + this.dadosUser.imagemUrl;
+      this.imagemURL = `${environment.urlImg}resources/images/${this.dadosUser.imagemUrl}`;
     } else {
-      this.imagemURL = 'assets/img/avatar.jpg'
+      this.imagemURL = 'assets/img/avatar.jpg';
     }
   }
 
@@ -48,7 +47,7 @@ export class PerfilComponent implements OnInit {
   private uploadImagem(): void {
     this.spinner.show();
     this.serviceUsuario
-      .atualizarImagem(this.dadosUser.usuario_Id, this.file)
+      .atualizarImagem(this.dadosUser.idUsuario, this.file)
       .subscribe({
         next: (res) => {
           this.toastr.success('Imagem atualizada com Sucesso', 'Sucesso!');
