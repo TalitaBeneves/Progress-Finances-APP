@@ -13,11 +13,12 @@
     <form [formGroup]="form" class="form">
       <input type="email" formControlName="email" placeholder="E-mail" />
       <input type="password" formControlName="novaSenha" placeholder="Senha" />
-      <button class="my-3" type="submit" (click)="redefinir()">Entrar</button>
+      <button class="my-3" type="submit" (click)="redefinir()">
+        Redefinir
+      </button>
     </form>
 
     <p>
-      Ainda não tem conta?
       <a href="/login" style="color: rgb(134, 158, 45)">Login </a>
     </p>
   </div>
